@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>News Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--scarlet:#c8102e;--maroon:#7a0c1b;--navy:#0c1a33;--tint:#fcf4f4;--line:#e9d3d6;--muted:#586073;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--navy);font:16px/1.55 "Public Sans",system-ui,sans-serif}
+.cond{font-family:"Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase}
+[hidden]{display:none!important}
+#gate{min-height:100vh;display:grid;place-items:center;padding:20px;background:var(--tint)}
+.box{width:min(420px,100%);background:#fff;border:3px solid var(--navy);border-top:10px solid var(--scarlet);padding:32px}
+.box h1{margin:0 0 18px;font-size:2.4rem;line-height:1}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--navy);color:#fff;border-bottom:6px solid var(--scarlet)}
+.bar img{width:40px;height:40px}
+.bar h1{margin:0;font-size:1.7rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+button,.btn{font:600 .95rem "Public Sans",sans-serif;padding:9px 16px;border:2px solid var(--scarlet);background:#fff;color:var(--scarlet);cursor:pointer}
+button:hover{background:var(--scarlet);color:#fff}
+button.solid{background:var(--scarlet);color:#fff}
+button.solid:hover{background:var(--maroon);border-color:var(--maroon)}
+.bar button{background:transparent;color:#fff;border-color:#fff}
+.bar button.on,.bar button:hover{background:var(--scarlet);border-color:var(--scarlet)}
+main{width:min(1000px,100% - 32px);margin:28px auto 80px}
+label{display:block;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--maroon);margin:16px 0 4px}
+input[type=text],input[type=password],input[type=date],input[type=number],select,textarea{width:100%;padding:10px 12px;border:1px solid #b9bfca;font:inherit;background:#fff}
+textarea{min-height:110px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.checks{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px}
+.checks label{display:flex;gap:8px;align-items:center;margin:0;font-size:.95rem;letter-spacing:0;color:var(--navy)}
+h2{margin:0 0 6px;font-size:2rem;line-height:1.1;display:flex;gap:12px;align-items:center}
+h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
+.hint{color:var(--muted);font-size:.9rem;margin:2px 0 0}
+.post{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:14px 0;border-bottom:2px solid var(--line)}
+.post b{font-size:1.1rem}
+.post small{display:block;color:var(--muted)}
+.tag{display:inline-block;margin-left:6px;padding:0 8px;font-size:.75rem;font-weight:700;background:var(--navy);color:#fff}
+.tag.draft{background:#8a6d00}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.block{margin-top:14px;padding:14px;border:2px solid var(--line);border-left:6px solid var(--scarlet);background:#fff}
+.bh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.bh button{padding:4px 10px;font-size:.8rem}
+.preview{max-width:340px;margin-top:10px;border-bottom:5px solid var(--scarlet)}
+#status{position:fixed;left:16px;right:16px;bottom:16px;padding:12px 16px;background:var(--navy);color:#fff;border-left:8px solid var(--scarlet);max-width:640px;margin-inline:auto}
+#status.bad{background:var(--maroon)}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="gate">
+<form class="box" id="gateForm">
+<h1 class="cond">News Manager</h1>
+<label for="pw">PASSWORD</label>
+<input id="pw" type="password" autocomplete="current-password" required>
+<p class="hint" id="gateError"></p>
+<p><button class="solid" type="submit">Unlock</button></p>
+</form>
+</div>
+<div id="app" hidden>
+<div class="bar">
+<div class="row" style="align-items:center"><img src="../assets/logo.png" alt=""><h1 class="cond">News Manager</h1></div>
+<div class="tabs">
+<button data-view="viewPosts">Posts</button>
+<button data-view="viewEdit" id="newTab">New post</button>
+<button data-view="viewSettings">Settings</button>
+<button id="lockBtn">Lock</button>
+</div>
+</div>
+<main>
+<section id="viewPosts">
+<h2 class="cond">Posts</h2>
+<p class="hint">Every post is a JSON file in the news folder. Deleting a post deletes its file.</p>
+<p><button id="refreshBtn" type="button">Refresh</button></p>
+<div id="postList"></div>
+</section>
+<section id="viewEdit" hidden>
+<h2 class="cond" id="editTitle">New post</h2>
+<div class="grid2">
+<div><label for="f-title">TITLE</label><input type="text" id="f-title" data-field="title"></div>
+<div><label for="f-id">FILE NAME (ID)</label><input type="text" id="f-id" data-field="id"></div>
+<div><label for="f-category">CATEGORY</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
+<div><label for="f-date">DATE</label><input type="date" id="f-date" data-field="date"></div>
+<div><label for="f-author">AUTHOR</label><input type="text" id="f-author" data-field="author"></div>
+<div><label for="f-tags">TAGS (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
+</div>
+<label for="f-excerpt">EXCERPT (shown on tiles and under the title)</label>
+<textarea id="f-excerpt" data-field="excerpt" style="min-height:80px"></textarea>
+<label for="f-imageFile">HEADER IMAGE</label>
+<input type="file" id="f-imageFile" accept="image/*">
+<p class="hint">Or use an image URL or a path already in the repo</p>
+<input type="text" id="f-image" data-field="image" placeholder="https://... or assets/news/photo.jpg">
+<img class="preview" id="imagePreview" alt="" hidden>
+<div class="grid2">
+<div><label for="f-imagePosition">IMAGE FOCUS ON TILE</label><select id="f-imagePosition" data-field="imagePosition"><option>center</option><option>top</option><option>bottom</option><option>left</option><option>right</option></select></div>
+<div><label for="f-imageCaption">IMAGE CAPTION</label><input type="text" id="f-imageCaption" data-field="imageCaption"></div>
+</div>
+<div class="checks">
+<label><input type="checkbox" data-field="featured"> Featured (wide tile)</label>
+<label><input type="checkbox" data-field="pinned"> Pinned to top</label>
+<label><input type="checkbox" data-field="published"> Published (untick for draft)</label>
+</div>
+<label>ARTICLE BODY</label>
+<div id="blockList"></div>
+<div class="row" style="margin-top:14px">
+<button type="button" data-add="p">Add paragraph</button>
+<button type="button" data-add="h">Add heading</button>
+<button type="button" data-add="qa">Add Q&amp;A</button>
+<button type="button" data-add="quote">Add quote</button>
+<button type="button" data-add="img">Add image</button>
+</div>
+<div class="row" style="margin-top:28px">
+<button class="solid" type="button" id="publishBtn">Publish to GitHub</button>
+<button type="button" id="downloadBtn">Download JSON</button>
+<button type="button" id="cancelBtn">Cancel</button>
+</div>
+</section>
+<section id="viewSettings" hidden>
+<h2 class="cond">Settings</h2>
+<p class="hint">Saved in this browser only. The token never leaves your device except to call GitHub.</p>
+<div class="grid2">
+<div><label for="s-owner">GITHUB OWNER</label><input type="text" id="s-owner" data-setting="owner"></div>
+<div><label for="s-repo">REPOSITORY</label><input type="text" id="s-repo" data-setting="repo"></div>
+<div><label for="s-branch">BRANCH</label><input type="text" id="s-branch" data-setting="branch"></div>
+<div><label for="s-token">FINE-GRAINED TOKEN (Contents: read and write)</label><input type="password" id="s-token" data-setting="token" autocomplete="off"></div>
+<div><label for="s-newsDir">NEWS FOLDER</label><input type="text" id="s-newsDir" data-setting="newsDir"></div>
+<div><label for="s-imageDir">IMAGE FOLDER</label><input type="text" id="s-imageDir" data-setting="imageDir"></div>
+<div><label for="s-maxImageWidth">MAX IMAGE WIDTH (px)</label><input type="number" id="s-maxImageWidth" data-setting="maxImageWidth" min="400" max="4000"></div>
+<div><label for="s-jpegQuality">JPEG QUALITY (0.3 to 1)</label><input type="number" id="s-jpegQuality" data-setting="jpegQuality" min="0.3" max="1" step="0.05"></div>
+<div><label for="s-categories">CATEGORIES (comma separated)</label><input type="text" id="s-categories" data-setting="categories"></div>
+<div><label for="s-defaultAuthor">DEFAULT AUTHOR</label><input type="text" id="s-defaultAuthor" data-setting="defaultAuthor"></div>
+<div><label for="s-defaultImagePosition">DEFAULT IMAGE FOCUS</label><select id="s-defaultImagePosition" data-setting="defaultImagePosition"><option>center</option><option>top</option><option>bottom</option></select></div>
+</div>
+<div class="row" style="margin-top:24px">
+<button class="solid" type="button" id="saveSettings">Save settings</button>
+<button type="button" id="testBtn">Test connection</button>
+</div>
+</section>
+</main>
+</div>
+<div id="status" role="status" hidden></div>
+<script>
+const PASSWORD_HASH = "c628de1e870e6975ba04a83e9cfe1c988039696a1578754ae396ebd4c5aea268";
+const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center"};
+const BLOCK_LABELS = {p: "Paragraph", h: "Heading", qa: "Q&A", quote: "Quote", img: "Image"};
+const settings = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem("mpsManager") || "{}"));
+let draft = null;
+let draftIsNew = true;
+let headerFile = null;
+function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char])); }
+function Say(text, bad) {
+  const box = document.getElementById("status");
+  box.textContent = text; box.hidden = false; box.classList.toggle("bad", !!bad);
+  clearTimeout(Say.timer); Say.timer = setTimeout(() => { box.hidden = true; }, bad ? 9000 : 5000);
+}
+async function Sha256(text) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+function Slug(text) { return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60); }
+function ToBase64(text) { return btoa(unescape(encodeURIComponent(text))); }
+function FromBase64(text) { return decodeURIComponent(escape(atob(text.replace(/\n/g, "")))); }
+async function Gh(path, options = {}) {
+  if (!settings.owner || !settings.repo || !settings.token) throw new Error("[NEWS MANAGER] fill owner, repo and token in Settings first");
+  const apiReply = await fetch(`https://api.github.com/repos/${settings.owner}/${settings.repo}/${path}`, Object.assign({}, options, {headers: {Accept: "application/vnd.github+json", Authorization: "Bearer " + settings.token, "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28"}}));
+  if (apiReply.status === 404) return null;
+  if (!apiReply.ok) throw new Error("[NEWS MANAGER] GitHub said " + apiReply.status + " " + (await apiReply.text()).slice(0, 160));
+  return apiReply.json();
+}
+async function PutFile(path, base64Content, message) {
+  const existing = await Gh(`contents/${path}?ref=${settings.branch}`);
+  const body = {message, content: base64Content, branch: settings.branch};
+  if (existing && existing.sha) body.sha = existing.sha;
+  return Gh(`contents/${path}`, {method: "PUT", body: JSON.stringify(body)});
+}
+async function DeleteFile(path, message) {
+  const existing = await Gh(`contents/${path}?ref=${settings.branch}`);
+  if (!existing) return;
+  await Gh(`contents/${path}`, {method: "DELETE", body: JSON.stringify({message, sha: existing.sha, branch: settings.branch})});
+}
+function ResizeImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const picture = new Image();
+      picture.onload = () => {
+        const scale = Math.min(1, Number(settings.maxImageWidth) / picture.width);
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(picture.width * scale); canvas.height = Math.round(picture.height * scale);
+        const pen = canvas.getContext("2d");
+        pen.fillStyle = "#fff"; pen.fillRect(0, 0, canvas.width, canvas.height);
+        pen.drawImage(picture, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", Number(settings.jpegQuality)).split(",")[1]);
+      };
+      picture.onerror = reject; picture.src = reader.result;
+    };
+    reader.onerror = reject; reader.readAsDataURL(file);
+  });
+}
+function Show(viewId) {
+  document.querySelectorAll("main section").forEach((view) => { view.hidden = view.id !== viewId; });
+  document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.classList.toggle("on", tab.dataset.view === viewId));
+}
+function ImageSrc(path) { return /^(https?:|data:)/.test(path) ? path : "../" + path; }
+function NewDraft() {
+  return {id: "", title: "", category: settings.categories.split(",")[0].trim(), date: new Date().toISOString().slice(0, 10), author: settings.defaultAuthor, excerpt: "", image: "", imagePosition: settings.defaultImagePosition, imageCaption: "", tags: [], featured: false, pinned: false, published: true, body: []};
+}
+function OpenEditor(article) {
+  draftIsNew = !article;
+  draft = article ? JSON.parse(JSON.stringify(article)) : NewDraft();
+  headerFile = null;
+  document.getElementById("editTitle").textContent = draftIsNew ? "New post" : "Edit post";
+  document.getElementById("f-id").readOnly = !draftIsNew;
+  document.getElementById("f-imageFile").value = "";
+  document.querySelectorAll("[data-field]").forEach((input) => {
+    const fieldValue = draft[input.dataset.field];
+    if (input.type === "checkbox") input.checked = !!fieldValue;
+    else input.value = Array.isArray(fieldValue) ? fieldValue.join(", ") : (fieldValue ?? "");
+  });
+  document.getElementById("catList").innerHTML = settings.categories.split(",").map((name) => `<option value="${Esc(name.trim())}">`).join("");
+  RenderBlocks(); RenderPreview(); Show("viewEdit");
+}
+function RenderPreview() {
+  const picture = document.getElementById("imagePreview");
+  const source = headerFile ? URL.createObjectURL(headerFile) : (draft.image ? ImageSrc(draft.image) : "");
+  picture.hidden = !source; if (source) picture.src = source;
+}
+function BlockFields(block) {
+  if (block.type === "p") return `<textarea data-key="text">${Esc(block.text)}</textarea>`;
+  if (block.type === "h") return `<input type="text" data-key="text" value="${Esc(block.text)}">`;
+  if (block.type === "quote") return `<textarea data-key="text" style="min-height:70px">${Esc(block.text)}</textarea><label>SPEAKER</label><input type="text" data-key="by" value="${Esc(block.by)}">`;
+  if (block.type === "qa") return `<label>QUESTION</label><input type="text" data-key="q" value="${Esc(block.q)}"><label>ANSWER</label><textarea data-key="a">${Esc(block.a)}</textarea>`;
+  return `<input type="file" data-key="file" accept="image/*"><p class="hint">Or image URL or repo path</p><input type="text" data-key="src" value="${Esc(block.src)}"><label>CAPTION</label><input type="text" data-key="caption" value="${Esc(block.caption)}">`;
+}
+function RenderBlocks() {
+  document.getElementById("blockList").innerHTML = draft.body.map((block, index) =>
+    `<div class="block" data-index="${index}"><div class="bh"><b>${BLOCK_LABELS[block.type]}</b><span class="row"><button type="button" data-act="up">Up</button><button type="button" data-act="down">Down</button><button type="button" data-act="del">Remove</button></span></div>${BlockFields(block)}</div>`).join("");
+}
+async function ListPosts() {
+  const listBox = document.getElementById("postList");
+  listBox.textContent = "Loading...";
+  try {
+    const files = await Gh(`contents/${settings.newsDir}?ref=${settings.branch}`);
+    const jsonFiles = (files || []).filter((file) => file.name.endsWith(".json"));
+    const posts = await Promise.all(jsonFiles.map(async (file) => JSON.parse(FromBase64((await Gh(`contents/${file.path}?ref=${settings.branch}`)).content))));
+    posts.sort((first, second) => String(second.date).localeCompare(String(first.date)));
+    listBox.innerHTML = posts.length ? "" : "<p>No posts yet.</p>";
+    posts.forEach((post) => {
+      const row = document.createElement("div"); row.className = "post";
+      row.innerHTML = `<div><b>${Esc(post.title)}</b>${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}<small>${Esc(post.category)} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="row"><button type="button" data-edit>Edit</button><button type="button" data-delete>Delete</button></div>`;
+      row.querySelector("[data-edit]").onclick = () => OpenEditor(post);
+      row.querySelector("[data-delete]").onclick = () => DeletePost(post);
+      listBox.appendChild(row);
+    });
+  } catch (problem) { listBox.textContent = ""; Say(problem.message, true); }
+}
+async function DeletePost(post) {
+  if (!confirm("Delete " + post.title + "? This removes its JSON file.")) return;
+  try {
+    await DeleteFile(`${settings.newsDir}/${post.id}.json`, "[NEWS] delete " + post.id);
+    const owned = [post.image, ...post.body.filter((block) => block.type === "img").map((block) => block.src)].filter((path) => path && path.startsWith(settings.imageDir + "/" + post.id));
+    for (const path of owned) await DeleteFile(path, "[NEWS] delete image for " + post.id);
+    Say("Deleted. The site refreshes after the next deploy, about a minute.");
+    ListPosts();
+  } catch (problem) { Say(problem.message, true); }
+}
+function CleanArticle() {
+  const article = JSON.parse(JSON.stringify(draft));
+  article.tags = Array.isArray(draft.tags) ? draft.tags : String(draft.tags).split(",").map((tag) => tag.trim()).filter(Boolean);
+  article.excerpt = draft.excerpt.trim();
+  article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
+  return article;
+}
+async function Publish() {
+  if (!draft.title.trim() || !draft.id.trim()) return Say("[NEWS MANAGER] title and file name are required", true);
+  try {
+    Say("Publishing...");
+    if (headerFile) {
+      draft.image = `${settings.imageDir}/${draft.id}-header.jpg`;
+      await PutFile(draft.image, await ResizeImage(headerFile), "[NEWS] header image for " + draft.id);
+    }
+    for (const [index, block] of draft.body.entries()) {
+      if (block.type === "img" && block._file) {
+        block.src = `${settings.imageDir}/${draft.id}-${index}.jpg`;
+        await PutFile(block.src, await ResizeImage(block._file), "[NEWS] image " + index + " for " + draft.id);
+        delete block._file;
+      }
+    }
+    await PutFile(`${settings.newsDir}/${draft.id}.json`, ToBase64(JSON.stringify(CleanArticle(), null, 2)), (draftIsNew ? "[NEWS] add " : "[NEWS] update ") + draft.id);
+    Say("Saved. The site updates after the deploy finishes, about a minute.");
+    Show("viewPosts"); ListPosts();
+  } catch (problem) { Say(problem.message, true); }
+}
+function DownloadJson() {
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(new Blob([JSON.stringify(CleanArticle(), null, 2)], {type: "application/json"}));
+  link.download = (draft.id || "post") + ".json"; link.click();
+}
+function FillSettings() {
+  document.querySelectorAll("[data-setting]").forEach((input) => { input.value = settings[input.dataset.setting]; });
+}
+document.getElementById("gateForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (await Sha256(document.getElementById("pw").value) === PASSWORD_HASH) {
+    sessionStorage.setItem("mpsUnlocked", "1"); Unlock();
+  } else document.getElementById("gateError").textContent = "Wrong password";
+});
+function Unlock() {
+  document.getElementById("gate").hidden = true; document.getElementById("app").hidden = false;
+  FillSettings(); Show("viewPosts");
+  if (settings.owner && settings.token) ListPosts(); else { document.getElementById("postList").textContent = "Open Settings and connect your repository first."; }
+}
+document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.addEventListener("click", () => {
+  if (tab.dataset.view === "viewEdit") OpenEditor(null); else Show(tab.dataset.view);
+  if (tab.dataset.view === "viewPosts" && settings.token) ListPosts();
+}));
+document.getElementById("lockBtn").onclick = () => { sessionStorage.clear(); location.reload(); };
+document.getElementById("refreshBtn").onclick = ListPosts;
+document.getElementById("cancelBtn").onclick = () => Show("viewPosts");
+document.getElementById("publishBtn").onclick = Publish;
+document.getElementById("downloadBtn").onclick = DownloadJson;
+document.getElementById("saveSettings").onclick = () => {
+  document.querySelectorAll("[data-setting]").forEach((input) => { settings[input.dataset.setting] = input.type === "number" ? Number(input.value) : input.value.trim(); });
+  localStorage.setItem("mpsManager", JSON.stringify(settings)); Say("Settings saved");
+};
+document.getElementById("testBtn").onclick = async () => {
+  try { const repoInfo = await Gh(""); Say(repoInfo ? "Connected to " + repoInfo.full_name : "[NEWS MANAGER] repo not found", !repoInfo); } catch (problem) { Say(problem.message, true); }
+};
+document.getElementById("viewEdit").addEventListener("input", (event) => {
+  const input = event.target;
+  if (input.id === "f-imageFile") { headerFile = input.files[0] || null; RenderPreview(); return; }
+  if (!input.dataset.field) return;
+  draft[input.dataset.field] = input.type === "checkbox" ? input.checked : input.value;
+  if (input.dataset.field === "title" && draftIsNew) { draft.id = Slug(input.value); document.getElementById("f-id").value = draft.id; }
+  if (input.dataset.field === "image") RenderPreview();
+  if (input.dataset.field === "tags") draft.tags = input.value;
+});
+document.getElementById("blockList").addEventListener("input", (event) => {
+  const input = event.target; const box = input.closest(".block"); if (!box) return;
+  const block = draft.body[Number(box.dataset.index)];
+  if (input.dataset.key === "file") block._file = input.files[0]; else block[input.dataset.key] = input.value;
+});
+document.getElementById("blockList").addEventListener("click", (event) => {
+  const act = event.target.dataset.act; if (!act) return;
+  const index = Number(event.target.closest(".block").dataset.index);
+  if (act === "del") draft.body.splice(index, 1);
+  else { const target = act === "up" ? index - 1 : index + 1; if (target < 0 || target >= draft.body.length) return; [draft.body[index], draft.body[target]] = [draft.body[target], draft.body[index]]; }
+  RenderBlocks();
+});
+document.querySelectorAll("[data-add]").forEach((button) => button.addEventListener("click", () => { draft.body.push({type: button.dataset.add}); RenderBlocks(); }));
+if (sessionStorage.getItem("mpsUnlocked") === "1") Unlock();
+</script>
+</body>
+</html>

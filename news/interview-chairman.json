@@ -1,0 +1,54 @@
+{
+  "id": "interview-chairman",
+  "title": "Interviewing the Military Police School Chairman",
+  "category": "Interviews",
+  "date": "2026-10-15",
+  "author": "Military Police School",
+  "excerpt": "Major General mike0w73 talks about the school, its instructors and what it takes to join.",
+  "image": "assets/hall.webp",
+  "imagePosition": "center",
+  "imageCaption": "",
+  "tags": [
+    "interview",
+    "chairman"
+  ],
+  "featured": true,
+  "pinned": false,
+  "published": true,
+  "body": [
+    {
+      "type": "p",
+      "text": "Military Police School is responsible for the recruitment and competence of future graduates of the Military Police program. Behind that mission is its Chairman, Major General mike0w73. We sat down with him to talk about the school, the staff and the people who want to join."
+    },
+    {
+      "type": "qa",
+      "q": "Who are you and what does the Chairman do?",
+      "a": "I am Major General mike0w73, Chairman of Military Police School. My job is to keep the school running well and to make sure every candidate who comes through is ready for Military Police."
+    },
+    {
+      "type": "qa",
+      "q": "What is the mission of Military Police School?",
+      "a": "We are responsible for the recruitment and competence of future graduates of our program. Everything we do comes back to bringing in the right people and making sure they are ready."
+    },
+    {
+      "type": "qa",
+      "q": "How can someone join?",
+      "a": "There are two ways in: Tryouts and Applications. Choose the route that suits you, show up prepared and take it seriously."
+    },
+    {
+      "type": "qa",
+      "q": "What do you look for in an instructor?",
+      "a": "Leadership, discipline, community and teamwork. Those four qualities show up in everyone who does well here."
+    },
+    {
+      "type": "qa",
+      "q": "What advice do you have for new candidates?",
+      "a": "Stay active, ask questions through the chain of command and bring a good attitude. We want people who care about the school as much as we do."
+    },
+    {
+      "type": "qa",
+      "q": "Anything you would like to add?",
+      "a": "Thank you to every instructor and candidate for the work you put in. Vertutis Disciplina."
+    }
+  ]
+}

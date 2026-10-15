@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Military Police School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--white:#fff;--tint:#fcf4f4;--scarlet:#c8102e;--maroon:#7a0c1b;--navy:#0c1a33;--gold:#c9a227;--muted:#586073;--line:#e9d3d6;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--white);color:var(--navy);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:1.0625rem;line-height:1.65}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--scarlet);outline-offset:3px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.cond{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif}
+.slab{font-family:"Zilla Slab",Rockwell,Georgia,serif}
+.chev{height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='22'%3E%3Cpath d='M0 22 L22 2 L44 22' fill='none' stroke='%23c8102e' stroke-width='4'/%3E%3C/svg%3E") repeat-x center bottom/44px 22px}
+.hero{position:relative;min-height:clamp(380px,46vw,520px);background:var(--navy);color:#fff;overflow:hidden;display:flex;flex-direction:column}
+.hero.tall{min-height:clamp(560px,62vw,720px)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,26,51,.9),rgba(12,26,51,.35) 45%,rgba(12,26,51,.85))}
+.top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 32px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand img{width:52px;height:52px}
+.brand span{font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+nav{display:flex;gap:22px;flex-wrap:wrap}
+nav a{position:relative;padding:6px 0;font-size:1.35rem;font-weight:600;text-decoration:none}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--scarlet);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+nav a:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
+.crumbs{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:stretch;background:rgba(255,255,255,.16);font-size:.9rem}
+.crumbs ol{list-style:none;margin:0;padding:6px 32px;display:flex;gap:10px;flex-wrap:wrap;min-width:0}
+.crumbs li+li::before{content:"›";margin-right:10px}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.crumbs li:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:50vw}
+.motto{background:var(--maroon);padding:6px 28px;font-style:italic;font-weight:500;white-space:nowrap}
+.hero-body{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:48px 0 56px}
+.hero-body::before{content:"";display:block;width:110px;height:2px;background:var(--scarlet);margin-bottom:22px}
+.hero h1{margin:0;font-size:clamp(3rem,9vw,6.8rem);line-height:.95;font-weight:700;text-transform:uppercase;max-width:14ch}
+.hero.long h1{font-size:clamp(2.2rem,5.2vw,4.2rem);max-width:22ch;line-height:1.02}
+.hero .lede{margin:20px 0 0;max-width:40rem;font-size:1.2rem}
+.hero.play .hero-body>*{animation:slide .8s cubic-bezier(.2,.7,.2,1) both}
+.hero.play .hero-body>*:nth-child(2){animation-delay:.12s}
+.hero.play .hero-body>*:nth-child(3){animation-delay:.24s}
+.hero.play .hero-body>*:nth-child(4){animation-delay:.36s}
+.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-block;padding:13px 26px;font-weight:700;text-decoration:none;border:3px solid var(--scarlet);transition:background .25s,color .25s}
+.btn.solid{background:var(--scarlet);color:#fff}
+.btn.solid:hover{background:var(--maroon);border-color:var(--maroon)}
+.btn.line{color:#fff}
+.btn.line:hover{background:var(--scarlet)}
+.page{display:none;min-height:50vh}
+.page.on{display:block}
+section{padding:80px 0}
+.alt{background:var(--tint)}
+h2.sec{display:flex;align-items:center;gap:16px;margin:0 0 36px;font-size:clamp(2.2rem,4.6vw,3.2rem);font-weight:700;text-transform:uppercase;line-height:1}
+h2.sec::before{content:"";width:14px;align-self:stretch;background:var(--scarlet)}
+.about{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+.about p{margin:0;font-size:1.2rem;max-width:36rem}
+.values{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 32px}
+.values div{border-top:4px solid var(--scarlet);padding-top:12px}
+.values h3{margin:0 0 4px;font-size:1.9rem;text-transform:uppercase;line-height:1.1}
+.values p{font-size:1rem;color:var(--muted)}
+.filter{display:flex;flex-wrap:wrap;gap:28px 36px;justify-content:space-between;align-items:flex-end;margin-bottom:26px}
+.filter label{display:block;font-size:.8rem;letter-spacing:.2em;color:var(--maroon);margin-bottom:6px}
+.filter select{min-width:200px;padding:6px 28px 6px 0;border:0;border-bottom:2px solid var(--line);background:transparent;font:700 1rem "Public Sans",sans-serif;color:var(--maroon)}
+.filter input{width:min(320px,100%);padding:10px 12px;border:1px solid #b9bfca;font:1rem "Public Sans",sans-serif}
+.results{display:flex;gap:16px;align-items:center;margin-bottom:18px;font-size:.95rem}
+.results button{border:0;background:none;color:var(--muted);letter-spacing:.15em;font-size:.8rem;cursor:pointer;text-decoration:underline}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.tile{position:relative;display:block;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;background:var(--navy);grid-column:span 2}
+.tile.big{grid-column:span 6;min-height:380px}
+.tile .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,26,51,.1),rgba(12,26,51,.88));transition:background .4s}
+.tile:hover .bg{transform:scale(1.07)}
+.tile:hover::after{background:linear-gradient(180deg,rgba(122,12,27,.25),rgba(12,26,51,.94))}
+.tile .txt{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:26px 28px}
+.tile .txt::before{content:"";display:block;width:60px;height:3px;background:var(--scarlet);margin-bottom:14px;transition:width .4s}
+.tile:hover .txt::before{width:130px}
+.tile h3{margin:0;font-size:clamp(1.35rem,2.4vw,1.9rem);line-height:1.15;text-transform:uppercase;font-weight:700}
+.tile.big h3{font-size:clamp(1.6rem,3.2vw,2.5rem);max-width:30ch}
+.tile p{margin:10px 0 0;max-width:46rem;font-size:.98rem;color:#e3e6ee}
+.more{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:.78rem;font-weight:700;letter-spacing:.2em}
+.more::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--scarlet);transition:transform .3s}
+.tile:hover .more::before{transform:scale(1.5)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+.article{max-width:760px}
+.meta{margin:0 0 28px;color:var(--muted);font-weight:600}
+.article .intro{font-size:1.25rem;margin:0 0 36px}
+.qa{margin:0 0 30px}
+.qa h3{margin:0 0 8px;padding-left:16px;border-left:6px solid var(--scarlet);font-size:1.5rem;line-height:1.25;color:var(--maroon)}
+.qa p{margin:0}
+.back{display:inline-block;margin-top:24px;font-weight:700;color:var(--scarlet)}
+.join{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--navy);background:var(--white)}
+.join div{padding:40px}
+.join div+div{border-left:3px solid var(--navy)}
+.join h3{margin:0 0 10px;font-size:2.8rem;text-transform:uppercase;color:var(--scarlet);line-height:1}
+.join p{margin:0;max-width:26rem}
+.rank-group{margin-bottom:56px}
+.rank-group:last-child{margin-bottom:0}
+.rank-group h3{margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--line);font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
+.roster{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px}
+.entry{display:flex;flex-direction:column;gap:14px;min-width:0}
+.portrait{width:100%;max-width:240px;aspect-ratio:238/366;background:#e9edf3;border-bottom:5px solid var(--scarlet)}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.rank{display:flex;align-items:center;gap:14px;min-width:0}
+.tile2{flex:none;width:80px;height:80px;display:grid;place-items:center;background:var(--navy);border-bottom:5px solid var(--scarlet)}
+.tile2 img{max-width:54px;max-height:58px;width:auto;height:auto}
+.rank>div:last-child{min-width:0}
+.entry b{display:block;font-size:1.8rem;line-height:1.05;overflow-wrap:anywhere}
+.entry span{display:block;font-weight:600;margin-top:4px}
+.entry small{display:block;font-size:.95rem;color:var(--muted)}
+footer{background:var(--navy);color:#fff;border-top:8px solid var(--scarlet)}
+footer .wrap{display:flex;align-items:center;gap:20px;padding:36px 0;flex-wrap:wrap}
+footer img{width:72px;height:72px}
+footer p{margin:0}
+footer .t{font-size:1.9rem;font-weight:700;text-transform:uppercase}
+footer em{color:var(--gold)}
+.lead{margin:0 0 28px}
+.lead img{width:100%;border-bottom:6px solid var(--scarlet)}
+figure{margin:0 0 28px}
+figure img{width:100%}
+figcaption{font-size:.9rem;color:var(--muted);margin-top:6px}
+blockquote{margin:0 0 30px;padding:6px 0 6px 20px;border-left:6px solid var(--scarlet);font-size:1.5rem;line-height:1.3;color:var(--maroon)}
+blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-serif;color:var(--muted)}
+.sub{margin:36px 0 12px;font-size:1.7rem}
+.body{margin:0 0 20px}
+@keyframes slide{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:none}}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.1) translateX(-1.5%)}}
+@media (prefers-reduced-motion:no-preference){.hero-bg img{animation:drift 24s ease-in-out infinite alternate}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.tile .bg,.tile .txt::before,nav a::after{transition:none}}
+@media (max-width:900px){
+.about{grid-template-columns:1fr;gap:32px}
+.roster{grid-template-columns:1fr}
+.join{grid-template-columns:1fr}
+.join div+div{border-left:0;border-top:3px solid var(--navy)}
+.tile{grid-column:span 6}
+section{padding:60px 0}
+.top{padding:14px 20px}
+.crumbs ol{padding:6px 20px}
+}
+@media (max-width:560px){
+.brand span{display:none}
+nav{gap:14px}
+nav a{font-size:1.15rem}
+.values{grid-template-columns:1fr}
+.motto{padding:6px 14px}
+}
+</style>
+</head>
+<body>
+<div class="hero tall play" id="hero">
+<div class="hero-bg"><img id="heroImg" alt=""></div>
+<div class="top">
+<a class="brand cond" href="#/"><img id="brandLogo" alt="Military Police School seal"><span>Military Police School</span></a>
+<nav class="cond" aria-label="Main">
+<a href="#/" data-route="home">Home</a>
+<a href="#/news" data-route="news">News</a>
+<a href="#/join" data-route="join">Join</a>
+<a href="#/leadership" data-route="leadership">Leadership</a>
+</nav>
+</div>
+<div class="crumbs"><ol id="crumbs"></ol><div class="motto">Vertutis Disciplina</div></div>
+<div class="wrap hero-body">
+<h1 class="cond" id="heroTitle"></h1>
+<p class="lede" id="heroLede"></p>
+<div class="btnrow" id="heroCta"></div>
+</div>
+</div>
+<div class="chev" aria-hidden="true"></div>
+<main>
+<div class="page" data-page="home">
+<section>
+<div class="wrap">
+<h2 class="sec cond">About the school</h2>
+<div class="about">
+<p>Military Police School recruits new members and makes sure the future graduates of its program are competent. The people who teach here build their own skills in four areas.</p>
+<div class="values">
+<div><h3 class="cond">Leadership</h3><p>Lead candidates and fellow instructors.</p></div>
+<div><h3 class="cond">Discipline</h3><p>Hold yourself and others to the standard.</p></div>
+<div><h3 class="cond">Community</h3><p>Engage with the wider Military Police community.</p></div>
+<div><h3 class="cond">Teamwork</h3><p>Work as one staff toward one mission.</p></div>
+</div>
+</div>
+</div>
+</section>
+<section class="alt">
+<div class="wrap">
+<h2 class="sec cond">Latest news</h2>
+<div class="grid" id="homeGrid"></div>
+</div>
+</section>
+</div>
+<div class="page" data-page="news">
+<section>
+<div class="wrap">
+<div class="filter">
+<div><label for="catSelect">CATEGORY</label><select id="catSelect"></select></div>
+<div><label for="kwInput">KEY WORDS</label><input id="kwInput" type="search" placeholder="Search news"></div>
+</div>
+<div class="results"><span id="resultCount"></span><button id="clearAll" type="button">CLEAR ALL</button></div>
+<div class="grid" id="newsGrid"></div>
+</div>
+</section>
+</div>
+<div class="page" data-page="article">
+<section>
+<div class="wrap">
+<div class="article" id="articleBody"></div>
+</div>
+</section>
+</div>
+<div class="page" data-page="join">
+<section class="alt">
+<div class="wrap">
+<h2 class="sec cond">Two ways in</h2>
+<div class="join">
+<div><h3 class="cond">Tryouts</h3><p>Attend a tryout and show you are ready to be part of Military Police School.</p></div>
+<div><h3 class="cond">Applications</h3><p>Submit an application when positions are open and be considered for the school.</p></div>
+</div>
+</div>
+</section>
+</div>
+<div class="page" data-page="leadership">
+<section>
+<div class="wrap" id="roster"></div>
+</section>
+</div>
+</main>
+<footer>
+<div class="wrap">
+<img id="footLogo" alt="">
+<p class="t cond">Military Police School</p>
+<p><em>Vertutis Disciplina</em></p>
+</div>
+</footer>
+<script>
+const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", sgm: "assets/sgm.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
+let ARTICLES = [];
+const PEOPLE = [
+  {name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8"], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7"], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "sgm"]]},
+  {name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6"]]},
+  {name: "Middle Command: Head Instructors", list: [["gendermaleehrh", "Head Instructor", "Lieutenant Colonel", "o5"], ["KUNALNG6", "Head Instructor", "Lieutenant Colonel", "o5"], ["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5"]]}
+];
+const HERO = {
+  home: {title: "Military Police School", lede: "Responsible for the recruitment and competence of future graduates of the Military Police program.", tall: true},
+  news: {title: "News", lede: "The latest news, interviews and coverage from Military Police School."},
+  join: {title: "Join MPS", lede: "You can join Military Police School through Tryouts or Applications."},
+  leadership: {title: "Chain of Command", lede: "The High Command and Middle Command of Military Police School."}
+};
+const PAGE_NAMES = {home: "Military Police School", news: "News", join: "Join", leadership: "Leadership"};
+function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char])); }
+function Multiline(text) { return Esc(text).replace(/\n/g, "<br>"); }
+function FormatDate(text) { const day = new Date(text + "T00:00:00"); return isNaN(day) ? text : day.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"}); }
+function SortNews(list) { return [...list].sort((first, second) => (second.pinned ? 1 : 0) - (first.pinned ? 1 : 0) || String(second.date).localeCompare(String(first.date))); }
+function TileHtml(article, featured) {
+  const picture = article.image || IMG.banner;
+  return `<a class="tile reveal${featured ? " big" : ""}" href="#/news/${Esc(article.id)}"><div class="bg" style="background-image:url('${Esc(picture)}');background-position:${Esc(article.imagePosition || "center")}"></div><div class="txt"><h3 class="slab">${Esc(article.title)}</h3>${featured && article.excerpt ? `<p>${Esc(article.excerpt)}</p>` : ""}<span class="more cond">READ MORE</span></div></a>`;
+}
+function FillGrid(target, list) {
+  target.innerHTML = list.map((article) => TileHtml(article, article.featured)).join("");
+  WatchReveal(target);
+}
+function WatchReveal(scope) {
+  const watcher = new IntersectionObserver((entries) => entries.forEach((entry) => {
+    if (entry.isIntersecting) { entry.target.classList.add("in"); watcher.unobserve(entry.target); }
+  }), {threshold: 0.1});
+  scope.querySelectorAll(".reveal").forEach((tile, index) => { tile.style.transitionDelay = (index % 3) * 0.1 + "s"; watcher.observe(tile); });
+}
+function FilterNews() {
+  const category = document.getElementById("catSelect").value;
+  const keyword = document.getElementById("kwInput").value.trim().toLowerCase();
+  const found = ARTICLES.filter((article) => (!category || article.category === category) && (!keyword || (article.title + article.excerpt).toLowerCase().includes(keyword)));
+  document.getElementById("resultCount").textContent = "Results: " + found.length;
+  FillGrid(document.getElementById("newsGrid"), found);
+}
+function BlockHtml(block) {
+  if (block.type === "h") return `<h3 class="slab sub">${Esc(block.text)}</h3>`;
+  if (block.type === "qa") return `<div class="qa"><h3 class="slab">${Esc(block.q)}</h3><p>${Multiline(block.a)}</p></div>`;
+  if (block.type === "quote") return `<blockquote class="slab">${Multiline(block.text)}${block.by ? `<cite>${Esc(block.by)}</cite>` : ""}</blockquote>`;
+  if (block.type === "img") return `<figure><img src="${Esc(block.src)}" alt="${Esc(block.caption || "")}">${block.caption ? `<figcaption>${Esc(block.caption)}</figcaption>` : ""}</figure>`;
+  return `<p class="body">${Multiline(block.text)}</p>`;
+}
+function ArticleHtml(article) {
+  const lead = article.image ? `<figure class="lead"><img src="${Esc(article.image)}" alt="${Esc(article.imageCaption || article.title)}">${article.imageCaption ? `<figcaption>${Esc(article.imageCaption)}</figcaption>` : ""}</figure>` : "";
+  const byline = [article.category, FormatDate(article.date), article.author].filter(Boolean).map(Esc).join(" | ");
+  return `<p class="meta">${byline}</p>${lead}${(article.body || []).map(BlockHtml).join("")}<a class="back" href="#/news">Back to all news</a>`;
+}
+function RosterHtml() {
+  return PEOPLE.map((group) => `<div class="rank-group"><h3 class="cond">${group.name}</h3><div class="roster">${group.list.map(([name, role, rank, insignia]) =>
+    `<div class="entry"><div class="portrait"><img src="${IMG.portrait}" alt="Portrait of ${name}"></div><div class="rank"><div class="tile2"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div><b class="cond">${name}</b><span>${role}</span><small>${rank}</small></div></div></div>`).join("")}</div></div>`).join("");
+}
+function ShowPage() {
+  const parts = location.hash.replace(/^#\/?/, "").split("/");
+  const article = parts[0] === "news" && parts[1] ? ARTICLES.find((entry) => entry.id === parts[1]) : null;
+  const route = article ? "article" : (HERO[parts[0]] ? parts[0] : "home");
+  const navRoute = article ? "news" : route;
+  const hero = document.getElementById("hero");
+  const config = article ? {title: article.title, lede: article.excerpt} : HERO[route];
+  document.getElementById("heroTitle").textContent = config.title;
+  document.getElementById("heroLede").textContent = config.lede;
+  document.getElementById("heroCta").innerHTML = route === "home" ? `<a class="btn solid" href="#/join">How to join</a><a class="btn line" href="#/news">Read the news</a>` : "";
+  hero.classList.toggle("tall", !!config.tall);
+  hero.classList.toggle("long", !!article);
+  hero.classList.remove("play");
+  void hero.offsetWidth;
+  hero.classList.add("play");
+  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : [[PAGE_NAMES[route]]];
+  document.getElementById("crumbs").innerHTML = `<li><a href="#/">Home</a></li>` + trail.map(([label, link]) => `<li>${link ? `<a href="${link}">${label}</a>` : label}</li>`).join("");
+  document.querySelectorAll(".page").forEach((page) => page.classList.toggle("on", page.dataset.page === route));
+  document.querySelectorAll("nav a").forEach((link) => {
+    if (link.dataset.route === navRoute) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current");
+  });
+  if (article) document.getElementById("articleBody").innerHTML = ArticleHtml(article);
+  if (route === "news") FilterNews();
+  document.title = route === "home" ? "Military Police School" : (article ? article.title : PAGE_NAMES[route]) + " | Military Police School";
+  window.scrollTo(0, 0);
+}
+document.getElementById("heroImg").src = IMG.banner;
+document.getElementById("brandLogo").src = IMG.logo;
+document.getElementById("footLogo").src = IMG.logo;
+document.getElementById("roster").innerHTML = RosterHtml();
+const catSelect = document.getElementById("catSelect");
+function Rebuild() {
+  catSelect.innerHTML = `<option value="">All</option>` + [...new Set(ARTICLES.map((article) => article.category))].map((name) => `<option>${Esc(name)}</option>`).join("");
+  FillGrid(document.getElementById("homeGrid"), ARTICLES.slice(0, 4));
+  ShowPage();
+}
+catSelect.addEventListener("change", FilterNews);
+document.getElementById("kwInput").addEventListener("input", FilterNews);
+document.getElementById("clearAll").addEventListener("click", () => { catSelect.value = ""; document.getElementById("kwInput").value = ""; FilterNews(); });
+window.addEventListener("hashchange", ShowPage);
+fetch("news-index.json").then((reply) => reply.ok ? reply.json() : []).catch(() => []).then((list) => { ARTICLES = SortNews(list); Rebuild(); });
+</script>
+</body>
+</html>
