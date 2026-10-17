@@ -44,6 +44,9 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 .block{margin-top:14px;padding:14px;border:2px solid var(--line);border-left:6px solid var(--scarlet);background:#fff}
 .bh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
 .bh button{padding:4px 10px;font-size:.8rem}
+#viewEdit.app .nw,#viewEdit:not(.app) .ap{display:none}
+.kinds{display:flex;gap:8px;margin:14px 0}
+.kinds button.on{background:var(--scarlet);color:#fff}
 .preview{max-width:340px;margin-top:10px;border-bottom:5px solid var(--scarlet)}
 #status{position:fixed;left:16px;right:16px;bottom:16px;padding:12px 16px;background:var(--navy);color:#fff;border-left:8px solid var(--scarlet);max-width:640px;margin-inline:auto}
 #status.bad{background:var(--maroon)}
@@ -73,7 +76,8 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <main>
 <section id="viewPosts">
 <h2 class="cond">Posts</h2>
-<p class="hint">Every post is a JSON file in the news folder. Deleting a post deletes its file.</p>
+<p class="hint">Every post is a JSON file in its folder. Deleting a post deletes its file.</p>
+<div class="kinds"><button type="button" data-kind="news" class="on">News</button><button type="button" data-kind="app">Applications</button></div>
 <p><button id="refreshBtn" type="button">Refresh</button></p>
 <div id="postList"></div>
 </section>
@@ -82,13 +86,16 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <div class="grid2">
 <div><label for="f-title">TITLE</label><input type="text" id="f-title" data-field="title"></div>
 <div><label for="f-id">FILE NAME (ID)</label><input type="text" id="f-id" data-field="id"></div>
-<div><label for="f-category">CATEGORY</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
+<div class="nw"><label for="f-category">CATEGORY</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
 <div><label for="f-date">DATE</label><input type="date" id="f-date" data-field="date"></div>
-<div><label for="f-author">AUTHOR</label><input type="text" id="f-author" data-field="author"></div>
-<div><label for="f-tags">TAGS (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
+<div class="ap"><label for="f-deadline">DEADLINE</label><input type="date" id="f-deadline" data-field="deadline"></div>
+<div class="ap"><label for="f-link">APPLICATION LINK (Google Forms)</label><input type="text" id="f-link" data-field="link" placeholder="https://forms.gle/..."></div>
+<div class="nw"><label for="f-author">AUTHOR</label><input type="text" id="f-author" data-field="author"></div>
+<div class="nw"><label for="f-tags">TAGS (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
 </div>
 <label for="f-excerpt">EXCERPT (shown on tiles and under the title)</label>
 <textarea id="f-excerpt" data-field="excerpt" style="min-height:80px"></textarea>
+<div class="nw">
 <label for="f-imageFile">HEADER IMAGE</label>
 <input type="file" id="f-imageFile" accept="image/*">
 <p class="hint">Or use an image URL or a path already in the repo</p>
@@ -98,15 +105,17 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <div><label for="f-imagePosition">IMAGE FOCUS ON TILE</label><select id="f-imagePosition" data-field="imagePosition"><option>center</option><option>top</option><option>bottom</option><option>left</option><option>right</option></select></div>
 <div><label for="f-imageCaption">IMAGE CAPTION</label><input type="text" id="f-imageCaption" data-field="imageCaption"></div>
 </div>
+</div>
 <div class="checks">
 <label><input type="checkbox" data-field="featured"> Featured (wide tile)</label>
-<label><input type="checkbox" data-field="pinned"> Pinned to top</label>
+<label class="nw"><input type="checkbox" data-field="pinned"> Pinned to top</label>
 <label><input type="checkbox" data-field="published"> Published (untick for draft)</label>
 </div>
 <label>ARTICLE BODY</label>
 <div id="blockList"></div>
 <div class="row" style="margin-top:14px">
 <button type="button" data-add="p">Add paragraph</button>
+<button type="button" data-add="ul">Add list</button>
 <button type="button" data-add="h">Add heading</button>
 <button type="button" data-add="qa">Add Q&amp;A</button>
 <button type="button" data-add="quote">Add quote</button>
@@ -127,6 +136,7 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <div><label for="s-branch">BRANCH</label><input type="text" id="s-branch" data-setting="branch"></div>
 <div><label for="s-token">FINE-GRAINED TOKEN (Contents: read and write)</label><input type="password" id="s-token" data-setting="token" autocomplete="off"></div>
 <div><label for="s-newsDir">NEWS FOLDER</label><input type="text" id="s-newsDir" data-setting="newsDir"></div>
+<div><label for="s-appDir">APPLICATIONS FOLDER</label><input type="text" id="s-appDir" data-setting="appDir"></div>
 <div><label for="s-imageDir">IMAGE FOLDER</label><input type="text" id="s-imageDir" data-setting="imageDir"></div>
 <div><label for="s-maxImageWidth">MAX IMAGE WIDTH (px)</label><input type="number" id="s-maxImageWidth" data-setting="maxImageWidth" min="400" max="4000"></div>
 <div><label for="s-jpegQuality">JPEG QUALITY (0.3 to 1)</label><input type="number" id="s-jpegQuality" data-setting="jpegQuality" min="0.3" max="1" step="0.05"></div>
@@ -144,9 +154,10 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <div id="status" role="status" hidden></div>
 <script>
 const PASSWORD_HASH = "c628de1e870e6975ba04a83e9cfe1c988039696a1578754ae396ebd4c5aea268";
-const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center"};
-const BLOCK_LABELS = {p: "Paragraph", h: "Heading", qa: "Q&A", quote: "Quote", img: "Image"};
+const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", appDir: "applications", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center"};
+const BLOCK_LABELS = {p: "Paragraph", ul: "List", h: "Heading", qa: "Q&A", quote: "Quote", img: "Image"};
 const settings = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem("mpsManager") || "{}"));
+let kind = "news";
 let draft = null;
 let draftIsNew = true;
 let headerFile = null;
@@ -160,6 +171,8 @@ async function Sha256(text) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
+const Dir = () => kind === "app" ? settings.appDir : settings.newsDir;
+const Tag = () => kind === "app" ? "[APP]" : "[NEWS]";
 function Slug(text) { return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60); }
 function ToBase64(text) { return btoa(unescape(encodeURIComponent(text))); }
 function FromBase64(text) { return decodeURIComponent(escape(atob(text.replace(/\n/g, "")))); }
@@ -206,13 +219,14 @@ function Show(viewId) {
 }
 function ImageSrc(path) { return /^(https?:|data:)/.test(path) ? path : "../" + path; }
 function NewDraft() {
-  return {id: "", title: "", category: settings.categories.split(",")[0].trim(), date: new Date().toISOString().slice(0, 10), author: settings.defaultAuthor, excerpt: "", image: "", imagePosition: settings.defaultImagePosition, imageCaption: "", tags: [], featured: false, pinned: false, published: true, body: []};
+  return {id: "", title: "", category: settings.categories.split(",")[0].trim(), date: new Date().toISOString().slice(0, 10), author: settings.defaultAuthor, excerpt: "", image: "", imagePosition: settings.defaultImagePosition, imageCaption: "", tags: [], featured: false, pinned: false, published: true, link: "", deadline: "", body: []};
 }
 function OpenEditor(article) {
   draftIsNew = !article;
   draft = article ? JSON.parse(JSON.stringify(article)) : NewDraft();
   headerFile = null;
-  document.getElementById("editTitle").textContent = draftIsNew ? "New post" : "Edit post";
+  document.getElementById("editTitle").textContent = (draftIsNew ? "New " : "Edit ") + (kind === "app" ? "application" : "post");
+  document.getElementById("viewEdit").classList.toggle("app", kind === "app");
   document.getElementById("f-id").readOnly = !draftIsNew;
   document.getElementById("f-imageFile").value = "";
   document.querySelectorAll("[data-field]").forEach((input) => {
@@ -230,6 +244,7 @@ function RenderPreview() {
 }
 function BlockFields(block) {
   if (block.type === "p") return `<textarea data-key="text">${Esc(block.text)}</textarea>`;
+  if (block.type === "ul") return `<textarea data-key="text">${Esc(block.text)}</textarea><p class="hint">One item per line</p>`;
   if (block.type === "h") return `<input type="text" data-key="text" value="${Esc(block.text)}">`;
   if (block.type === "quote") return `<textarea data-key="text" style="min-height:70px">${Esc(block.text)}</textarea><label>SPEAKER</label><input type="text" data-key="by" value="${Esc(block.by)}">`;
   if (block.type === "qa") return `<label>QUESTION</label><input type="text" data-key="q" value="${Esc(block.q)}"><label>ANSWER</label><textarea data-key="a">${Esc(block.a)}</textarea>`;
@@ -243,14 +258,14 @@ async function ListPosts() {
   const listBox = document.getElementById("postList");
   listBox.textContent = "Loading...";
   try {
-    const files = await Gh(`contents/${settings.newsDir}?ref=${settings.branch}`);
+    const files = await Gh(`contents/${Dir()}?ref=${settings.branch}`);
     const jsonFiles = (files || []).filter((file) => file.name.endsWith(".json"));
     const posts = await Promise.all(jsonFiles.map(async (file) => JSON.parse(FromBase64((await Gh(`contents/${file.path}?ref=${settings.branch}`)).content))));
     posts.sort((first, second) => String(second.date).localeCompare(String(first.date)));
     listBox.innerHTML = posts.length ? "" : "<p>No posts yet.</p>";
     posts.forEach((post) => {
       const row = document.createElement("div"); row.className = "post";
-      row.innerHTML = `<div><b>${Esc(post.title)}</b>${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}<small>${Esc(post.category)} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="row"><button type="button" data-edit>Edit</button><button type="button" data-delete>Delete</button></div>`;
+      row.innerHTML = `<div><b>${Esc(post.title)}</b>${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}<small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="row"><button type="button" data-edit>Edit</button><button type="button" data-delete>Delete</button></div>`;
       row.querySelector("[data-edit]").onclick = () => OpenEditor(post);
       row.querySelector("[data-delete]").onclick = () => DeletePost(post);
       listBox.appendChild(row);
@@ -260,15 +275,17 @@ async function ListPosts() {
 async function DeletePost(post) {
   if (!confirm("Delete " + post.title + "? This removes its JSON file.")) return;
   try {
-    await DeleteFile(`${settings.newsDir}/${post.id}.json`, "[NEWS] delete " + post.id);
+    await DeleteFile(`${Dir()}/${post.id}.json`, Tag() + " delete " + post.id);
     const owned = [post.image, ...post.body.filter((block) => block.type === "img").map((block) => block.src)].filter((path) => path && path.startsWith(settings.imageDir + "/" + post.id));
-    for (const path of owned) await DeleteFile(path, "[NEWS] delete image for " + post.id);
+    for (const path of owned) await DeleteFile(path, Tag() + " delete image for " + post.id);
     Say("Deleted. The site refreshes after the next deploy, about a minute.");
     ListPosts();
   } catch (problem) { Say(problem.message, true); }
 }
 function CleanArticle() {
   const article = JSON.parse(JSON.stringify(draft));
+  article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
+  if (kind === "app") return {id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, published: draft.published, excerpt: (draft.excerpt || "").trim(), body: article.body};
   article.tags = Array.isArray(draft.tags) ? draft.tags : String(draft.tags).split(",").map((tag) => tag.trim()).filter(Boolean);
   article.excerpt = draft.excerpt.trim();
   article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
@@ -280,16 +297,16 @@ async function Publish() {
     Say("Publishing...");
     if (headerFile) {
       draft.image = `${settings.imageDir}/${draft.id}-header.jpg`;
-      await PutFile(draft.image, await ResizeImage(headerFile), "[NEWS] header image for " + draft.id);
+      await PutFile(draft.image, await ResizeImage(headerFile), Tag() + " header image for " + draft.id);
     }
     for (const [index, block] of draft.body.entries()) {
       if (block.type === "img" && block._file) {
         block.src = `${settings.imageDir}/${draft.id}-${index}.jpg`;
-        await PutFile(block.src, await ResizeImage(block._file), "[NEWS] image " + index + " for " + draft.id);
+        await PutFile(block.src, await ResizeImage(block._file), Tag() + " image " + index + " for " + draft.id);
         delete block._file;
       }
     }
-    await PutFile(`${settings.newsDir}/${draft.id}.json`, ToBase64(JSON.stringify(CleanArticle(), null, 2)), (draftIsNew ? "[NEWS] add " : "[NEWS] update ") + draft.id);
+    await PutFile(`${Dir()}/${draft.id}.json`, ToBase64(JSON.stringify(CleanArticle(), null, 2)), Tag() + (draftIsNew ? " add " : " update ") + draft.id);
     Say("Saved. The site updates after the deploy finishes, about a minute.");
     Show("viewPosts"); ListPosts();
   } catch (problem) { Say(problem.message, true); }
@@ -319,6 +336,11 @@ document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.addEventListe
 }));
 document.getElementById("lockBtn").onclick = () => { sessionStorage.clear(); location.reload(); };
 document.getElementById("refreshBtn").onclick = ListPosts;
+document.querySelectorAll("[data-kind]").forEach((button) => button.addEventListener("click", () => {
+  kind = button.dataset.kind;
+  document.querySelectorAll("[data-kind]").forEach((other) => other.classList.toggle("on", other === button));
+  if (settings.token) ListPosts();
+}));
 document.getElementById("cancelBtn").onclick = () => Show("viewPosts");
 document.getElementById("publishBtn").onclick = Publish;
 document.getElementById("downloadBtn").onclick = DownloadJson;
