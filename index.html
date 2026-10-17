@@ -27,7 +27,6 @@ a{color:inherit}
 .wrap{width:min(1180px,100% - 40px);margin-inline:auto}
 .cond{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif}
 .slab{font-family:"Zilla Slab",Rockwell,Georgia,serif}
-.chev{height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='22'%3E%3Cpath d='M0 22 L22 2 L44 22' fill='none' stroke='%23c8102e' stroke-width='4'/%3E%3C/svg%3E") repeat-x center bottom/44px 22px}
 .hero{position:relative;min-height:clamp(380px,46vw,520px);background:var(--navy);color:#fff;overflow:hidden;display:flex;flex-direction:column}
 .hero.tall{min-height:clamp(560px,62vw,720px)}
 .hero-bg{position:absolute;inset:0}
@@ -40,12 +39,11 @@ a{color:inherit}
 nav{display:flex;gap:22px;flex-wrap:wrap}
 nav a{position:relative;padding:6px 0;font-size:1.35rem;font-weight:600;text-decoration:none}
 nav a::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--scarlet);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-nav a:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
+nav a[aria-current]::after{transform:scaleX(1)}
 .crumbs{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:stretch;background:rgba(255,255,255,.16);font-size:.9rem}
 .crumbs ol{list-style:none;margin:0;padding:6px 32px;display:flex;gap:10px;flex-wrap:wrap;min-width:0}
 .crumbs li+li::before{content:"›";margin-right:10px}
 .crumbs a{text-decoration:none}
-.crumbs a:hover{text-decoration:underline}
 .crumbs li:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:50vw}
 .motto{background:var(--maroon);padding:6px 28px;font-style:italic;font-weight:500;white-space:nowrap}
 .hero-body{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:48px 0 56px}
@@ -60,9 +58,7 @@ nav a:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
 .btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .btn{display:inline-block;padding:13px 26px;font-weight:700;text-decoration:none;border:3px solid var(--scarlet);transition:background .25s,color .25s}
 .btn.solid{background:var(--scarlet);color:#fff}
-.btn.solid:hover{background:var(--maroon);border-color:var(--maroon)}
 .btn.line{color:#fff}
-.btn.line:hover{background:var(--scarlet)}
 .page{display:none;min-height:50vh}
 .page.on{display:block}
 section{padding:80px 0}
@@ -86,17 +82,13 @@ h2.sec::before{content:"";width:14px;align-self:stretch;background:var(--scarlet
 .tile.big{grid-column:span 6;min-height:380px}
 .tile .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,26,51,.1),rgba(12,26,51,.88));transition:background .4s}
-.tile:hover .bg{transform:scale(1.07)}
-.tile:hover::after{background:linear-gradient(180deg,rgba(122,12,27,.25),rgba(12,26,51,.94))}
 .tile .txt{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:26px 28px}
 .tile .txt::before{content:"";display:block;width:60px;height:3px;background:var(--scarlet);margin-bottom:14px;transition:width .4s}
-.tile:hover .txt::before{width:130px}
 .tile h3{margin:0;font-size:clamp(1.35rem,2.4vw,1.9rem);line-height:1.15;text-transform:uppercase;font-weight:700}
 .tile.big h3{font-size:clamp(1.6rem,3.2vw,2.5rem);max-width:30ch}
 .tile p{margin:10px 0 0;max-width:46rem;font-size:.98rem;color:#e3e6ee}
 .more{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:.78rem;font-weight:700;letter-spacing:.2em}
 .more::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--scarlet);transition:transform .3s}
-.tile:hover .more::before{transform:scale(1.5)}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
 .reveal.in{opacity:1;transform:none}
 .article{max-width:760px}
@@ -167,8 +159,6 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .bio{display:inline-flex;align-items:center;gap:14px;align-self:flex-start;color:#a00c20;font-size:.85rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;text-decoration:none}
 .bio svg{width:18px;height:22px;flex:none;fill:currentColor;transition:transform .3s}
 .bio span{padding-bottom:3px;background:linear-gradient(currentColor,currentColor) left bottom/0 2px no-repeat;transition:background-size .3s}
-.bio:hover svg{transform:translateY(-3px)}
-.bio:hover span{background-size:100% 2px}
 .profile{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:48px;align-items:start}
 .profile .portrait{max-width:280px}
 .profile .rank{gap:18px;margin-bottom:26px}
@@ -191,20 +181,14 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:50;background:linear-gradient(90deg,var(--scarlet),var(--gold));transform:scaleX(0);transform-origin:left}
 .hero-bg::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 1px,transparent 1px 3px)}
 .hero::before{content:"";position:absolute;left:0;right:0;top:-160px;height:160px;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(255,255,255,.08),transparent)}
-.hero::after{content:"";position:absolute;inset:14px;z-index:1;pointer-events:none;background:linear-gradient(var(--scarlet),var(--scarlet)) 0 100%/42px 3px,linear-gradient(var(--scarlet),var(--scarlet)) 0 100%/3px 42px,linear-gradient(var(--scarlet),var(--scarlet)) 100% 100%/42px 3px,linear-gradient(var(--scarlet),var(--scarlet)) 100% 100%/3px 42px;background-repeat:no-repeat}
 .portrait{position:relative;overflow:hidden}
 .portrait img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .portrait::after{content:"";position:absolute;inset:12px;pointer-events:none;opacity:0;transform:scale(1.12);transition:opacity .35s,transform .35s;background:linear-gradient(#fff,#fff) 0 0/24px 2px,linear-gradient(#fff,#fff) 0 0/2px 24px,linear-gradient(#fff,#fff) 100% 0/24px 2px,linear-gradient(#fff,#fff) 100% 0/2px 24px,linear-gradient(#fff,#fff) 0 100%/24px 2px,linear-gradient(#fff,#fff) 0 100%/2px 24px,linear-gradient(#fff,#fff) 100% 100%/24px 2px,linear-gradient(#fff,#fff) 100% 100%/2px 24px;background-repeat:no-repeat}
-.entry:hover .portrait img,.profile .portrait:hover img{transform:scale(1.05)}
-.entry:hover .portrait::after,.profile .portrait:hover::after{opacity:1;transform:none}
 .tile2,.timeline .badge{position:relative;overflow:hidden}
 .tile2::after,.timeline .badge::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);transition:transform .8s}
-.entry:hover .tile2::after,.profile .tile2:hover::after,.timeline li:hover .badge::after{transform:translateX(130%)}
 .tile2 img,.timeline .badge img{transition:transform .4s}
-.entry:hover .tile2 img,.timeline li:hover .badge img{transform:scale(1.1)}
 .creed{position:relative;margin:0 0 26px;padding:18px 24px 18px 28px;background:var(--navy);border-left:6px solid var(--scarlet);color:#fff;font-size:1.45rem;font-style:italic;line-height:1.3}
 .creed small{display:block;margin-bottom:8px;color:var(--gold);font:700 .75rem "Public Sans",sans-serif;font-style:normal;letter-spacing:.3em}
-.stamp{display:table;margin:0 0 28px;padding:2px 18px;border:5px double var(--scarlet);color:var(--scarlet);font:700 2.6rem "Barlow Condensed",sans-serif;letter-spacing:.16em;line-height:1.2;text-transform:uppercase;transform:rotate(-4deg);transform-origin:left center;opacity:.92}
 .outcome{margin:0 0 40px}
 .outcome h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
 .outcome h3::before{content:"";width:12px;height:26px;background:var(--scarlet)}
@@ -214,23 +198,18 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .outcome td{padding:13px 16px;border-top:1px solid var(--line);font-weight:600;overflow-wrap:anywhere}
 .outcome tbody tr{transition:background .2s}
 .outcome tbody tr:nth-child(even){background:var(--tint)}
-.outcome tbody tr:hover{background:#f6dfe3}
 .outcome td.tbd{color:var(--muted);font-style:italic;font-weight:500}
 .outcome td.only{padding:36px 16px;color:var(--maroon);font-style:normal;font-weight:700;letter-spacing:.22em;text-align:center;text-transform:uppercase}
 @keyframes sweep{from{top:-160px}to{top:100%}}
-@keyframes lock{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:none}}
 @keyframes strike{from{opacity:0;letter-spacing:.3em}to{opacity:1;letter-spacing:0}}
 @keyframes rule{from{width:0}to{width:110px}}
-@keyframes march{from{background-position-x:0}to{background-position-x:44px}}
 @keyframes pagein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(200,16,46,.55)}100%{box-shadow:0 0 0 16px rgba(200,16,46,0)}}
-@keyframes slam{0%{opacity:0;transform:rotate(-4deg) scale(2.6)}60%{opacity:.95}100%{opacity:.92;transform:rotate(-4deg) scale(1)}}
+@keyframes slam{0%{opacity:0;transform:rotate(-3deg) scale(2.6)}60%{opacity:.95}100%{opacity:.93;transform:rotate(-3deg) scale(1)}}
 @media (prefers-reduced-motion:no-preference){
 .hero::before{animation:sweep 7s linear infinite}
-.hero.play::after{animation:lock 1s cubic-bezier(.2,.7,.2,1) .2s both}
 .hero.play .hero-body>h1{animation:strike .9s cubic-bezier(.2,.7,.2,1) both}
 .hero.play .hero-body::before{animation:rule 1s ease-out both}
-.chev{animation:march 2.4s linear infinite}
 .page.on{animation:pagein .5s ease both}
 .timeline li:last-child::before{animation:ping 2.2s ease-out infinite}
 .stamp{animation:slam .7s cubic-bezier(.2,.9,.3,1.25) .4s both}
@@ -239,7 +218,70 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.1) translateX(-1.5%)}}
 @media (prefers-reduced-motion:no-preference){.hero-bg img{animation:drift 24s ease-in-out infinite alternate}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.tile .bg,.tile .txt::before,nav a::after{transition:none}}
+.stamp{display:table;position:relative;margin:0 0 32px;padding:12px 34px 14px;border:5px solid var(--scarlet);color:var(--scarlet);text-align:center;text-transform:uppercase;transform:rotate(-3deg);transform-origin:left center;opacity:.93;filter:url(#inkWear)}
+.stamp::before{content:"";position:absolute;inset:4px;border:2px solid currentColor;pointer-events:none}
+.stamp>*{display:block;position:relative;font-family:"Barlow Condensed","Arial Narrow",sans-serif;line-height:1}
+.stamp-top{padding:0 0 7px .42em;border-bottom:2px solid currentColor;font-size:.95rem;font-weight:700;letter-spacing:.42em}
+.stamp-main{padding:8px 0 4px .2em;font-size:4.6rem;font-weight:700;letter-spacing:.2em}
+.stamp-bot{padding:7px 0 0 .3em;border-top:2px solid currentColor;font-size:.9rem;font-weight:600;letter-spacing:.3em}
+.ticker{position:relative;display:flex;align-items:stretch;background:linear-gradient(180deg,var(--scarlet),#a60d26);color:#fff;border-top:4px solid var(--maroon);border-bottom:4px solid var(--maroon);overflow:hidden}
+.ticker::before{content:"";position:absolute;inset:3px 0;border-top:1px solid rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.5);pointer-events:none;z-index:2}
+.ticker-view{flex:1;min-width:0;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.ticker-view.drag{cursor:grabbing}
+.ticker-track{display:flex;width:max-content;will-change:transform}
+.ticker-set{display:flex;flex:none}
+.ticker-item{flex:none;display:flex;align-items:center;padding:14px 0;font-size:1.4rem;font-weight:600;letter-spacing:.06em;white-space:nowrap}
+.ticker-item::after{content:"";width:9px;height:9px;margin:0 34px;background:var(--gold);transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.ticker-view{overflow-x:auto;cursor:auto;user-select:auto;-webkit-user-select:auto}.ticker-set.dup{display:none}}
+@media (max-width:560px){.ticker-item{font-size:1.2rem}.stamp{padding:10px 18px 12px}.stamp-main{font-size:3.2rem}.stamp-top{font-size:.8rem;letter-spacing:.3em}.stamp-bot{font-size:.75rem;letter-spacing:.14em}}
+.ranks{display:grid;grid-template-columns:minmax(250px,330px) minmax(0,1fr);gap:44px;align-items:start}
+.rank-list{list-style:none;margin:0;padding:0;border:3px solid var(--navy);background:var(--white)}
+.rank-list li+li{border-top:1px solid var(--line)}
+.rank-list .grp{padding:10px 18px;background:var(--tint);color:var(--maroon);font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.rank-list a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-left:6px solid transparent;font-weight:600;text-decoration:none;transition:background .2s,border-color .2s}
+.rank-list small{color:var(--muted);font-size:.85rem;font-weight:600;letter-spacing:.06em;white-space:nowrap}
+.rank-list a[aria-current]{background:var(--navy);border-left-color:var(--scarlet);color:#fff}
+.rank-list a[aria-current] small{color:#d4d9e6}
+.rank-head{margin:0 0 26px}
+.rank-head h3{margin:0 0 14px;font-size:clamp(2.4rem,5.5vw,3.6rem);line-height:1;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{padding:4px 14px;background:var(--navy);color:#fff;font-size:.85rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.chips span:first-child{background:var(--scarlet)}
+.insignia-row{display:flex;flex-wrap:wrap;gap:28px}
+.insig{display:flex;align-items:center;gap:16px}
+.insig .tile2{width:112px;height:112px}
+.insig .tile2 img{max-width:76px;max-height:84px}
+.insig b{display:block;font-size:1.5rem;line-height:1.1}
+.insig span{display:block;font-weight:600;color:var(--muted)}
+.rank-detail h4{margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line);font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.7rem;line-height:1.1;text-transform:uppercase;color:var(--scarlet)}
+.rank-detail .body{font-size:1.15rem}
+@media (prefers-reduced-motion:no-preference){.rank-card{animation:pagein .35s ease both}}
+@media (hover:hover) and (pointer:fine){
+.rank-list a:not([aria-current]):hover{background:var(--tint)}
+nav a:hover::after{transform:scaleX(1)}
+.crumbs a:hover{text-decoration:underline}
+.btn.solid:hover{background:var(--maroon);border-color:var(--maroon)}
+.btn.line:hover{background:var(--scarlet)}
+.tile:hover .bg{transform:scale(1.07)}
+.tile:hover::after{background:linear-gradient(180deg,rgba(122,12,27,.25),rgba(12,26,51,.94))}
+.tile:hover .txt::before{width:130px}
+.tile:hover .more::before{transform:scale(1.5)}
+.bio:hover svg{transform:translateY(-3px)}
+.bio:hover span{background-size:100% 2px}
+.portrait:hover img{transform:scale(1.05)}
+.portrait:hover::after{opacity:1;transform:none}
+.tile2:hover::after,.timeline li:hover .badge::after{transform:translateX(130%)}
+.tile2:hover img,.timeline li:hover .badge img{transform:scale(1.1)}
+.outcome tbody tr:hover{background:#f6dfe3}
+}
 @media (max-width:900px){
+.ranks{grid-template-columns:1fr;gap:28px}
+.rank-list{display:flex;overflow-x:auto;border-width:2px}
+.rank-list .grp{display:none}
+.rank-list li{flex:none}
+.rank-list li+li{border-top:0;border-left:1px solid var(--line)}
+.rank-list a{border-left:0;border-bottom:5px solid transparent;white-space:nowrap}
+.rank-list a[aria-current]{border-bottom-color:var(--scarlet)}
 .about{grid-template-columns:1fr;gap:32px}
 .roster{grid-template-columns:1fr}
 .profile{grid-template-columns:1fr}
@@ -252,7 +294,6 @@ section{padding:60px 0}
 .crumbs ol{padding:6px 20px}
 }
 @media (max-width:560px){
-.stamp{font-size:2rem}
 .timeline li{flex-wrap:wrap;gap:6px 16px}
 .timeline .when{width:100%}
 }
@@ -266,6 +307,7 @@ nav a{font-size:1.15rem}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="inkWear" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="4" result="warp"/><feDisplacementMap in="SourceGraphic" in2="warp" scale="2" xChannelSelector="R" yChannelSelector="G" result="rough"/><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 6.2" result="holes"/><feComposite in="rough" in2="holes" operator="in"/></filter></svg>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="hero tall play" id="hero">
 <div class="hero-bg"><img id="heroImg" alt=""></div>
@@ -275,6 +317,7 @@ nav a{font-size:1.15rem}
 <a href="#/" data-route="home">Home</a>
 <a href="#/news" data-route="news">News</a>
 <a href="#/join" data-route="join">Join</a>
+<a href="#/ranks" data-route="ranks">Ranks</a>
 <div class="has-menu"><a href="#/leadership" data-route="leadership">Leadership<span class="caret" aria-hidden="true"></span></a><ul class="menu" id="leadMenu"></ul></div>
 </nav>
 </div>
@@ -285,7 +328,7 @@ nav a{font-size:1.15rem}
 <div class="btnrow" id="heroCta"></div>
 </div>
 </div>
-<div class="chev" aria-hidden="true"></div>
+<div class="ticker" role="region" aria-label="Announcements"><div class="ticker-view"><div class="ticker-track" id="tickerTrack"></div></div></div>
 <main>
 <div class="page" data-page="home">
 <section>
@@ -370,6 +413,13 @@ Ping: @MPS Staff</pre>
 </div>
 </section>
 </div>
+<div class="page" data-page="ranks">
+<section>
+<div class="wrap">
+<div class="ranks"><ul class="rank-list" id="rankList"></ul><div class="rank-detail" id="rankDetail"></div></div>
+</div>
+</section>
+</div>
 <div class="page" data-page="profile">
 <section>
 <div class="wrap" id="profileBody"></div>
@@ -389,12 +439,12 @@ Ping: @MPS Staff</pre>
 </div>
 </footer>
 <script>
-const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", o4: "assets/o4.webp", o3: "assets/o3.webp", o2: "assets/o2.webp", e2: "assets/e2.webp", e3: "assets/e3.webp", e4: "assets/e4.webp", e5: "assets/e5.webp", e6: "assets/e6.webp", e7: "assets/e7.webp", e8a: "assets/e8a.webp", e8b: "assets/e8b.webp", e9a: "assets/e9a.webp", e9b: "assets/e9b.webp", e9c: "assets/e9c.webp", e9d: "assets/e9d.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
+const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o1: "assets/o1.webp", o8: "assets/o8.webp", o7: "assets/o7.webp", o4: "assets/o4.webp", o3: "assets/o3.webp", o2: "assets/o2.webp", e2: "assets/e2.webp", e3: "assets/e3.webp", e4: "assets/e4.webp", e5: "assets/e5.webp", e6: "assets/e6.webp", e7: "assets/e7.webp", e8a: "assets/e8a.webp", e8b: "assets/e8b.webp", e9a: "assets/e9a.webp", e9b: "assets/e9b.webp", e9c: "assets/e9c.webp", e9d: "assets/e9d.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
 let ARTICLES = [];
 let APPLICATIONS = [];
 const PEOPLE = [
   {id: "high-command", name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8", "Major General Mike has served at Military Police School since May 7, 2026, and is one of the people who has contributed the most to leading and developing the school. He officially began his work in High Command on June 24, 2026, as a Senior Enlisted Advisor.", [["May 7, 2026", "First Lieutenant", "o2", "Instructor"], ["May 9, 2026", "Colonel", "o6", "Chief Instructor, Aide-de-Camp"], ["June 24, 2026", "Sergeant Major", "e9b", "Senior Enlisted Advisor"], ["July 7, 2026", "Brigadier General", "o7", "Vice Chairman"], ["October 6, 2026", "Major General", "o8", "Chairman"]]], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7", "Brigadier General Fang has served at Military Police School since May 16, 2026, and currently serves as Vice Chairman, contributing to the school. He officially became a member of High Command on July 7, 2026.", [["May 16, 2026", "Captain", "o3", "Senior Instructor"], ["May 25, 2026", "Major", "o4", "Lead Instructor"], ["June 8, 2026", "Colonel", "o6", "Head Instructor"], ["June 15, 2026", "Colonel", "o6", "Chief Instructor"], ["July 7, 2026", "Sergeant Major", "e9b", "Senior Enlisted Advisor"], ["October 6, 2026", "Brigadier General", "o7", "Vice Chairman"]]], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "e9b", "Sergeant Major Anthony has served at Military Police School since April 16, 2026, and currently serves as Senior Enlisted Advisor. He became a member of High Command on October 6, 2026.", [["May 26, 2026", "Captain", "o3", "Senior Instructor"], ["June 2, 2026", "Major", "o4", "Lead Instructor"], ["June 15, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["July 7, 2026", "Colonel", "o6", "Chief Instructor"], ["October 6, 2026", "Sergeant Major", "e9b", "Senior Enlisted Advisor"]]]]},
-  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6", "Colonel Police has dedicated himself to Military Police School since July 20, 2026, starting as an Instructor. He currently serves as Chief Instructor, holding the rank of Colonel.", [["July 20, 2026", "Gunnery Sergeant", "e7", "Instructor"], ["July 27, 2026", "Master Sergeant", "e8a", "Senior Instructor"], ["August 3, 2026", "First Sergeant", "e8b", "Lead Instructor"], ["August 7, 2026", "Major", "o4", "Lead Instructor"], ["August 14, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["September 13, 2026", "Colonel", "o6", "Chief Instructor"]], "Don't make your problem, become my problem"]]},
+  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6", "Colonel Police has dedicated himself to Military Police School since July 20, 2026, starting as a Junior Instructor. He currently serves as Chief Instructor, holding the rank of Colonel.", [["July 20, 2026", "Gunnery Sergeant", "e7", "Junior Instructor"], ["July 27, 2026", "Master Sergeant", "e8a", "Instructor"], ["August 3, 2026", "First Sergeant", "e8b", "Senior Instructor"], ["August 7, 2026", "Major", "o4", "Lead Instructor"], ["August 14, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["September 13, 2026", "Colonel", "o6", "Chief Instructor"]], "Don't make your problem, become my problem"]]},
   {id: "head-instructors", name: "Middle Command: Head Instructors", list: [["gendermaleehrh", "Head Instructor", "Lieutenant Colonel", "o5"], ["KUNALNG6", "Head Instructor", "Lieutenant Colonel", "o5"], ["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5"]]}
 ];
 const VIEWS = {
@@ -407,14 +457,85 @@ const COMMAND_MENU = [
   ["High Command", "high-command", [["Chairman", "mike0w73"], ["Vice Chairman", "X_AgsFang"], ["Senior Enlisted Advisor", "AnthonyUnbeatable"]]],
   ["Middle Command", "middle-command", [["Aide-de-Camp", "65VI9"], ["Chief Instructors", null, "chief-instructors"], ["Head Instructors", null, "head-instructors"]]]
 ];
+const QUOTA_PATH = (rankName) => `Complete your quota at the ${rankName} rank, and you will be promoted to this position once you meet the requirements.`;
+const APPLY_OPEN = "Submit an application when applications are open, then complete the phases to earn this position.";
+const MIDCOM_APPLY = "Apply when a Middle Command application is open, then complete the phases to earn this position.";
+const HICOM_SELECT = "Be selected by High Command when a position is open.";
+const HQ_SELECT = "Be selected by Headquarters and approved by Marine Staff.";
+const POSITIONS = [
+  {id: "junior-instructor", name: "Junior Instructor", grade: "E7 / O1", command: "Lower Command", insignia: [["e7", "Gunnery Sergeant", "E7"], ["o1", "Second Lieutenant", "O1"]],
+    description: "Junior Instructors are the front line of Military Police training. Their main focus is organizing and running phases for Military Police Phase Candidates.",
+    obtain: ["Pass a Military Police School tryout, then complete the phases to earn this position.", APPLY_OPEN]},
+  {id: "instructor", name: "Instructor", grade: "E8A / O2", command: "Lower Command", insignia: [["e8a", "Master Sergeant", "E8A"], ["o2", "First Lieutenant", "O2"]],
+    description: "Instructors primarily host Law Enforcement Battalion tryouts, and also run phases for Military Police Phase Candidates.",
+    obtain: [QUOTA_PATH("Junior Instructor"), APPLY_OPEN]},
+  {id: "senior-instructor", name: "Senior Instructor", grade: "E8B / O3", command: "Lower Command", insignia: [["e8b", "First Sergeant", "E8B"], ["o3", "Captain", "O3"]],
+    description: "Senior Instructors focus on hosting Military Police School tryouts and running phases for Instructor Candidates.",
+    obtain: [QUOTA_PATH("Instructor"), APPLY_OPEN]},
+  {id: "lead-instructor", name: "Lead Instructor", grade: "E9A / O4", command: "Lower Command", insignia: [["e9a", "Master Gunnery Sergeant", "E9A"], ["o4", "Major", "O4"]],
+    description: "Lead Instructors host events for Military Police School, alongside Military Police School tryouts.",
+    obtain: [QUOTA_PATH("Senior Instructor"), APPLY_OPEN]},
+  {id: "head-instructor", name: "Head Instructor", grade: "O5", command: "Middle Command", insignia: [["o5", "Lieutenant Colonel", "O5"]],
+    description: "Head Instructors manage the database, log phases and events, and handle many other duties. They also host sessions and support both new and existing members of Military Police School.",
+    obtain: [HICOM_SELECT, MIDCOM_APPLY]},
+  {id: "chief-instructor", name: "Chief Instructor", grade: "O6", command: "Middle Command", insignia: [["o6", "Colonel", "O6"]],
+    description: "Chief Instructors focus on logging and rank management. They host tryouts and events for Military Police School, and support both new and existing members.",
+    obtain: [HICOM_SELECT, MIDCOM_APPLY]},
+  {id: "aide-de-camp", name: "Aide-de-Camp", grade: "O6", command: "Middle Command", insignia: [["o6", "Colonel", "O6"]],
+    description: "The Aide-de-Camp serves as an assistant to High Command, observing and stepping in to help whenever High Command needs support.",
+    obtain: [HICOM_SELECT, "You must already be a member of Middle Command."]},
+  {id: "senior-enlisted-advisor", name: "Senior Enlisted Advisor", grade: "E9B", command: "High Command", insignia: [["e9b", "Sergeant Major", "E9B"]],
+    description: "The Senior Enlisted Advisor manages and represents the Enlisted Instructors, and oversees Lower Command. They handle quotas, discipline and corrections, advise High Command, and help develop Military Police School.",
+    obtain: [HQ_SELECT]},
+  {id: "vice-chairman", name: "Vice Chairman", grade: "O7", command: "High Command", insignia: [["o7", "Brigadier General", "O7"]],
+    description: "The Vice Chairman oversees Middle Command and recruitment, and assists the Chairman in running Military Police School. They also monitor the state of the school and put forward initiatives that help it grow.",
+    obtain: [HQ_SELECT]},
+  {id: "chairman", name: "Chairman", grade: "O8", command: "High Command", insignia: [["o8", "Major General", "O8"]],
+    description: "The Chairman runs Military Police School and represents it, builds and grows the division, and oversees the other members of High Command.",
+    obtain: [HQ_SELECT]}
+];
+function TickerLine(name, sentence) { const person = FindPerson(name); return person.rank + " " + person.name + " " + sentence; }
+const TICKER_SPEED = 70;
+const TICKER_MESSAGES = [
+  "Join Military Police School today to gain more experience and advance your journey in the United States Marine Corps!",
+  TickerLine("mike0w73", "is the Chairman of Military Police School."),
+  TickerLine("X_AgsFang", "serves as the Vice Chairman of Military Police School."),
+  TickerLine("AnthonyUnbeatable", "serves as the Senior Enlisted Advisor of Military Police School."),
+  TickerLine("65VI9", "has been appointed as the Aide-de-Camp of Military Police School."),
+  "Attend a hosted tryout in #event-broadcast and become a member of Military Police School.",
+  "Get the MPS PING role in #get-your-roles so you never miss a Military Police School tryout.",
+  "Request your own tryout in #request-a-tryout and follow the post format exactly.",
+  "Leadership, Discipline, Community and Teamwork are the standards every MPS Instructor builds on.",
+  "Military Police School recruits new members and makes sure every future graduate is competent.",
+  "Vertutis Disciplina is the motto that guides every member of Military Police School.",
+  "Leadership: lead candidates and fellow instructors with confidence.",
+  "Discipline: hold yourself and others to the standard, every single day.",
+  "Community: engage with the wider Military Police community and grow together.",
+  "Teamwork: one staff, one mission, one Military Police School.",
+  "Stay active, stay disciplined, and rise through the ranks of Military Police School.",
+  "Read the latest news, interviews and announcements on the MPS News page.",
+  "Visit the Leadership page to meet the High Command and Middle Command of MPS.",
+  "Military Police School is the backbone of Military Police personnel, training the Marines of tomorrow.",
+  "Chief Instructors and Head Instructors form the Middle Command of Military Police School.",
+  "Read the biography and promotion history of every leader on the Leadership page.",
+  "Check the Join page to see how you can become part of Military Police School.",
+  "Two ways in: attend a hosted tryout or submit an application when positions are open.",
+  "Tryout request posts must be titled Military Police School | Username.",
+  "A tryout request needs your name, timezone, device, mic status and availability.",
+  "Being mic active is a big plus for anyone who wants to become an MPS Instructor.",
+  "MPS Instructors are mature, active and ready to lead candidates.",
+  "Applications are reviewed carefully, so always answer every question in detail.",
+  "MPSNet sat down with the Chairman and a Chief Instructor of MPS. Read the full interview in the News section."
+];
 const BIO_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h9l5 5v15H5z"/><path d="M13 2v6h6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M8 12h8M8 16h8" stroke="#fff" stroke-width="1.5"/></svg>`;
 const HERO = {
   home: {title: "Military Police School", lede: "Responsible for the recruitment and competence of future graduates of the Military Police program.", tall: true},
   news: {title: "News", lede: "The latest news, interviews and coverage from Military Police School."},
   join: {title: "Join MPS", lede: "You can join Military Police School through Tryouts or Applications."},
+  ranks: {title: "Ranks", lede: "Every position in Military Police School, from Junior Instructor to Chairman."},
   leadership: {title: "Chain of Command", lede: "The High Command and Middle Command of Military Police School."}
 };
-const PAGE_NAMES = {home: "Military Police School", news: "News", join: "Join", leadership: "Leadership"};
+const PAGE_NAMES = {home: "Military Police School", news: "News", join: "Join", ranks: "Ranks", leadership: "Leadership"};
 function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char])); }
 function Multiline(text) { return Esc(text).replace(/\n/g, "<br>"); }
 function FormatDate(text) { const day = new Date(text + "T00:00:00"); return isNaN(day) ? text : day.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"}); }
@@ -464,7 +585,7 @@ function ApplicationHtml(application) {
   const byline = [FormatDate(application.date), application.deadline ? "Deadline: " + FormatDate(application.deadline) : ""].filter(Boolean).map(Esc).join(" | ");
   const apply = !IsClosed(application) && /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
   const closed = IsClosed(application);
-  const stamp = closed ? `<div class="stamp" aria-hidden="true">Closed</div>` : "";
+  const stamp = closed ? `<div class="stamp" aria-hidden="true"><span class="stamp-top">Military Police School</span><b class="stamp-main">Closed</b><span class="stamp-bot">Applications no longer accepted</span></div>` : "";
   const outcome = closed && Array.isArray(application.results) ? ResultsHtml(application.results) : "";
   return `${stamp}${outcome}<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
 }
@@ -503,6 +624,26 @@ function ProfileHtml(person) {
   const creed = person.motto ? `<blockquote class="creed"><small>MOTTO</small>“${Esc(person.motto)}”</blockquote>` : "";
   return `<div class="profile">${PortraitHtml(person.name)}<div>${RankHtml(person.name, person.role, person.rank, person.insignia)}${biography}${creed}${promotions}<a class="back" href="#/leadership/${person.group.id}">Back to ${VIEWS[person.group.id].title}</a></div></div>`;
 }
+function RankListHtml() {
+  return [...new Set(POSITIONS.map((position) => position.command))].map((command) => `<li class="grp">${Esc(command)}</li>` + POSITIONS.filter((position) => position.command === command).map((position) => `<li><a href="#/ranks/${position.id}" data-id="${position.id}">${Esc(position.name)}<small>${Esc(position.grade)}</small></a></li>`).join("")).join("");
+}
+function RankDetailHtml(position) {
+  const insigniaHtml = position.insignia.map(([key, rankName, gradeName]) => `<div class="insig"><div class="tile2"><img src="${IMG[key]}" alt="${Esc(rankName)} insignia"></div><div><b class="cond">${Esc(rankName)}</b><span>${Esc(gradeName)}</span></div></div>`).join("");
+  const stepsHtml = position.obtain.map((step) => `<li>${Esc(step)}</li>`).join("");
+  return `<div class="rank-card"><div class="rank-head"><h3 class="cond">${Esc(position.name)}</h3><div class="chips"><span>Paygrade ${Esc(position.grade)}</span><span>${Esc(position.command)}</span></div></div><div class="insignia-row">${insigniaHtml}</div><h4>Description</h4><p class="body">${Esc(position.description)}</p><h4>How to obtain</h4><ul class="list">${stepsHtml}</ul></div>`;
+}
+function SelectPosition(positionId, fromClick) {
+  const position = POSITIONS.find((entry) => entry.id === positionId) || POSITIONS[0];
+  document.querySelectorAll("#rankList a").forEach((link) => { if (link.dataset.id === position.id) link.setAttribute("aria-current", "true"); else link.removeAttribute("aria-current"); });
+  document.getElementById("rankDetail").innerHTML = RankDetailHtml(position);
+  if (fromClick) { history.replaceState(null, "", "#/ranks/" + position.id); document.querySelector("#rankList a[aria-current]").scrollIntoView({block: "nearest", inline: "center"}); }
+}
+document.getElementById("rankList").addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (!link) return;
+  event.preventDefault();
+  SelectPosition(link.dataset.id, true);
+});
 const REVEAL_SELECTOR = "h2.sec, .values>div, .steps>div, .join>div, .about>p, .fmt, .entry, .timeline li, .promo h3, .creed, .outcome, .article>.meta, .profile .rank, .rank-group h3";
 const REVEAL_WATCHER = new IntersectionObserver((sightings) => sightings.forEach((sighting) => {
   if (sighting.isIntersecting) { sighting.target.classList.add("in"); REVEAL_WATCHER.unobserve(sighting.target); }
@@ -549,6 +690,7 @@ function ShowPage() {
   });
   if (opened) document.getElementById("articleBody").innerHTML = application ? ApplicationHtml(application) : ArticleHtml(article);
   if (route === "news") FilterNews();
+  if (route === "ranks") { document.getElementById("rankList").innerHTML = RankListHtml(); SelectPosition(parts[1], false); }
   if (route === "leadership") document.getElementById("roster").innerHTML = RosterHtml(leadView ? leadView.groups : PEOPLE.map((group) => group.id));
   if (person) document.getElementById("profileBody").innerHTML = ProfileHtml(person);
   document.title = route === "home" ? "Military Police School" : pageTitle + " | Military Police School";
@@ -558,6 +700,40 @@ function ShowPage() {
 document.getElementById("heroImg").src = IMG.banner;
 document.getElementById("brandLogo").src = IMG.logo;
 document.getElementById("footLogo").src = IMG.logo;
+function BuildTicker() {
+  const track = document.getElementById("tickerTrack");
+  const view = track.parentElement;
+  const itemsHtml = TICKER_MESSAGES.map((message) => `<span class="ticker-item cond">${Esc(message)}</span>`).join("");
+  track.innerHTML = `<div class="ticker-set">${itemsHtml}</div><div class="ticker-set dup" aria-hidden="true">${itemsHtml}</div>`;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let loopWidth = 1;
+  let scrollOffset = 0;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartOffset = 0;
+  let lastFrame = 0;
+  const Apply = () => { scrollOffset = ((scrollOffset % loopWidth) + loopWidth) % loopWidth; track.style.transform = `translateX(${-scrollOffset}px)`; };
+  const Measure = () => { loopWidth = track.firstElementChild.offsetWidth || 1; Apply(); };
+  const Release = () => { dragging = false; view.classList.remove("drag"); };
+  const Step = (now) => {
+    const elapsed = Math.min(now - lastFrame, 50);
+    lastFrame = now;
+    if (!dragging) { scrollOffset += TICKER_SPEED * elapsed / 1000; Apply(); }
+    requestAnimationFrame(Step);
+  };
+  view.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    dragging = true; dragStartX = event.clientX; dragStartOffset = scrollOffset;
+    view.setPointerCapture(event.pointerId); view.classList.add("drag");
+  });
+  view.addEventListener("pointermove", (event) => { if (dragging) { scrollOffset = dragStartOffset - (event.clientX - dragStartX); Apply(); } });
+  ["pointerup", "pointercancel", "lostpointercapture"].forEach((name) => view.addEventListener(name, Release));
+  window.addEventListener("resize", Measure);
+  document.fonts.ready.then(Measure);
+  Measure();
+  requestAnimationFrame((now) => { lastFrame = now; Step(now); });
+}
+BuildTicker();
 document.getElementById("leadMenu").innerHTML = MenuHtml();
 const catSelect = document.getElementById("catSelect");
 function Rebuild() {
