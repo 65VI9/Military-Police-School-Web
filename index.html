@@ -132,9 +132,9 @@ h2.sec::before{content:"";width:14px;align-self:stretch;background:var(--scarlet
 .tile2{flex:none;width:80px;height:80px;display:grid;place-items:center;background:var(--navy);border-bottom:5px solid var(--scarlet)}
 .tile2 img{max-width:54px;max-height:58px;width:auto;height:auto}
 .rank>div:last-child{min-width:0}
-.entry b{display:block;font-size:1.8rem;line-height:1.05;overflow-wrap:anywhere}
-.entry span{display:block;font-weight:600;margin-top:4px}
-.entry small{display:block;font-size:.95rem;color:var(--muted)}
+.rank b{display:block;font-size:1.8rem;line-height:1.05;overflow-wrap:anywhere}
+.rank span{display:block;font-weight:600;margin-top:4px}
+.rank small{display:block;font-size:.95rem;color:var(--muted)}
 footer{background:var(--navy);color:#fff;border-top:8px solid var(--scarlet)}
 footer .wrap{display:flex;align-items:center;gap:20px;padding:36px 0;flex-wrap:wrap}
 footer img{width:72px;height:72px}
@@ -171,7 +171,11 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .bio:hover span{background-size:100% 2px}
 .profile{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:48px;align-items:start}
 .profile .portrait{max-width:280px}
-.profile .rank{margin-bottom:26px}
+.profile .rank{gap:18px;margin-bottom:26px}
+.profile .tile2{width:96px;height:96px}
+.profile .tile2 img{max-width:64px;max-height:70px}
+.profile .rank b{font-size:2.4rem}
+.profile .rank span{font-size:1.1rem}
 .promo{margin:36px 0 12px}
 .promo h3{margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--line);font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
 .timeline{position:relative;list-style:none;margin:0;padding:0 0 0 34px}
