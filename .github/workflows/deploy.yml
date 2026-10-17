@@ -21,6 +21,7 @@ jobs:
       - name: Build news index
         run: |
           if ls news/*.json >/dev/null 2>&1; then jq -s 'map(select(.published != false)) | sort_by(.date) | reverse' news/*.json > news-index.json; else echo '[]' > news-index.json; fi
+          if ls applications/*.json >/dev/null 2>&1; then jq -s 'map(select(.published != false)) | sort_by(.date) | reverse' applications/*.json > applications-index.json; else echo '[]' > applications-index.json; fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
