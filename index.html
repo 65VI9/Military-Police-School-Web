@@ -101,6 +101,16 @@ h2.sec::before{content:"";width:14px;align-self:stretch;background:var(--scarlet
 .join div+div{border-left:3px solid var(--navy)}
 .join h3{margin:0 0 10px;font-size:2.8rem;text-transform:uppercase;color:var(--scarlet);line-height:1}
 .join p{margin:0;max-width:26rem}
+.dc{color:var(--scarlet);font-weight:700}
+.fmt{margin:0 0 24px;padding:18px 22px;background:var(--navy);color:#fff;border-left:6px solid var(--scarlet);font:.95rem/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.lbl{margin:0 0 6px;font-weight:700;color:var(--maroon)}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
+.steps>div{border-top:4px solid var(--scarlet);padding-top:12px}
+.steps h3{margin:0 0 8px;font-size:1.9rem;text-transform:uppercase;line-height:1.1}
+.steps p{margin:0 0 14px}
+.list{margin:0 0 20px;padding-left:22px}
+.list li{margin-bottom:6px}
+.empty{margin:0;color:var(--muted)}
 .rank-group{margin-bottom:56px}
 .rank-group:last-child{margin-bottom:0}
 .rank-group h3{margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--line);font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
@@ -137,7 +147,7 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 @media (max-width:900px){
 .about{grid-template-columns:1fr;gap:32px}
 .roster{grid-template-columns:1fr}
-.join{grid-template-columns:1fr}
+.join,.steps{grid-template-columns:1fr}
 .join div+div{border-left:0;border-top:3px solid var(--navy)}
 .tile{grid-column:span 6}
 section{padding:60px 0}
@@ -225,6 +235,37 @@ nav a{font-size:1.15rem}
 </div>
 </div>
 </section>
+<section>
+<div class="wrap">
+<h2 class="sec cond">Request a tryout</h2>
+<div class="steps">
+<div>
+<h3 class="cond">Wait for a hosted tryout</h3>
+<p>Wait until an Instructor hosts a Military Police School tryout. Check <a class="dc" href="https://discord.com/channels/679450235982053393/1143018721707819098" target="_blank" rel="noopener noreferrer">#event-broadcast</a> to see if an MPS tryout is being hosted, then attend and become a member of Military Police School.</p>
+<p>Do not forget to get the MPS PING role from <a class="dc" href="https://discord.com/channels/679450235982053393/1462016940422987867" target="_blank" rel="noopener noreferrer">#get-your-roles</a> so you get notified every time there is a Military Police School tryout.</p>
+</div>
+<div>
+<h3 class="cond">Request one yourself</h3>
+<p>Request a tryout in <a class="dc" href="https://discord.com/channels/679450235982053393/1505501777934422197" target="_blank" rel="noopener noreferrer">#request-a-tryout</a> by creating a post in that thread. Follow the format below exactly.</p>
+</div>
+</div>
+<p class="lbl">Post title format</p>
+<pre class="fmt">Military Police School | Username</pre>
+<p class="lbl">Post format</p>
+<pre class="fmt">Name: (e.g. mikebell)
+Timezone: (e.g. EST)
+Device: (e.g. Phone, PC)
+Mic: Yes/No
+Availability: (e.g. From May 17, 2026 5:15 PM to May 17, 2026 5:20 PM)
+Ping: @MPS Staff</pre>
+</div>
+</section>
+<section class="alt">
+<div class="wrap">
+<h2 class="sec cond">Applications</h2>
+<div class="grid" id="appGrid"></div>
+</div>
+</section>
 </div>
 <div class="page" data-page="leadership">
 <section>
@@ -242,6 +283,7 @@ nav a{font-size:1.15rem}
 <script>
 const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", sgm: "assets/sgm.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
 let ARTICLES = [];
+let APPLICATIONS = [];
 const PEOPLE = [
   {name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8"], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7"], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "sgm"]]},
   {name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6"]]},
@@ -258,12 +300,12 @@ function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"
 function Multiline(text) { return Esc(text).replace(/\n/g, "<br>"); }
 function FormatDate(text) { const day = new Date(text + "T00:00:00"); return isNaN(day) ? text : day.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"}); }
 function SortNews(list) { return [...list].sort((first, second) => (second.pinned ? 1 : 0) - (first.pinned ? 1 : 0) || String(second.date).localeCompare(String(first.date))); }
-function TileHtml(article, featured) {
+function TileHtml(article, featured, base = "news", label = "READ MORE") {
   const picture = article.image || IMG.banner;
-  return `<a class="tile reveal${featured ? " big" : ""}" href="#/news/${Esc(article.id)}"><div class="bg" style="background-image:url('${Esc(picture)}');background-position:${Esc(article.imagePosition || "center")}"></div><div class="txt"><h3 class="slab">${Esc(article.title)}</h3>${featured && article.excerpt ? `<p>${Esc(article.excerpt)}</p>` : ""}<span class="more cond">READ MORE</span></div></a>`;
+  return `<a class="tile reveal${featured ? " big" : ""}" href="#/${base}/${Esc(article.id)}"><div class="bg" style="background-image:url('${Esc(picture)}');background-position:${Esc(article.imagePosition || "center")}"></div><div class="txt"><h3 class="slab">${Esc(article.title)}</h3>${featured && article.excerpt ? `<p>${Esc(article.excerpt)}</p>` : ""}<span class="more cond">${label}</span></div></a>`;
 }
-function FillGrid(target, list) {
-  target.innerHTML = list.map((article) => TileHtml(article, article.featured)).join("");
+function FillGrid(target, list, base, label) {
+  target.innerHTML = list.map((article) => TileHtml(article, article.featured, base, label)).join("");
   WatchReveal(target);
 }
 function WatchReveal(scope) {
@@ -282,6 +324,7 @@ function FilterNews() {
 function BlockHtml(block) {
   if (block.type === "h") return `<h3 class="slab sub">${Esc(block.text)}</h3>`;
   if (block.type === "qa") return `<div class="qa"><h3 class="slab">${Esc(block.q)}</h3><p>${Multiline(block.a)}</p></div>`;
+  if (block.type === "ul") return `<ul class="list">${String(block.text).split("\n").filter(Boolean).map((line) => `<li>${Esc(line)}</li>`).join("")}</ul>`;
   if (block.type === "quote") return `<blockquote class="slab">${Multiline(block.text)}${block.by ? `<cite>${Esc(block.by)}</cite>` : ""}</blockquote>`;
   if (block.type === "img") return `<figure><img src="${Esc(block.src)}" alt="${Esc(block.caption || "")}">${block.caption ? `<figcaption>${Esc(block.caption)}</figcaption>` : ""}</figure>`;
   return `<p class="body">${Multiline(block.text)}</p>`;
@@ -291,6 +334,11 @@ function ArticleHtml(article) {
   const byline = [article.category, FormatDate(article.date), article.author].filter(Boolean).map(Esc).join(" | ");
   return `<p class="meta">${byline}</p>${lead}${(article.body || []).map(BlockHtml).join("")}<a class="back" href="#/news">Back to all news</a>`;
 }
+function ApplicationHtml(application) {
+  const byline = [FormatDate(application.date), application.deadline ? "Deadline: " + FormatDate(application.deadline) : ""].filter(Boolean).map(Esc).join(" | ");
+  const apply = /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
+  return `<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
+}
 function RosterHtml() {
   return PEOPLE.map((group) => `<div class="rank-group"><h3 class="cond">${group.name}</h3><div class="roster">${group.list.map(([name, role, rank, insignia]) =>
     `<div class="entry"><div class="portrait"><img src="assets/portraits/${Esc(name)}.png" alt="Portrait of ${name}"></div><div class="rank"><div class="tile2"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div><b class="cond">${name}</b><span>${role}</span><small>${rank}</small></div></div></div>`).join("")}</div></div>`).join("");
@@ -298,27 +346,29 @@ function RosterHtml() {
 function ShowPage() {
   const parts = location.hash.replace(/^#\/?/, "").split("/");
   const article = parts[0] === "news" && parts[1] ? ARTICLES.find((entry) => entry.id === parts[1]) : null;
-  const route = article ? "article" : (HERO[parts[0]] ? parts[0] : "home");
-  const navRoute = article ? "news" : route;
+  const application = parts[0] === "applications" && parts[1] ? APPLICATIONS.find((entry) => entry.id === parts[1]) : null;
+  const route = article || application ? "article" : (HERO[parts[0]] ? parts[0] : "home");
+  const navRoute = article ? "news" : application ? "join" : route;
   const hero = document.getElementById("hero");
-  const config = article ? {title: article.title, lede: article.excerpt} : HERO[route];
+  const opened = article || application;
+  const config = opened ? {title: opened.title, lede: opened.excerpt} : HERO[route];
   document.getElementById("heroTitle").textContent = config.title;
   document.getElementById("heroLede").textContent = config.lede;
   document.getElementById("heroCta").innerHTML = route === "home" ? `<a class="btn solid" href="#/join">How to join</a><a class="btn line" href="#/news">Read the news</a>` : "";
   hero.classList.toggle("tall", !!config.tall);
-  hero.classList.toggle("long", !!article);
+  hero.classList.toggle("long", !!opened);
   hero.classList.remove("play");
   void hero.offsetWidth;
   hero.classList.add("play");
-  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : [[PAGE_NAMES[route]]];
+  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : application ? [["Join", "#/join"], [application.title]] : [[PAGE_NAMES[route]]];
   document.getElementById("crumbs").innerHTML = `<li><a href="#/">Home</a></li>` + trail.map(([label, link]) => `<li>${link ? `<a href="${link}">${label}</a>` : label}</li>`).join("");
   document.querySelectorAll(".page").forEach((page) => page.classList.toggle("on", page.dataset.page === route));
   document.querySelectorAll("nav a").forEach((link) => {
     if (link.dataset.route === navRoute) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current");
   });
-  if (article) document.getElementById("articleBody").innerHTML = ArticleHtml(article);
+  if (opened) document.getElementById("articleBody").innerHTML = application ? ApplicationHtml(application) : ArticleHtml(article);
   if (route === "news") FilterNews();
-  document.title = route === "home" ? "Military Police School" : (article ? article.title : PAGE_NAMES[route]) + " | Military Police School";
+  document.title = route === "home" ? "Military Police School" : (opened ? opened.title : PAGE_NAMES[route]) + " | Military Police School";
   window.scrollTo(0, 0);
 }
 document.getElementById("heroImg").src = IMG.banner;
@@ -329,13 +379,16 @@ const catSelect = document.getElementById("catSelect");
 function Rebuild() {
   catSelect.innerHTML = `<option value="">All</option>` + [...new Set(ARTICLES.map((article) => article.category))].map((name) => `<option>${Esc(name)}</option>`).join("");
   FillGrid(document.getElementById("homeGrid"), ARTICLES.slice(0, 4));
+  const appGrid = document.getElementById("appGrid");
+  if (APPLICATIONS.length) FillGrid(appGrid, APPLICATIONS, "applications", "VIEW APPLICATION"); else appGrid.innerHTML = `<p class="empty">No applications are open right now.</p>`;
   ShowPage();
 }
 catSelect.addEventListener("change", FilterNews);
 document.getElementById("kwInput").addEventListener("input", FilterNews);
 document.getElementById("clearAll").addEventListener("click", () => { catSelect.value = ""; document.getElementById("kwInput").value = ""; FilterNews(); });
 window.addEventListener("hashchange", ShowPage);
-fetch("news-index.json").then((reply) => reply.ok ? reply.json() : []).catch(() => []).then((list) => { ARTICLES = SortNews(list); Rebuild(); });
+const LoadList = (file) => fetch(file).then((reply) => reply.ok ? reply.json() : []).catch(() => []);
+Promise.all([LoadList("news-index.json"), LoadList("applications-index.json")]).then(([newsList, applicationList]) => { ARTICLES = SortNews(newsList); APPLICATIONS = SortNews(applicationList); Rebuild(); });
 </script>
 </body>
 </html>
