@@ -293,7 +293,7 @@ function ArticleHtml(article) {
 }
 function RosterHtml() {
   return PEOPLE.map((group) => `<div class="rank-group"><h3 class="cond">${group.name}</h3><div class="roster">${group.list.map(([name, role, rank, insignia]) =>
-    `<div class="entry"><div class="portrait"><img src="${IMG.portrait}" alt="Portrait of ${name}"></div><div class="rank"><div class="tile2"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div><b class="cond">${name}</b><span>${role}</span><small>${rank}</small></div></div></div>`).join("")}</div></div>`).join("");
+    `<div class="entry"><div class="portrait"><img src="assets/portraits/${Esc(name)}.png" alt="Portrait of ${name}"></div><div class="rank"><div class="tile2"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div><b class="cond">${name}</b><span>${role}</span><small>${rank}</small></div></div></div>`).join("")}</div></div>`).join("");
 }
 function ShowPage() {
   const parts = location.hash.replace(/^#\/?/, "").split("/");
