@@ -188,6 +188,53 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .timeline .badge img{max-width:46px;max-height:50px;width:auto;height:auto}
 .timeline .what b{display:block;font-size:1.55rem;line-height:1.1}
 .timeline .what span{display:block;font-weight:600;color:var(--maroon)}
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:50;background:linear-gradient(90deg,var(--scarlet),var(--gold));transform:scaleX(0);transform-origin:left}
+.hero-bg::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 1px,transparent 1px 3px)}
+.hero::before{content:"";position:absolute;left:0;right:0;top:-160px;height:160px;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(255,255,255,.08),transparent)}
+.hero::after{content:"";position:absolute;inset:14px;z-index:1;pointer-events:none;background:linear-gradient(var(--scarlet),var(--scarlet)) 0 100%/42px 3px,linear-gradient(var(--scarlet),var(--scarlet)) 0 100%/3px 42px,linear-gradient(var(--scarlet),var(--scarlet)) 100% 100%/42px 3px,linear-gradient(var(--scarlet),var(--scarlet)) 100% 100%/3px 42px;background-repeat:no-repeat}
+.portrait{position:relative;overflow:hidden}
+.portrait img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.portrait::after{content:"";position:absolute;inset:12px;pointer-events:none;opacity:0;transform:scale(1.12);transition:opacity .35s,transform .35s;background:linear-gradient(#fff,#fff) 0 0/24px 2px,linear-gradient(#fff,#fff) 0 0/2px 24px,linear-gradient(#fff,#fff) 100% 0/24px 2px,linear-gradient(#fff,#fff) 100% 0/2px 24px,linear-gradient(#fff,#fff) 0 100%/24px 2px,linear-gradient(#fff,#fff) 0 100%/2px 24px,linear-gradient(#fff,#fff) 100% 100%/24px 2px,linear-gradient(#fff,#fff) 100% 100%/2px 24px;background-repeat:no-repeat}
+.entry:hover .portrait img,.profile .portrait:hover img{transform:scale(1.05)}
+.entry:hover .portrait::after,.profile .portrait:hover::after{opacity:1;transform:none}
+.tile2,.timeline .badge{position:relative;overflow:hidden}
+.tile2::after,.timeline .badge::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);transition:transform .8s}
+.entry:hover .tile2::after,.profile .tile2:hover::after,.timeline li:hover .badge::after{transform:translateX(130%)}
+.tile2 img,.timeline .badge img{transition:transform .4s}
+.entry:hover .tile2 img,.timeline li:hover .badge img{transform:scale(1.1)}
+.creed{position:relative;margin:0 0 26px;padding:18px 24px 18px 28px;background:var(--navy);border-left:6px solid var(--scarlet);color:#fff;font-size:1.45rem;font-style:italic;line-height:1.3}
+.creed small{display:block;margin-bottom:8px;color:var(--gold);font:700 .75rem "Public Sans",sans-serif;font-style:normal;letter-spacing:.3em}
+.stamp{display:table;margin:0 0 28px;padding:2px 18px;border:5px double var(--scarlet);color:var(--scarlet);font:700 2.6rem "Barlow Condensed",sans-serif;letter-spacing:.16em;line-height:1.2;text-transform:uppercase;transform:rotate(-4deg);transform-origin:left center;opacity:.92}
+.outcome{margin:0 0 40px}
+.outcome h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
+.outcome h3::before{content:"";width:12px;height:26px;background:var(--scarlet)}
+.outcome .scroll{overflow-x:auto;border:3px solid var(--navy)}
+.outcome table{width:100%;min-width:560px;border-collapse:collapse}
+.outcome th{padding:12px 16px;background:var(--navy);border-bottom:4px solid var(--scarlet);color:#fff;text-align:left;font:700 1.15rem "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.outcome td{padding:13px 16px;border-top:1px solid var(--line);font-weight:600;overflow-wrap:anywhere}
+.outcome tbody tr{transition:background .2s}
+.outcome tbody tr:nth-child(even){background:var(--tint)}
+.outcome tbody tr:hover{background:#f6dfe3}
+.outcome td.tbd{color:var(--muted);font-style:italic;font-weight:500}
+.outcome td.only{padding:36px 16px;color:var(--maroon);font-style:normal;font-weight:700;letter-spacing:.22em;text-align:center;text-transform:uppercase}
+@keyframes sweep{from{top:-160px}to{top:100%}}
+@keyframes lock{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:none}}
+@keyframes strike{from{opacity:0;letter-spacing:.3em}to{opacity:1;letter-spacing:0}}
+@keyframes rule{from{width:0}to{width:110px}}
+@keyframes march{from{background-position-x:0}to{background-position-x:44px}}
+@keyframes pagein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(200,16,46,.55)}100%{box-shadow:0 0 0 16px rgba(200,16,46,0)}}
+@keyframes slam{0%{opacity:0;transform:rotate(-4deg) scale(2.6)}60%{opacity:.95}100%{opacity:.92;transform:rotate(-4deg) scale(1)}}
+@media (prefers-reduced-motion:no-preference){
+.hero::before{animation:sweep 7s linear infinite}
+.hero.play::after{animation:lock 1s cubic-bezier(.2,.7,.2,1) .2s both}
+.hero.play .hero-body>h1{animation:strike .9s cubic-bezier(.2,.7,.2,1) both}
+.hero.play .hero-body::before{animation:rule 1s ease-out both}
+.chev{animation:march 2.4s linear infinite}
+.page.on{animation:pagein .5s ease both}
+.timeline li:last-child::before{animation:ping 2.2s ease-out infinite}
+.stamp{animation:slam .7s cubic-bezier(.2,.9,.3,1.25) .4s both}
+}
 @keyframes slide{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:none}}
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.1) translateX(-1.5%)}}
 @media (prefers-reduced-motion:no-preference){.hero-bg img{animation:drift 24s ease-in-out infinite alternate}}
@@ -205,6 +252,7 @@ section{padding:60px 0}
 .crumbs ol{padding:6px 20px}
 }
 @media (max-width:560px){
+.stamp{font-size:2rem}
 .timeline li{flex-wrap:wrap;gap:6px 16px}
 .timeline .when{width:100%}
 }
@@ -218,6 +266,7 @@ nav a{font-size:1.15rem}
 </style>
 </head>
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
 <div class="hero tall play" id="hero">
 <div class="hero-bg"><img id="heroImg" alt=""></div>
 <div class="top">
@@ -340,12 +389,12 @@ Ping: @MPS Staff</pre>
 </div>
 </footer>
 <script>
-const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", o4: "assets/o4.webp", o3: "assets/o3.webp", o2: "assets/o2.webp", sgm: "assets/sgm.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
+const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", o4: "assets/o4.webp", o3: "assets/o3.webp", o2: "assets/o2.webp", e2: "assets/e2.webp", e3: "assets/e3.webp", e4: "assets/e4.webp", e5: "assets/e5.webp", e6: "assets/e6.webp", e7: "assets/e7.webp", e8a: "assets/e8a.webp", e8b: "assets/e8b.webp", e9a: "assets/e9a.webp", e9b: "assets/e9b.webp", e9c: "assets/e9c.webp", e9d: "assets/e9d.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
 let ARTICLES = [];
 let APPLICATIONS = [];
 const PEOPLE = [
-  {id: "high-command", name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8", "Major General Mike has served at Military Police School since May 8, 2026, and is one of the people who has contributed the most to leading and developing the school. He officially began his work in High Command on June 24, 2026, as a Senior Enlisted Advisor.", [["May 7, 2026", "First Lieutenant", "o2", "Instructor"], ["May 9, 2026", "Colonel", "o6", "Chief Instructor, Aide-de-Camp"], ["June 24, 2026", "Sergeant Major", "sgm", "Senior Enlisted Advisor"], ["July 7, 2026", "Brigadier General", "o7", "Vice Chairman"], ["October 6, 2026", "Major General", "o8", "Chairman"]]], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7", "Brigadier General Fang has served at Military Police School since May 16, 2026, and currently serves as Vice Chairman, contributing to the school. He officially became a member of High Command on July 7, 2026.", [["May 16, 2026", "Captain", "o3", "Senior Instructor"], ["May 25, 2026", "Major", "o4", "Lead Instructor"], ["June 8, 2026", "Colonel", "o6", "Head Instructor"], ["June 15, 2026", "Colonel", "o6", "Chief Instructor"], ["July 7, 2026", "Sergeant Major", "sgm", "Senior Enlisted Advisor"], ["October 6, 2026", "Brigadier General", "o7", "Vice Chairman"]]], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "sgm", "Sergeant Major Anthony has served at Military Police School since April 16, 2026, and currently serves as Senior Enlisted Advisor. He became a member of High Command on October 6, 2026.", [["May 26, 2026", "Captain", "o3", "Senior Instructor"], ["June 2, 2026", "Major", "o4", "Lead Instructor"], ["June 15, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["July 7, 2026", "Colonel", "o6", "Chief Instructor"], ["October 6, 2026", "Sergeant Major", "sgm", "Senior Enlisted Advisor"]]]]},
-  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6"]]},
+  {id: "high-command", name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8", "Major General Mike has served at Military Police School since May 7, 2026, and is one of the people who has contributed the most to leading and developing the school. He officially began his work in High Command on June 24, 2026, as a Senior Enlisted Advisor.", [["May 7, 2026", "First Lieutenant", "o2", "Instructor"], ["May 9, 2026", "Colonel", "o6", "Chief Instructor, Aide-de-Camp"], ["June 24, 2026", "Sergeant Major", "e9b", "Senior Enlisted Advisor"], ["July 7, 2026", "Brigadier General", "o7", "Vice Chairman"], ["October 6, 2026", "Major General", "o8", "Chairman"]]], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7", "Brigadier General Fang has served at Military Police School since May 16, 2026, and currently serves as Vice Chairman, contributing to the school. He officially became a member of High Command on July 7, 2026.", [["May 16, 2026", "Captain", "o3", "Senior Instructor"], ["May 25, 2026", "Major", "o4", "Lead Instructor"], ["June 8, 2026", "Colonel", "o6", "Head Instructor"], ["June 15, 2026", "Colonel", "o6", "Chief Instructor"], ["July 7, 2026", "Sergeant Major", "e9b", "Senior Enlisted Advisor"], ["October 6, 2026", "Brigadier General", "o7", "Vice Chairman"]]], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "e9b", "Sergeant Major Anthony has served at Military Police School since April 16, 2026, and currently serves as Senior Enlisted Advisor. He became a member of High Command on October 6, 2026.", [["May 26, 2026", "Captain", "o3", "Senior Instructor"], ["June 2, 2026", "Major", "o4", "Lead Instructor"], ["June 15, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["July 7, 2026", "Colonel", "o6", "Chief Instructor"], ["October 6, 2026", "Sergeant Major", "e9b", "Senior Enlisted Advisor"]]]]},
+  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6", "Colonel Police has dedicated himself to Military Police School since July 20, 2026, starting as an Instructor. He currently serves as Chief Instructor, holding the rank of Colonel.", [["July 20, 2026", "Gunnery Sergeant", "e7", "Instructor"], ["July 27, 2026", "Master Sergeant", "e8a", "Senior Instructor"], ["August 3, 2026", "First Sergeant", "e8b", "Lead Instructor"], ["August 7, 2026", "Major", "o4", "Lead Instructor"], ["August 14, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["September 13, 2026", "Colonel", "o6", "Chief Instructor"]], "Don't make your problem, become my problem"]]},
   {id: "head-instructors", name: "Middle Command: Head Instructors", list: [["gendermaleehrh", "Head Instructor", "Lieutenant Colonel", "o5"], ["KUNALNG6", "Head Instructor", "Lieutenant Colonel", "o5"], ["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5"]]}
 ];
 const VIEWS = {
@@ -369,6 +418,8 @@ const PAGE_NAMES = {home: "Military Police School", news: "News", join: "Join", 
 function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char])); }
 function Multiline(text) { return Esc(text).replace(/\n/g, "<br>"); }
 function FormatDate(text) { const day = new Date(text + "T00:00:00"); return isNaN(day) ? text : day.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"}); }
+const TODAY = new Date().toLocaleDateString("sv-SE");
+function IsClosed(application) { return application.status === "closed" || !!(application.deadline && application.deadline < TODAY); }
 function SortNews(list) { return [...list].sort((first, second) => (second.pinned ? 1 : 0) - (first.pinned ? 1 : 0) || String(second.date).localeCompare(String(first.date))); }
 function TileHtml(article, featured, base = "news", label = "READ MORE") {
   const picture = article.image || IMG.banner;
@@ -387,7 +438,7 @@ function WatchReveal(scope) {
 function FilterNews() {
   const category = document.getElementById("catSelect").value;
   const keyword = document.getElementById("kwInput").value.trim().toLowerCase();
-  const found = ARTICLES.filter((article) => (!category || article.category === category) && (!keyword || (article.title + article.excerpt).toLowerCase().includes(keyword)));
+  const found = ARTICLES.filter((article) => (!category || article.category === category) && (!keyword || (article.title + " " + (article.excerpt || "")).toLowerCase().includes(keyword)));
   document.getElementById("resultCount").textContent = "Results: " + found.length;
   FillGrid(document.getElementById("newsGrid"), found);
 }
@@ -404,16 +455,24 @@ function ArticleHtml(article) {
   const byline = [article.category, FormatDate(article.date), article.author].filter(Boolean).map(Esc).join(" | ");
   return `<p class="meta">${byline}</p>${lead}${(article.body || []).map(BlockHtml).join("")}<a class="back" href="#/news">Back to all news</a>`;
 }
+function ResultCell(text) { return text ? `<td>${Esc(text)}</td>` : `<td class="tbd">To Be Determined</td>`; }
+function ResultsHtml(results) {
+  const rows = results.length ? results.map((winner) => `<tr>${ResultCell(winner.roblox)}${ResultCell(winner.discord)}${ResultCell(winner.position)}</tr>`).join("") : `<tr><td class="tbd only" colspan="3">To Be Determined</td></tr>`;
+  return `<div class="outcome"><h3 class="cond">Results</h3><div class="scroll"><table><thead><tr><th>Roblox Username</th><th>Discord Username</th><th>Position</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+}
 function ApplicationHtml(application) {
   const byline = [FormatDate(application.date), application.deadline ? "Deadline: " + FormatDate(application.deadline) : ""].filter(Boolean).map(Esc).join(" | ");
-  const apply = /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
-  return `<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
+  const apply = !IsClosed(application) && /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
+  const closed = IsClosed(application);
+  const stamp = closed ? `<div class="stamp" aria-hidden="true">Closed</div>` : "";
+  const outcome = closed && Array.isArray(application.results) ? ResultsHtml(application.results) : "";
+  return `${stamp}${outcome}<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
 }
 function ProfileLink(name) { return "#/leadership/profile/" + encodeURIComponent(name); }
 function FindPerson(name) {
   for (const group of PEOPLE) {
     const entry = group.list.find((member) => member[0] === name);
-    if (entry) return {name: entry[0], role: entry[1], rank: entry[2], insignia: entry[3], bio: entry[4], history: entry[5], group};
+    if (entry) return {name: entry[0], role: entry[1], rank: entry[2], insignia: entry[3], bio: entry[4], history: entry[5], motto: entry[6], group};
   }
   return null;
 }
@@ -441,8 +500,26 @@ function PromotionHtml(history) {
 function ProfileHtml(person) {
   const biography = person.bio ? `<p class="body">${Multiline(person.bio)}</p>` : "";
   const promotions = person.history ? PromotionHtml(person.history) : "";
-  return `<div class="profile">${PortraitHtml(person.name)}<div>${RankHtml(person.name, person.role, person.rank, person.insignia)}${biography}${promotions}<a class="back" href="#/leadership/${person.group.id}">Back to ${VIEWS[person.group.id].title}</a></div></div>`;
+  const creed = person.motto ? `<blockquote class="creed"><small>MOTTO</small>“${Esc(person.motto)}”</blockquote>` : "";
+  return `<div class="profile">${PortraitHtml(person.name)}<div>${RankHtml(person.name, person.role, person.rank, person.insignia)}${biography}${creed}${promotions}<a class="back" href="#/leadership/${person.group.id}">Back to ${VIEWS[person.group.id].title}</a></div></div>`;
 }
+const REVEAL_SELECTOR = "h2.sec, .values>div, .steps>div, .join>div, .about>p, .fmt, .entry, .timeline li, .promo h3, .creed, .outcome, .article>.meta, .profile .rank, .rank-group h3";
+const REVEAL_WATCHER = new IntersectionObserver((sightings) => sightings.forEach((sighting) => {
+  if (sighting.isIntersecting) { sighting.target.classList.add("in"); REVEAL_WATCHER.unobserve(sighting.target); }
+}), {threshold: 0.1});
+function ArmReveals() {
+  document.querySelectorAll(REVEAL_SELECTOR).forEach((block) => {
+    if (block.classList.contains("reveal")) return;
+    block.classList.add("reveal");
+    block.style.transitionDelay = ([...block.parentElement.children].indexOf(block) % 5) * 0.08 + "s";
+    REVEAL_WATCHER.observe(block);
+  });
+}
+const PROGRESS_BAR = document.getElementById("progress");
+window.addEventListener("scroll", () => {
+  const scrollSpan = document.documentElement.scrollHeight - window.innerHeight;
+  PROGRESS_BAR.style.transform = `scaleX(${scrollSpan > 0 ? window.scrollY / scrollSpan : 0})`;
+}, {passive: true});
 function ShowPage() {
   const parts = location.hash.replace(/^#\/?/, "").split("/");
   const article = parts[0] === "news" && parts[1] ? ARTICLES.find((entry) => entry.id === parts[1]) : null;
@@ -475,6 +552,7 @@ function ShowPage() {
   if (route === "leadership") document.getElementById("roster").innerHTML = RosterHtml(leadView ? leadView.groups : PEOPLE.map((group) => group.id));
   if (person) document.getElementById("profileBody").innerHTML = ProfileHtml(person);
   document.title = route === "home" ? "Military Police School" : pageTitle + " | Military Police School";
+  ArmReveals();
   window.scrollTo(0, 0);
 }
 document.getElementById("heroImg").src = IMG.banner;
@@ -494,7 +572,7 @@ document.getElementById("kwInput").addEventListener("input", FilterNews);
 document.getElementById("clearAll").addEventListener("click", () => { catSelect.value = ""; document.getElementById("kwInput").value = ""; FilterNews(); });
 window.addEventListener("hashchange", ShowPage);
 const LoadList = (file) => fetch(file).then((reply) => reply.ok ? reply.json() : []).catch(() => []);
-Promise.all([LoadList("news-index.json"), LoadList("applications-index.json")]).then(([newsList, applicationList]) => { ARTICLES = SortNews(newsList); APPLICATIONS = SortNews(applicationList); Rebuild(); });
+Promise.all([LoadList("news-index.json"), LoadList("applications-index.json")]).then(([newsList, applicationList]) => { ARTICLES = SortNews(newsList); APPLICATIONS = SortNews(applicationList).map((application) => IsClosed(application) ? {...application, title: application.title + " (CLOSED)"} : application); Rebuild(); });
 </script>
 </body>
 </html>
