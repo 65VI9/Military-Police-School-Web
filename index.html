@@ -33,7 +33,7 @@ a{color:inherit}
 .hero-bg{position:absolute;inset:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,26,51,.9),rgba(12,26,51,.35) 45%,rgba(12,26,51,.85))}
-.top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 32px;flex-wrap:wrap}
+.top{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 32px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
 .brand img{width:52px;height:52px}
 .brand span{font-size:2rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;line-height:1}
@@ -150,6 +150,40 @@ blockquote{margin:0 0 30px;padding:6px 0 6px 20px;border-left:6px solid var(--sc
 blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-serif;color:var(--muted)}
 .sub{margin:36px 0 12px;font-size:1.7rem}
 .body{margin:0 0 20px}
+.has-menu{position:relative;display:flex}
+.caret{display:inline-block;width:8px;height:8px;margin-left:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-3px) rotate(45deg);transition:transform .3s}
+.has-menu:hover .caret,.has-menu:focus-within .caret{transform:translateY(1px) rotate(225deg)}
+.menu,.fly{list-style:none;margin:0;padding:14px 0;opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+.menu{position:absolute;top:100%;right:-14px;min-width:250px;background:#a00c20;box-shadow:0 14px 30px rgba(0,0,0,.4);transform:translateY(10px)}
+.has-menu:hover>.menu,.has-menu:focus-within>.menu{opacity:1;visibility:visible;transform:none}
+.menu li{position:relative}
+.menu a{display:block;padding:9px 28px;font-size:1.15rem;font-weight:500;white-space:nowrap}
+.menu a::after{display:none}
+.menu li:hover>a,.menu li:focus-within>a{background:rgba(0,0,0,.2)}
+.menu li.has-fly>a{padding-left:38px}
+.menu li.has-fly>a::before{content:"";position:absolute;left:16px;top:50%;width:8px;height:8px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-50%) rotate(45deg)}
+.fly{position:absolute;top:-14px;right:100%;min-width:270px;background:var(--maroon);box-shadow:0 14px 30px rgba(0,0,0,.4);transform:translateX(10px)}
+.menu li:hover>.fly,.menu li:focus-within>.fly{opacity:1;visibility:visible;transform:none}
+.bio{display:inline-flex;align-items:center;gap:14px;align-self:flex-start;color:#a00c20;font-size:.85rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;text-decoration:none}
+.bio svg{width:18px;height:22px;flex:none;fill:currentColor;transition:transform .3s}
+.bio span{padding-bottom:3px;background:linear-gradient(currentColor,currentColor) left bottom/0 2px no-repeat;transition:background-size .3s}
+.bio:hover svg{transform:translateY(-3px)}
+.bio:hover span{background-size:100% 2px}
+.profile{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:48px;align-items:start}
+.profile .portrait{max-width:280px}
+.profile .rank{margin-bottom:26px}
+.promo{margin:36px 0 12px}
+.promo h3{margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--line);font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
+.timeline{position:relative;list-style:none;margin:0;padding:0 0 0 34px}
+.timeline::before{content:"";position:absolute;left:8px;top:14px;bottom:14px;width:3px;background:var(--line)}
+.timeline li{position:relative;display:flex;align-items:center;gap:20px;padding:10px 0}
+.timeline li::before{content:"";position:absolute;left:-34px;top:50%;width:19px;height:19px;border:3px solid var(--scarlet);border-radius:50%;background:var(--white);transform:translateY(-50%)}
+.timeline li:last-child::before{background:var(--scarlet);box-shadow:0 0 0 5px rgba(200,16,46,.18)}
+.timeline .when{flex:none;width:170px;font-weight:600;color:var(--muted);font-size:.95rem}
+.timeline .badge{flex:none;width:68px;height:68px;display:grid;place-items:center;background:var(--navy);border-bottom:4px solid var(--scarlet)}
+.timeline .badge img{max-width:46px;max-height:50px;width:auto;height:auto}
+.timeline .what b{display:block;font-size:1.55rem;line-height:1.1}
+.timeline .what span{display:block;font-weight:600;color:var(--maroon)}
 @keyframes slide{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:none}}
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.1) translateX(-1.5%)}}
 @media (prefers-reduced-motion:no-preference){.hero-bg img{animation:drift 24s ease-in-out infinite alternate}}
@@ -157,12 +191,18 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 @media (max-width:900px){
 .about{grid-template-columns:1fr;gap:32px}
 .roster{grid-template-columns:1fr}
+.profile{grid-template-columns:1fr}
+.menu,.caret{display:none}
 .join,.steps{grid-template-columns:1fr}
 .join div+div{border-left:0;border-top:3px solid var(--navy)}
 .tile{grid-column:span 6}
 section{padding:60px 0}
 .top{padding:14px 20px}
 .crumbs ol{padding:6px 20px}
+}
+@media (max-width:560px){
+.timeline li{flex-wrap:wrap;gap:6px 16px}
+.timeline .when{width:100%}
 }
 @media (max-width:560px){
 .brand span{display:none}
@@ -182,7 +222,7 @@ nav a{font-size:1.15rem}
 <a href="#/" data-route="home">Home</a>
 <a href="#/news" data-route="news">News</a>
 <a href="#/join" data-route="join">Join</a>
-<a href="#/leadership" data-route="leadership">Leadership</a>
+<div class="has-menu"><a href="#/leadership" data-route="leadership">Leadership<span class="caret" aria-hidden="true"></span></a><ul class="menu" id="leadMenu"></ul></div>
 </nav>
 </div>
 <div class="crumbs"><ol id="crumbs"></ol><div class="motto">Vertutis Disciplina</div></div>
@@ -277,6 +317,11 @@ Ping: @MPS Staff</pre>
 </div>
 </section>
 </div>
+<div class="page" data-page="profile">
+<section>
+<div class="wrap" id="profileBody"></div>
+</section>
+</div>
 <div class="page" data-page="leadership">
 <section>
 <div class="wrap" id="roster"></div>
@@ -291,14 +336,25 @@ Ping: @MPS Staff</pre>
 </div>
 </footer>
 <script>
-const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", sgm: "assets/sgm.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
+const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o8: "assets/o8.webp", o7: "assets/o7.webp", o4: "assets/o4.webp", o3: "assets/o3.webp", o2: "assets/o2.webp", sgm: "assets/sgm.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
 let ARTICLES = [];
 let APPLICATIONS = [];
 const PEOPLE = [
-  {name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8"], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7"], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "sgm"]]},
-  {name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6"]]},
-  {name: "Middle Command: Head Instructors", list: [["gendermaleehrh", "Head Instructor", "Lieutenant Colonel", "o5"], ["KUNALNG6", "Head Instructor", "Lieutenant Colonel", "o5"], ["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5"]]}
+  {id: "high-command", name: "High Command", list: [["mike0w73", "Chairman", "Major General", "o8", "Major General Mike has served at Military Police School since May 8, 2026, and is one of the people who has contributed the most to leading and developing the school. He officially began his work in High Command on June 24, 2026, as a Senior Enlisted Advisor.", [["May 7, 2026", "First Lieutenant", "o2", "Instructor"], ["May 9, 2026", "Colonel", "o6", "Chief Instructor, Aide-de-Camp"], ["June 24, 2026", "Sergeant Major", "sgm", "Senior Enlisted Advisor"], ["July 7, 2026", "Brigadier General", "o7", "Vice Chairman"], ["October 6, 2026", "Major General", "o8", "Chairman"]]], ["X_AgsFang", "Vice Chairman", "Brigadier General", "o7", "Brigadier General Fang has served at Military Police School since May 16, 2026, and currently serves as Vice Chairman, contributing to the school. He officially became a member of High Command on July 7, 2026.", [["May 16, 2026", "Captain", "o3", "Senior Instructor"], ["May 25, 2026", "Major", "o4", "Lead Instructor"], ["June 8, 2026", "Colonel", "o6", "Head Instructor"], ["June 15, 2026", "Colonel", "o6", "Chief Instructor"], ["July 7, 2026", "Sergeant Major", "sgm", "Senior Enlisted Advisor"], ["October 6, 2026", "Brigadier General", "o7", "Vice Chairman"]]], ["AnthonyUnbeatable", "Senior Enlisted Advisor", "Sergeant Major", "sgm", "Sergeant Major Anthony has served at Military Police School since April 16, 2026, and currently serves as Senior Enlisted Advisor. He became a member of High Command on October 6, 2026.", [["May 26, 2026", "Captain", "o3", "Senior Instructor"], ["June 2, 2026", "Major", "o4", "Lead Instructor"], ["June 15, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["July 7, 2026", "Colonel", "o6", "Chief Instructor"], ["October 6, 2026", "Sergeant Major", "sgm", "Senior Enlisted Advisor"]]]]},
+  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide-de-Camp", "Colonel", "o6"], ["AviatorFs2020", "Chief Instructor", "Colonel", "o6"], ["Policeswat8934dudess", "Chief Instructor", "Colonel", "o6"]]},
+  {id: "head-instructors", name: "Middle Command: Head Instructors", list: [["gendermaleehrh", "Head Instructor", "Lieutenant Colonel", "o5"], ["KUNALNG6", "Head Instructor", "Lieutenant Colonel", "o5"], ["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5"]]}
 ];
+const VIEWS = {
+  "high-command": {title: "High Command", lede: "The senior leadership of Military Police School.", groups: ["high-command"]},
+  "middle-command": {title: "Middle Command", lede: "The Chief Instructors and Head Instructors of Military Police School.", groups: ["chief-instructors", "head-instructors"]},
+  "chief-instructors": {title: "Chief Instructors", lede: "The Chief Instructors of Military Police School.", groups: ["chief-instructors"], parent: "middle-command"},
+  "head-instructors": {title: "Head Instructors", lede: "The Head Instructors of Military Police School.", groups: ["head-instructors"], parent: "middle-command"}
+};
+const COMMAND_MENU = [
+  ["High Command", "high-command", [["Chairman", "mike0w73"], ["Vice Chairman", "X_AgsFang"], ["Senior Enlisted Advisor", "AnthonyUnbeatable"]]],
+  ["Middle Command", "middle-command", [["Aide-de-Camp", "65VI9"], ["Chief Instructors", null, "chief-instructors"], ["Head Instructors", null, "head-instructors"]]]
+];
+const BIO_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h9l5 5v15H5z"/><path d="M13 2v6h6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M8 12h8M8 16h8" stroke="#fff" stroke-width="1.5"/></svg>`;
 const HERO = {
   home: {title: "Military Police School", lede: "Responsible for the recruitment and competence of future graduates of the Military Police program.", tall: true},
   news: {title: "News", lede: "The latest news, interviews and coverage from Military Police School."},
@@ -349,28 +405,62 @@ function ApplicationHtml(application) {
   const apply = /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
   return `<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
 }
-function RosterHtml() {
-  return PEOPLE.map((group) => `<div class="rank-group"><h3 class="cond">${group.name}</h3><div class="roster">${group.list.map(([name, role, rank, insignia]) =>
-    `<div class="entry"><div class="portrait"><img src="assets/portraits/${Esc(name)}.png" alt="Portrait of ${name}"></div><div class="rank"><div class="tile2"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div><b class="cond">${name}</b><span>${role}</span><small>${rank}</small></div></div></div>`).join("")}</div></div>`).join("");
+function ProfileLink(name) { return "#/leadership/profile/" + encodeURIComponent(name); }
+function FindPerson(name) {
+  for (const group of PEOPLE) {
+    const entry = group.list.find((member) => member[0] === name);
+    if (entry) return {name: entry[0], role: entry[1], rank: entry[2], insignia: entry[3], bio: entry[4], history: entry[5], group};
+  }
+  return null;
+}
+function ViewTrail(viewId) {
+  const view = VIEWS[viewId];
+  return [...(view.parent ? ViewTrail(view.parent) : []), [view.title, "#/leadership/" + viewId]];
+}
+function MenuHtml() {
+  return COMMAND_MENU.map(([label, viewId, posts]) => `<li class="has-fly"><a href="#/leadership/${viewId}">${label}</a><ul class="fly">${posts.map(([postLabel, name, groupId]) => `<li><a href="${name ? ProfileLink(name) : "#/leadership/" + groupId}">${postLabel}</a></li>`).join("")}</ul></li>`).join("");
+}
+function PortraitHtml(name) {
+  return `<div class="portrait"><img src="assets/portraits/${Esc(name)}.png" alt="Portrait of ${Esc(name)}"></div>`;
+}
+function RankHtml(name, role, rank, insignia) {
+  return `<div class="rank"><div class="tile2"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div><b class="cond">${name}</b><span>${role}</span><small>${rank}</small></div></div>`;
+}
+function RosterHtml(groupIds) {
+  return PEOPLE.filter((group) => groupIds.includes(group.id)).map((group) => `<div class="rank-group"><h3 class="cond">${group.name}</h3><div class="roster">${group.list.map(([name, role, rank, insignia]) =>
+    `<div class="entry">${PortraitHtml(name)}${RankHtml(name, role, rank, insignia)}<a class="bio" href="${ProfileLink(name)}">${BIO_ICON}<span>Read biography</span></a></div>`).join("")}</div></div>`).join("");
+}
+function PromotionHtml(history) {
+  return `<div class="promo"><h3 class="cond">Promotion History</h3><ol class="timeline">${history.map(([date, rank, insignia, position]) =>
+    `<li><div class="when">${date}</div><div class="badge"><img src="${IMG[insignia]}" alt="${rank} insignia"></div><div class="what"><b class="cond">${rank}</b><span>${position}</span></div></li>`).join("")}</ol></div>`;
+}
+function ProfileHtml(person) {
+  const biography = person.bio ? `<p class="body">${Multiline(person.bio)}</p>` : "";
+  const promotions = person.history ? PromotionHtml(person.history) : "";
+  return `<div class="profile">${PortraitHtml(person.name)}<div>${RankHtml(person.name, person.role, person.rank, person.insignia)}${biography}${promotions}<a class="back" href="#/leadership/${person.group.id}">Back to ${VIEWS[person.group.id].title}</a></div></div>`;
 }
 function ShowPage() {
   const parts = location.hash.replace(/^#\/?/, "").split("/");
   const article = parts[0] === "news" && parts[1] ? ARTICLES.find((entry) => entry.id === parts[1]) : null;
   const application = parts[0] === "applications" && parts[1] ? APPLICATIONS.find((entry) => entry.id === parts[1]) : null;
-  const route = article || application ? "article" : (HERO[parts[0]] ? parts[0] : "home");
-  const navRoute = article ? "news" : application ? "join" : route;
+  const leadView = parts[0] === "leadership" && parts[1] ? VIEWS[parts[1]] : null;
+  const person = parts[0] === "leadership" && parts[1] === "profile" && parts[2] ? FindPerson(decodeURIComponent(parts[2])) : null;
+  const route = person ? "profile" : article || application ? "article" : (HERO[parts[0]] ? parts[0] : "home");
+  const navRoute = article ? "news" : application ? "join" : person ? "leadership" : route;
   const hero = document.getElementById("hero");
   const opened = article || application;
-  const config = opened ? {title: opened.title, lede: opened.excerpt} : HERO[route];
+  const config = person ? {title: person.name, lede: person.role + " | " + person.rank} : opened ? {title: opened.title, lede: opened.excerpt} : leadView ? {title: leadView.title, lede: leadView.lede} : HERO[route];
+  const pageTitle = person ? person.name : leadView ? leadView.title : opened ? opened.title : PAGE_NAMES[route];
+  if (document.activeElement) document.activeElement.blur();
   document.getElementById("heroTitle").textContent = config.title;
   document.getElementById("heroLede").textContent = config.lede;
   document.getElementById("heroCta").innerHTML = route === "home" ? `<a class="btn solid" href="#/join">How to join</a><a class="btn line" href="#/news">Read the news</a>` : "";
   hero.classList.toggle("tall", !!config.tall);
-  hero.classList.toggle("long", !!opened);
+  hero.classList.toggle("long", !!opened || !!person);
   hero.classList.remove("play");
   void hero.offsetWidth;
   hero.classList.add("play");
-  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : application ? [["Join", "#/join"], [application.title]] : [[PAGE_NAMES[route]]];
+  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : application ? [["Join", "#/join"], [application.title]] : person ? [["Leadership", "#/leadership"], ...ViewTrail(person.group.id), [person.name]] : leadView ? [["Leadership", "#/leadership"], ...ViewTrail(parts[1]).slice(0, -1), [leadView.title]] : [[PAGE_NAMES[route]]];
   document.getElementById("crumbs").innerHTML = `<li><a href="#/">Home</a></li>` + trail.map(([label, link]) => `<li>${link ? `<a href="${link}">${label}</a>` : label}</li>`).join("");
   document.querySelectorAll(".page").forEach((page) => page.classList.toggle("on", page.dataset.page === route));
   document.querySelectorAll("nav a").forEach((link) => {
@@ -378,13 +468,15 @@ function ShowPage() {
   });
   if (opened) document.getElementById("articleBody").innerHTML = application ? ApplicationHtml(application) : ArticleHtml(article);
   if (route === "news") FilterNews();
-  document.title = route === "home" ? "Military Police School" : (opened ? opened.title : PAGE_NAMES[route]) + " | Military Police School";
+  if (route === "leadership") document.getElementById("roster").innerHTML = RosterHtml(leadView ? leadView.groups : PEOPLE.map((group) => group.id));
+  if (person) document.getElementById("profileBody").innerHTML = ProfileHtml(person);
+  document.title = route === "home" ? "Military Police School" : pageTitle + " | Military Police School";
   window.scrollTo(0, 0);
 }
 document.getElementById("heroImg").src = IMG.banner;
 document.getElementById("brandLogo").src = IMG.logo;
 document.getElementById("footLogo").src = IMG.logo;
-document.getElementById("roster").innerHTML = RosterHtml();
+document.getElementById("leadMenu").innerHTML = MenuHtml();
 const catSelect = document.getElementById("catSelect");
 function Rebuild() {
   catSelect.innerHTML = `<option value="">All</option>` + [...new Set(ARTICLES.map((article) => article.category))].map((name) => `<option>${Esc(name)}</option>`).join("");
