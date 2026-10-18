@@ -118,7 +118,7 @@ h2.sec::before{content:"";width:14px;align-self:stretch;background:var(--scarlet
 .rank-group h3{margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--line);font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
 .roster{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px}
 .entry{display:flex;flex-direction:column;gap:14px;min-width:0}
-.portrait{width:100%;max-width:240px;aspect-ratio:215/245;background:#e9edf3;border-bottom:5px solid var(--scarlet)}
+.portrait{width:100%;max-width:320px;aspect-ratio:215/245;background:#e9edf3;border-bottom:5px solid var(--scarlet)}
 .portrait img{width:100%;height:100%;object-fit:cover}
 .rank{display:flex;align-items:center;gap:14px;min-width:0}
 .tile2{flex:none;width:80px;height:80px;display:grid;place-items:center;background:var(--navy);border-bottom:5px solid var(--scarlet)}
@@ -152,15 +152,16 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .menu a{display:block;padding:9px 28px;font-size:1.15rem;font-weight:500;white-space:nowrap}
 .menu a::after{display:none}
 .menu li:hover>a,.menu li:focus-within>a{background:rgba(0,0,0,.2)}
-.menu li.has-fly>a{padding-left:38px}
+.menu li.has-fly>a,.menu li.flat>a{padding-left:38px}
 .menu li.has-fly>a::before{content:"";position:absolute;left:16px;top:50%;width:8px;height:8px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-50%) rotate(45deg)}
+.fly .none{display:block;padding:9px 28px;font-size:1.15rem;font-weight:500;white-space:nowrap;opacity:.7}
 .fly{position:absolute;top:-14px;right:100%;min-width:270px;background:var(--maroon);box-shadow:0 14px 30px rgba(0,0,0,.4);transform:translateX(10px)}
 .menu li:hover>.fly,.menu li:focus-within>.fly{opacity:1;visibility:visible;transform:none}
 .bio{display:inline-flex;align-items:center;gap:14px;align-self:flex-start;color:#a00c20;font-size:.85rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;text-decoration:none}
 .bio svg{width:18px;height:22px;flex:none;fill:currentColor;transition:transform .3s}
 .bio span{padding-bottom:3px;background:linear-gradient(currentColor,currentColor) left bottom/0 2px no-repeat;transition:background-size .3s}
-.profile{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:48px;align-items:start}
-.profile .portrait{max-width:280px}
+.profile{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:48px;align-items:start}
+.profile .portrait{max-width:380px}
 .profile .rank{gap:18px;margin-bottom:26px}
 .profile .tile2{width:96px;height:96px}
 .profile .tile2 img{max-width:64px;max-height:70px}
@@ -185,8 +186,7 @@ blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-se
 .portrait img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .portrait::after{content:"";position:absolute;inset:12px;pointer-events:none;opacity:0;transform:scale(1.12);transition:opacity .35s,transform .35s;background:linear-gradient(#fff,#fff) 0 0/24px 2px,linear-gradient(#fff,#fff) 0 0/2px 24px,linear-gradient(#fff,#fff) 100% 0/24px 2px,linear-gradient(#fff,#fff) 100% 0/2px 24px,linear-gradient(#fff,#fff) 0 100%/24px 2px,linear-gradient(#fff,#fff) 0 100%/2px 24px,linear-gradient(#fff,#fff) 100% 100%/24px 2px,linear-gradient(#fff,#fff) 100% 100%/2px 24px;background-repeat:no-repeat}
 .tile2,.timeline .badge{position:relative;overflow:hidden}
-.tile2::after,.timeline .badge::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);transition:transform .8s}
-.tile2 img,.timeline .badge img{transition:transform .4s}
+.tile2::after,.timeline .badge::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%)}
 .creed{position:relative;margin:0 0 26px;padding:18px 24px 18px 28px;background:var(--navy);border-left:6px solid var(--scarlet);color:#fff;font-size:1.45rem;font-style:italic;line-height:1.3}
 .creed small{display:block;margin-bottom:8px;color:var(--gold);font:700 .75rem "Public Sans",sans-serif;font-style:normal;letter-spacing:.3em}
 .outcome{margin:0 0 40px}
@@ -270,8 +270,8 @@ nav a:hover::after{transform:scaleX(1)}
 .bio:hover span{background-size:100% 2px}
 .portrait:hover img{transform:scale(1.05)}
 .portrait:hover::after{opacity:1;transform:none}
-.tile2:hover::after,.timeline li:hover .badge::after{transform:translateX(130%)}
-.tile2:hover img,.timeline li:hover .badge img{transform:scale(1.1)}
+.tile2:hover::after,.timeline li:hover .badge::after{transform:translateX(130%);transition:transform .8s}
+.tile2:hover img,.timeline li:hover .badge img{transform:scale(1.1);transition:transform .4s}
 .outcome tbody tr:hover{background:#f6dfe3}
 }
 @media (max-width:900px){
@@ -316,7 +316,7 @@ nav a{font-size:1.15rem}
 <nav class="cond" aria-label="Main">
 <a href="#/" data-route="home">Home</a>
 <a href="#/news" data-route="news">News</a>
-<a href="#/join" data-route="join">Join</a>
+<div class="has-menu"><a href="#/join" data-route="join">Join<span class="caret" aria-hidden="true"></span></a><ul class="menu" id="joinMenu"></ul></div>
 <a href="#/ranks" data-route="ranks">Ranks</a>
 <div class="has-menu"><a href="#/leadership" data-route="leadership">Leadership<span class="caret" aria-hidden="true"></span></a><ul class="menu" id="leadMenu"></ul></div>
 </nav>
@@ -372,7 +372,7 @@ nav a{font-size:1.15rem}
 </section>
 </div>
 <div class="page" data-page="join">
-<section class="alt">
+<section class="alt" data-part="ways">
 <div class="wrap">
 <h2 class="sec cond">Two ways in</h2>
 <div class="join">
@@ -381,7 +381,7 @@ nav a{font-size:1.15rem}
 </div>
 </div>
 </section>
-<section>
+<section data-part="tryouts">
 <div class="wrap">
 <h2 class="sec cond">Request a tryout</h2>
 <div class="steps">
@@ -406,7 +406,7 @@ Availability: (e.g. From May 17, 2026 5:15 PM to May 17, 2026 5:20 PM)
 Ping: @MPS Staff</pre>
 </div>
 </section>
-<section class="alt">
+<section class="alt" data-part="apps">
 <div class="wrap">
 <h2 class="sec cond">Applications</h2>
 <div class="grid" id="appGrid"></div>
@@ -460,6 +460,10 @@ const VIEWS = {
   "middle-command": {title: "Middle Command", lede: "The Chief Instructors and Head Instructors of Military Police School.", groups: ["chief-instructors", "head-instructors"]},
   "chief-instructors": {title: "Chief Instructors", lede: "The Chief Instructors of Military Police School.", groups: ["chief-instructors"], parent: "middle-command"},
   "head-instructors": {title: "Head Instructors", lede: "The Head Instructors of Military Police School.", groups: ["head-instructors"], parent: "middle-command"}
+};
+const JOIN_VIEWS = {
+  tryouts: {title: "Tryouts", lede: "Attend a hosted tryout or request one yourself to join Military Police School.", parts: ["tryouts"]},
+  applications: {title: "Applications", lede: "The applications that are open right now at Military Police School.", parts: ["apps"]}
 };
 const COMMAND_MENU = [
   ["High Command", "high-command", [["Chairman", "mike0w73"], ["Vice Chairman", "X_AgsFang"], ["Senior Enlisted Advisor", "AnthonyUnbeatable"]]],
@@ -612,6 +616,16 @@ function ViewTrail(viewId) {
 function MenuHtml() {
   return COMMAND_MENU.map(([label, viewId, posts]) => `<li class="has-fly"><a href="#/leadership/${viewId}">${label}</a><ul class="fly">${posts.map(([postLabel, name, groupId]) => `<li><a href="${name ? ProfileLink(name) : "#/leadership/" + groupId}">${postLabel}</a></li>`).join("")}</ul></li>`).join("");
 }
+function JoinMenuHtml() {
+  const openApplications = APPLICATIONS.filter((application) => !IsClosed(application));
+  const openLinks = openApplications.length ? openApplications.map((application) => `<li><a href="#/applications/${Esc(application.id)}">${Esc(application.title)}</a></li>`).join("") : `<li><span class="none">No open applications</span></li>`;
+  return `<li class="flat"><a href="#/join/tryouts">Tryouts</a></li><li class="has-fly"><a href="#/join/applications">Applications</a><ul class="fly">${openLinks}</ul></li>`;
+}
+function FillApplications(openOnly) {
+  const appGrid = document.getElementById("appGrid");
+  const shownApplications = openOnly ? APPLICATIONS.filter((application) => !IsClosed(application)) : APPLICATIONS;
+  if (shownApplications.length) FillGrid(appGrid, shownApplications, "applications", "VIEW APPLICATION"); else appGrid.innerHTML = `<p class="empty">No applications are open right now.</p>`;
+}
 function PortraitHtml(name) {
   return `<div class="portrait"><img src="assets/portraits/${Esc(name)}.png" alt="Portrait of ${Esc(name)}"></div>`;
 }
@@ -674,13 +688,14 @@ function ShowPage() {
   const article = parts[0] === "news" && parts[1] ? ARTICLES.find((entry) => entry.id === parts[1]) : null;
   const application = parts[0] === "applications" && parts[1] ? APPLICATIONS.find((entry) => entry.id === parts[1]) : null;
   const leadView = parts[0] === "leadership" && parts[1] ? VIEWS[parts[1]] : null;
+  const joinView = parts[0] === "join" && parts[1] ? JOIN_VIEWS[parts[1]] : null;
   const person = parts[0] === "leadership" && parts[1] === "profile" && parts[2] ? FindPerson(decodeURIComponent(parts[2])) : null;
   const route = person ? "profile" : article || application ? "article" : (HERO[parts[0]] ? parts[0] : "home");
   const navRoute = article ? "news" : application ? "join" : person ? "leadership" : route;
   const hero = document.getElementById("hero");
   const opened = article || application;
-  const config = person ? {title: person.name, lede: person.role + " | " + person.rank} : opened ? {title: opened.title, lede: opened.excerpt} : leadView ? {title: leadView.title, lede: leadView.lede} : HERO[route];
-  const pageTitle = person ? person.name : leadView ? leadView.title : opened ? opened.title : PAGE_NAMES[route];
+  const config = person ? {title: person.name, lede: person.role + " | " + person.rank} : opened ? {title: opened.title, lede: opened.excerpt} : leadView ? {title: leadView.title, lede: leadView.lede} : joinView ? {title: joinView.title, lede: joinView.lede} : HERO[route];
+  const pageTitle = person ? person.name : leadView ? leadView.title : joinView ? joinView.title : opened ? opened.title : PAGE_NAMES[route];
   if (document.activeElement) document.activeElement.blur();
   document.getElementById("heroTitle").textContent = config.title;
   document.getElementById("heroLede").textContent = config.lede;
@@ -690,13 +705,17 @@ function ShowPage() {
   hero.classList.remove("play");
   void hero.offsetWidth;
   hero.classList.add("play");
-  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : application ? [["Join", "#/join"], [application.title]] : person ? [["Leadership", "#/leadership"], ...ViewTrail(person.group.id), [person.name]] : leadView ? [["Leadership", "#/leadership"], ...ViewTrail(parts[1]).slice(0, -1), [leadView.title]] : [[PAGE_NAMES[route]]];
+  const trail = route === "home" ? [] : article ? [["News", "#/news"], [article.title]] : application ? [["Join", "#/join"], [application.title]] : person ? [["Leadership", "#/leadership"], ...ViewTrail(person.group.id), [person.name]] : leadView ? [["Leadership", "#/leadership"], ...ViewTrail(parts[1]).slice(0, -1), [leadView.title]] : joinView ? [["Join", "#/join"], [joinView.title]] : [[PAGE_NAMES[route]]];
   document.getElementById("crumbs").innerHTML = `<li><a href="#/">Home</a></li>` + trail.map(([label, link]) => `<li>${link ? `<a href="${link}">${label}</a>` : label}</li>`).join("");
   document.querySelectorAll(".page").forEach((page) => page.classList.toggle("on", page.dataset.page === route));
   document.querySelectorAll("nav a").forEach((link) => {
     if (link.dataset.route === navRoute) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current");
   });
   if (opened) document.getElementById("articleBody").innerHTML = application ? ApplicationHtml(application) : ArticleHtml(article);
+  if (route === "join") {
+    document.querySelectorAll("[data-page=join] [data-part]").forEach((section) => { section.hidden = !!joinView && !joinView.parts.includes(section.dataset.part); });
+    FillApplications(!!joinView);
+  }
   if (route === "news") FilterNews();
   if (route === "ranks") { document.getElementById("rankList").innerHTML = RankListHtml(); SelectPosition(parts[1], false); }
   if (route === "leadership") document.getElementById("roster").innerHTML = RosterHtml(leadView ? leadView.groups : PEOPLE.map((group) => group.id));
@@ -743,12 +762,12 @@ function BuildTicker() {
 }
 BuildTicker();
 document.getElementById("leadMenu").innerHTML = MenuHtml();
+document.getElementById("joinMenu").innerHTML = JoinMenuHtml();
 const catSelect = document.getElementById("catSelect");
 function Rebuild() {
   catSelect.innerHTML = `<option value="">All</option>` + [...new Set(ARTICLES.map((article) => article.category))].map((name) => `<option>${Esc(name)}</option>`).join("");
   FillGrid(document.getElementById("homeGrid"), ARTICLES.slice(0, 4));
-  const appGrid = document.getElementById("appGrid");
-  if (APPLICATIONS.length) FillGrid(appGrid, APPLICATIONS, "applications", "VIEW APPLICATION"); else appGrid.innerHTML = `<p class="empty">No applications are open right now.</p>`;
+  document.getElementById("joinMenu").innerHTML = JoinMenuHtml();
   ShowPage();
 }
 catSelect.addEventListener("change", FilterNews);
