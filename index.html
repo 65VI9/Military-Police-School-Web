@@ -463,7 +463,7 @@ const VIEWS = {
 };
 const JOIN_VIEWS = {
   tryouts: {title: "Tryouts", lede: "Attend a hosted tryout or request one yourself to join Military Police School.", parts: ["tryouts"]},
-  applications: {title: "Applications", lede: "The applications that are open right now at Military Police School.", parts: ["apps"]}
+  applications: {title: "Applications", lede: "Every Military Police School application, with the results of the closed ones.", parts: ["apps"]}
 };
 const COMMAND_MENU = [
   ["High Command", "high-command", [["Chairman", "mike0w73"], ["Vice Chairman", "X_AgsFang"], ["Senior Enlisted Advisor", "AnthonyUnbeatable"]]],
@@ -617,14 +617,12 @@ function MenuHtml() {
   return COMMAND_MENU.map(([label, viewId, posts]) => `<li class="has-fly"><a href="#/leadership/${viewId}">${label}</a><ul class="fly">${posts.map(([postLabel, name, groupId]) => `<li><a href="${name ? ProfileLink(name) : "#/leadership/" + groupId}">${postLabel}</a></li>`).join("")}</ul></li>`).join("");
 }
 function JoinMenuHtml() {
-  const openApplications = APPLICATIONS.filter((application) => !IsClosed(application));
-  const openLinks = openApplications.length ? openApplications.map((application) => `<li><a href="#/applications/${Esc(application.id)}">${Esc(application.title)}</a></li>`).join("") : `<li><span class="none">No open applications</span></li>`;
-  return `<li class="flat"><a href="#/join/tryouts">Tryouts</a></li><li class="has-fly"><a href="#/join/applications">Applications</a><ul class="fly">${openLinks}</ul></li>`;
+  const applicationLinks = APPLICATIONS.length ? APPLICATIONS.map((application) => `<li><a href="#/applications/${Esc(application.id)}">${Esc(application.title)}</a></li>`).join("") : `<li><span class="none">No applications yet</span></li>`;
+  return `<li class="flat"><a href="#/join/tryouts">Tryouts</a></li><li class="has-fly"><a href="#/join/applications">Applications</a><ul class="fly">${applicationLinks}</ul></li>`;
 }
-function FillApplications(openOnly) {
+function FillApplications() {
   const appGrid = document.getElementById("appGrid");
-  const shownApplications = openOnly ? APPLICATIONS.filter((application) => !IsClosed(application)) : APPLICATIONS;
-  if (shownApplications.length) FillGrid(appGrid, shownApplications, "applications", "VIEW APPLICATION"); else appGrid.innerHTML = `<p class="empty">No applications are open right now.</p>`;
+  if (APPLICATIONS.length) FillGrid(appGrid, APPLICATIONS, "applications", "VIEW APPLICATION"); else appGrid.innerHTML = `<p class="empty">No applications are open right now.</p>`;
 }
 function PortraitHtml(name) {
   return `<div class="portrait"><img src="assets/portraits/${Esc(name)}.png" alt="Portrait of ${Esc(name)}"></div>`;
@@ -714,7 +712,7 @@ function ShowPage() {
   if (opened) document.getElementById("articleBody").innerHTML = application ? ApplicationHtml(application) : ArticleHtml(article);
   if (route === "join") {
     document.querySelectorAll("[data-page=join] [data-part]").forEach((section) => { section.hidden = !!joinView && !joinView.parts.includes(section.dataset.part); });
-    FillApplications(!!joinView);
+    FillApplications();
   }
   if (route === "news") FilterNews();
   if (route === "ranks") { document.getElementById("rankList").innerHTML = RankListHtml(); SelectPosition(parts[1], false); }
