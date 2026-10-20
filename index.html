@@ -306,41 +306,45 @@ nav a{font-size:1.15rem}
 }
 .awards{margin-top:56px}
 .awards>h3{margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--line);font-size:1.9rem;text-transform:uppercase;color:var(--scarlet)}
-.case{position:relative;padding:34px 24px 32px;color:#fff;border:12px solid #3b130f;border-image:linear-gradient(135deg,#7a2e1d,#2c0e0a 45%,#612418) 1;background:radial-gradient(120% 80% at 50% 0,#2a2a30 0,#151518 62%,#0b0b0d 100%),repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 1px,transparent 1px 3px);background-blend-mode:normal;box-shadow:inset 0 0 0 2px rgba(201,162,39,.55),inset 0 0 70px rgba(0,0,0,.85),0 22px 44px rgba(12,26,51,.28)}
-.award-group h4{display:flex;align-items:center;gap:14px;margin:0 0 22px;font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-size:1.2rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-.award-group h4::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(201,162,39,.7),transparent)}
-.award-group h4 small{order:2;padding:1px 10px;border:1px solid rgba(201,162,39,.6);font-size:.95rem;letter-spacing:.08em;color:#fff200}
-.case-low{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:44px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(201,162,39,.28)}
-.award-grid{display:grid;gap:28px 10px}
-.award-grid.medals{grid-template-columns:repeat(10,minmax(0,1fr))}
-.award-grid.ribbons{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 6px;padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,39,.35);align-self:start}
-.award-grid.badges{grid-template-columns:repeat(4,minmax(0,1fr))}
-.award{display:flex;flex-direction:column;gap:10px;min-width:0}
-.award-art{width:100%}
-.award-art img{width:100%;height:100%;object-fit:contain;object-position:center top;filter:drop-shadow(0 8px 8px rgba(0,0,0,.65))}
+.case{position:relative;padding:46px 40px 42px;color:#fff;border:26px solid #4a1d10;border-image:linear-gradient(135deg,#9a5430 0,#55220f 28%,#2b0f08 52%,#7a3a20 78%,#3a150b 100%) 1;background:radial-gradient(130% 90% at 50% 0,#222735 0,#10121a 58%,#07080b 100%),repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 0 3px #c9a227,inset 0 0 0 5px rgba(0,0,0,.65),inset 0 0 110px rgba(0,0,0,.92),0 28px 54px rgba(12,26,51,.32)}
+.case::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.075) 0 20%,transparent 20% 38%,rgba(255,255,255,.045) 38% 43%,transparent 43%)}
+.award-grid.medals{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:30px 10px}
+.award{display:flex;flex-direction:column;gap:12px;min-width:0}
+.award-art{position:relative;width:100%}
+.award-art img{width:100%;height:100%;object-fit:contain;object-position:center top;filter:drop-shadow(5px 9px 7px rgba(0,0,0,.7))}
 .medals .award-art{aspect-ratio:1/2.15;padding:0 4px}
-.ribbons .award{gap:0}.ribbons .award-art{aspect-ratio:3.66/1;box-shadow:0 0 0 1px rgba(0,0,0,.7),0 6px 10px rgba(0,0,0,.55)}
-.ribbons .award-art img{object-fit:cover;object-position:center;filter:none}
-.badges .award-art{aspect-ratio:1/1}
-.badges .award-art img{object-position:center}
-.plate{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;padding:3px 2px;border:5px solid transparent;border-image:url(assets/awards/nameplate.png) 5 fill/5px stretch;color:#fff200;font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-size:.84rem;font-weight:600;letter-spacing:.06em;line-height:1.15;text-align:center;text-transform:uppercase;text-wrap:balance;overflow-wrap:break-word;word-break:normal;hyphens:manual;text-shadow:0 1px 0 rgba(0,0,0,.5)}
-.medals .plate{font-size:.7rem;letter-spacing:.01em;padding:3px 0}
+.plate{flex:1;display:flex;align-items:center;justify-content:center;min-height:42px;padding:5px 4px;border-radius:2px;background:linear-gradient(180deg,#f3df94 0,#dcb94f 38%,#b98b2b 62%,#ebd27f 100%);box-shadow:inset 0 0 0 1px rgba(255,246,196,.75),inset 0 0 0 3px rgba(122,84,10,.5),0 4px 6px rgba(0,0,0,.65);color:#2c1d00;font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.05em;line-height:1.15;text-align:center;text-transform:uppercase;text-wrap:balance;overflow-wrap:break-word;word-break:normal;text-shadow:0 1px 0 rgba(255,246,196,.6)}
+.medals .plate{font-size:.7rem;letter-spacing:.01em;padding:5px 1px}
+.plate small{display:block;margin-top:2px;font-size:.82em;letter-spacing:.08em;color:#5a3d00}
+.stars{position:absolute;left:50%;top:15%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:2px;width:72%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.8))}
+.stars i{width:14px;height:14px;background:#d4d8de;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.stars i.b{background:#c07a3a}
+.case-low{display:grid;grid-template-columns:1fr minmax(0,1.4fr) 1fr;grid-template-areas:"left mid right";align-items:center;gap:30px;margin-top:46px;padding-top:36px;border-top:1px solid rgba(201,162,39,.3)}
+.case-low .left{grid-area:left}.case-low .mid{grid-area:mid}.case-low .right{grid-area:right}
+.side{display:flex;justify-content:center}
+.side .award{width:min(100%,190px)}
+.badge-cell .award-art{aspect-ratio:1/1}
+.badge-cell .award-art img{object-position:center}
+.mid{display:flex;flex-direction:column;align-items:center;gap:26px}
+.mid>.award{width:min(100%,240px)}
+.mid>.award .award-art{aspect-ratio:1.5/1}
+.rack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:min(100%,340px);padding:9px;border-radius:3px;background:linear-gradient(180deg,#f3df94,#b98b2b);box-shadow:inset 0 0 0 1px rgba(255,246,196,.7),0 6px 10px rgba(0,0,0,.65)}
+.rack .award{gap:0}
+.rack .award-art{aspect-ratio:3.66/1;box-shadow:0 0 0 1px rgba(0,0,0,.65)}
+.rack .award-art img{object-fit:cover;object-position:center;filter:none}
+.rack .stars{top:50%;transform:translate(-50%,-50%)}
+.case-foot{display:flex;justify-content:center;margin-top:46px}
+.nameplate{display:flex;flex-direction:column;align-items:center;gap:2px;width:min(100%,620px);padding:14px 44px;border-radius:3px;text-align:center;text-transform:uppercase;color:#2c1d00;text-shadow:0 1px 0 rgba(255,246,196,.6);background:radial-gradient(circle at 16px 50%,#6b4a08 0 3px,#f6e49c 4px 5px,transparent 6px),radial-gradient(circle at calc(100% - 16px) 50%,#6b4a08 0 3px,#f6e49c 4px 5px,transparent 6px),linear-gradient(180deg,#f3df94 0,#dcb94f 38%,#b98b2b 62%,#ebd27f 100%);box-shadow:inset 0 0 0 1px rgba(255,246,196,.75),inset 0 0 0 4px rgba(122,84,10,.5),0 6px 10px rgba(0,0,0,.65)}
+.nameplate b{font-size:1.7rem;line-height:1.1;letter-spacing:.12em}
+.nameplate span{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em}
 @media (prefers-reduced-motion:no-preference){
 @keyframes awardin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .award{animation:awardin .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i)*45ms);transition:transform .3s}
 }
 @media (hover:hover) and (pointer:fine){.award:hover{transform:translateY(-5px)}}
-@media (max-width:1100px){.award-grid.medals{grid-template-columns:repeat(5,minmax(0,1fr))}.medals .plate{font-size:.82rem}}
-@media (max-width:900px){.case-low{grid-template-columns:1fr;gap:36px}}
-@media (max-width:560px){.award-grid.ribbons{grid-template-columns:repeat(2,minmax(0,1fr))}.case{padding:24px 14px 24px;border-width:9px}.award-grid.medals{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 10px}.medals .plate{font-size:.64rem;letter-spacing:0}.plate{font-size:.78rem}.award-grid.badges{grid-template-columns:repeat(2,minmax(0,1fr))}.award-group h4{letter-spacing:.2em}}
-.award-art{position:relative}
-.stars{position:absolute;left:50%;top:15%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:2px;width:72%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.8))}
-.stars i{width:14px;height:14px;background:#d4d8de;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
-.stars i.b{background:#c07a3a}
-.ribbons .stars{top:50%;transform:translate(-50%,-50%)}
-.ribbons .stars i{width:15px;height:15px}
-.plate small{display:block;margin-top:2px;font-size:.82em;letter-spacing:.08em;opacity:.85}
-.badges .plate{font-size:.74rem}
+@media (max-width:1100px){.award-grid.medals{grid-template-columns:repeat(5,minmax(0,1fr))}.medals .plate{font-size:.8rem}}
+@media (max-width:900px){.case-low{grid-template-columns:1fr 1fr;grid-template-areas:"mid mid" "left right";gap:34px 20px}}
+@media (max-width:560px){.case{padding:28px 14px 26px;border-width:14px}.award-grid.medals{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 8px}.medals .plate{font-size:.64rem;letter-spacing:0}.nameplate{padding:12px 30px}.nameplate b{font-size:1.3rem}.nameplate span{font-size:.85rem;letter-spacing:.1em}.plate{font-size:.78rem}}
 </style>
 </head>
 <body>
@@ -687,7 +691,7 @@ const AWARDS = {
   X_AgsFang: {
     medals: [["medals/silver-star", "Silver Star"], ["medals/bronze-star", "Bronze Star"], ["medals/meritorious-service", "Meritorious Service"], ["medals/navy-marine-corps-commendation", "Navy and Marine Corps Commendation"], ["medals/marine-corps-good-conduct", "Marine Corps Good Conduct"], ["medals/marine-corps-expeditionary", "Marine Corps Expeditionary", "10th Award", [1, 4]], ["medals/national-defense-service", "National Defense"], ["medals/antarctica-service", "Antarctica Service", "2nd Award", [0, 1]], ["medals/armed-forces-expeditionary", "Armed Forces Expeditionary"], ["medals/southwest-asia-service", "Southwest Asia Service"], ["medals/kosovo-campaign", "Kosovo Campaign"], ["medals/afghanistan-campaign", "Afghanistan Campaign", "6th Award", [1, 0]], ["medals/iraq-campaign", "Iraq Campaign"], ["medals/global-war-on-terrorism-service", "Global War on Terrorism"], ["medals/armed-forces-service", "Armed Forces Service"], ["medals/military-outstanding-volunteer-service", "Outstanding Volunteer Service"], ["medals/armed-forces-reserve", "Armed Forces Reserve"], ["medals/nato-isaf", "NATO ISAF"], ["medals/saudi-arabia-kuwait-liberation", "Kuwait Liberation (Saudi Arabia)"], ["medals/kuwait-liberation", "Kuwait Liberation (Kuwait)"]],
     ribbons: [["ribbons/navy-marine-corps-combat-action", "Navy and Marine Corps Combat Action", "2nd Award", [0, 1]], ["ribbons/navy-unit-commendation", "Navy Unit Commendation", "2nd Award", [0, 1]], ["ribbons/navy-e", "Navy Battle Efficiency E"], ["ribbons/sea-service-deployment", "Navy Sea Service Deployment", "2nd Award", [0, 1]], ["ribbons/navy-overseas-service", "Navy and Marine Corps Overseas Service"], ["ribbons/combat-instructor", "Combat Instructor"]],
-    badges: [["badges/marine-raider-insignia", "Marine Special Operator"], ["marksmanship/rifle-sharpshooter", "Rifle Sharpshooter"], ["marksmanship/pistol-sharpshooter", "Pistol Sharpshooter"], ["badges/service-stripes", "Service Stripes", "8x"]]
+    badges: [["badges/marine-raider-insignia", "Marine Special Operator"], ["marksmanship/rifle-sharpshooter", "Rifle Sharpshooter"], ["marksmanship/pistol-sharpshooter", "Pistol Sharpshooter"]]
   }
 };
 function AwardStarsHtml(stars) {
@@ -697,19 +701,18 @@ function AwardStarsHtml(stars) {
 function AwardCellHtml([path, label, note, stars], index) {
   return `<div class="award" style="--i:${index}" title="${Esc(label)}"><div class="award-art"><img src="${AWARD_PATH}${Esc(path)}.webp" alt="${Esc(label)}" loading="lazy">${AwardStarsHtml(stars)}</div>${path.startsWith("ribbons/") ? "" : `<div class="plate"><span>${Esc(label)}${note ? `<small>${Esc(note)}</small>` : ""}</span></div>`}</div>`;
 }
-function AwardGroupHtml(title, kind, entries) {
-  return `<div class="award-group"><h4>${title}<small>${entries.length}</small></h4><div class="award-grid ${kind}">${entries.map(AwardCellHtml).join("")}</div></div>`;
-}
-function AwardsHtml(name) {
-  const awards = AWARDS[name];
+function AwardsHtml(person) {
+  const awards = AWARDS[person.name];
   if (!awards) return "";
-  return `<div class="awards"><h3 class="cond">Awards</h3><div class="case">${AwardGroupHtml("Medals", "medals", awards.medals)}<div class="case-low">${AwardGroupHtml("Ribbons", "ribbons", awards.ribbons)}${AwardGroupHtml("Badges and Insignia", "badges", awards.badges)}</div></div></div>`;
+  const [insignia, rifleBadge, pistolBadge] = awards.badges;
+  const sideBadge = (entry) => `<div class="side badge-cell">${AwardCellHtml(entry, 0)}</div>`;
+  return `<div class="awards"><h3 class="cond">Awards</h3><div class="case"><div class="award-grid medals">${awards.medals.map(AwardCellHtml).join("")}</div><div class="case-low"><div class="left">${sideBadge(rifleBadge)}</div><div class="mid">${AwardCellHtml(insignia, 0)}<div class="rack">${awards.ribbons.map(AwardCellHtml).join("")}</div></div><div class="right">${sideBadge(pistolBadge)}</div></div><div class="case-foot"><div class="nameplate"><b class="cond">${Esc(person.name)}</b><span>${Esc(person.rank)} | Military Police School</span></div></div></div></div>`;
 }
 function ProfileHtml(person) {
   const biography = person.bio ? `<p class="body">${Multiline(person.bio)}</p>` : "";
   const promotions = person.history ? PromotionHtml(person.history) : "";
   const creed = person.motto ? `<blockquote class="creed"><small>MOTTO</small>“${Esc(person.motto)}”</blockquote>` : "";
-  return `<div class="profile">${PortraitHtml(person.name)}<div>${RankHtml(person.name, person.role, person.rank, person.insignia)}${biography}${creed}${promotions}<a class="back" href="#/leadership/${person.group.id}">Back to ${VIEWS[person.group.id].title}</a></div></div>${AwardsHtml(person.name)}`;
+  return `<div class="profile">${PortraitHtml(person.name)}<div>${RankHtml(person.name, person.role, person.rank, person.insignia)}${biography}${creed}${promotions}<a class="back" href="#/leadership/${person.group.id}">Back to ${VIEWS[person.group.id].title}</a></div></div>${AwardsHtml(person)}`;
 }
 function RankListHtml() {
   return [...new Set(POSITIONS.map((position) => position.command))].map((command) => `<li class="grp">${Esc(command)}</li>` + POSITIONS.filter((position) => position.command === command).map((position) => `<li><a href="#/ranks/${position.id}" data-id="${position.id}">${Esc(position.name)}<small>${Esc(position.grade)}</small></a></li>`).join("")).join("");
