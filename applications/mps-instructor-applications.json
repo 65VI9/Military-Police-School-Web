@@ -3,26 +3,31 @@
   "title": "MPS Instructor Applications",
   "date": "2026-10-17",
   "deadline": "2026-10-17",
+  "link": "https://forms.gle/HwxYi8br8r6mG71M9",
   "featured": true,
   "status": "closed",
-  "results": [
-    {
-      "roblox": "Uspkajyvgc",
-      "discord": "phinius._",
-      "position": "Senior Instructor"
-    },
-    {
-      "roblox": "Pomedious157",
-      "discord": "mloe234",
-      "position": "Instructor"
-    },
-    {
-      "roblox": "ezzplayyzz",
-      "discord": "ydanso",
-      "position": "Junior Instructor"
-    }
+  "resultColumns": [
+    "Roblox Username",
+    "Discord Username",
+    "Position"
   ],
-  "link": "https://forms.gle/HwxYi8br8r6mG71M9",
+  "results": [
+    [
+      "Uspkajyvgc",
+      "phinius._",
+      "Senior Instructor"
+    ],
+    [
+      "Pomedious157",
+      "mloe234",
+      "Instructor"
+    ],
+    [
+      "ezzplayyzz",
+      "ydanso",
+      "Junior Instructor"
+    ]
+  ],
   "excerpt": "Military Police School High Command is searching for active and dedicated personnel to fill its low command ranks.",
   "body": [
     {
@@ -59,7 +64,7 @@
     },
     {
       "type": "ul",
-      "text": "Chairman: [O8] mike0w73 (Temporarily suspended)\nVice Chairman: [O7] X_AgsFang\nSenior Enlisted Advisor: [E9B] AnthonyUnbeatable"
+      "text": "Chairman: [O8] mike0w73\nVice Chairman: [O7] X_AgsFang\nSenior Enlisted Advisor: [E9B] AnthonyUnbeatable"
     },
     {
       "type": "p",
