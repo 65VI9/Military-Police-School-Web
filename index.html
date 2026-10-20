@@ -552,11 +552,13 @@ function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"
 function Multiline(text) { return Esc(text).replace(/\n/g, "<br>"); }
 function FormatDate(text) { const day = new Date(text + "T00:00:00"); return isNaN(day) ? text : day.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"}); }
 const TODAY = new Date().toLocaleDateString("sv-SE");
-function IsClosed(application) { return application.status === "closed" || !!(application.deadline && application.deadline < TODAY); }
+function IsClosed(application) { return application.status === "closed" || (application.status !== "open" && !!(application.deadline && application.deadline < TODAY)); }
 function SortNews(list) { return [...list].sort((first, second) => (second.pinned ? 1 : 0) - (first.pinned ? 1 : 0) || String(second.date).localeCompare(String(first.date))); }
+function CssUrl(path) { return String(path).replace(/['"()\\\s]/g, (char) => "%" + char.charCodeAt(0).toString(16).padStart(2, "0")); }
+function SafeFocus(text) { return /^[a-z0-9% .-]{1,40}$/i.test(String(text)) ? String(text) : "center"; }
 function TileHtml(article, featured, base = "news", label = "READ MORE") {
   const picture = article.image || IMG.banner;
-  return `<a class="tile reveal${featured ? " big" : ""}" href="#/${base}/${Esc(article.id)}"><div class="bg" style="background-image:url('${Esc(picture)}');background-position:${Esc(article.imagePosition || "center")}"></div><div class="txt"><h3 class="slab">${Esc(article.title)}</h3>${featured && article.excerpt ? `<p>${Esc(article.excerpt)}</p>` : ""}<span class="more cond">${label}</span></div></a>`;
+  return `<a class="tile reveal${featured ? " big" : ""}" href="#/${base}/${Esc(article.id)}"><div class="bg" style="background-image:url('${Esc(CssUrl(picture))}');background-position:${Esc(SafeFocus(article.imagePosition || "center"))}"></div><div class="txt"><h3 class="slab">${Esc(article.title)}</h3>${featured && article.excerpt ? `<p>${Esc(article.excerpt)}</p>` : ""}<span class="more cond">${label}</span></div></a>`;
 }
 function FillGrid(target, list, base, label) {
   target.innerHTML = list.map((article) => TileHtml(article, article.featured, base, label)).join("");
@@ -589,16 +591,20 @@ function ArticleHtml(article) {
   return `<p class="meta">${byline}</p>${lead}${(article.body || []).map(BlockHtml).join("")}<a class="back" href="#/news">Back to all news</a>`;
 }
 function ResultCell(text) { return text ? `<td>${Esc(text)}</td>` : `<td class="tbd">To Be Determined</td>`; }
-function ResultsHtml(results) {
-  const rows = results.length ? results.map((winner) => `<tr>${ResultCell(winner.roblox)}${ResultCell(winner.discord)}${ResultCell(winner.position)}</tr>`).join("") : `<tr><td class="tbd only" colspan="3">To Be Determined</td></tr>`;
-  return `<div class="outcome"><h3 class="cond">Results</h3><div class="scroll"><table><thead><tr><th>Roblox Username</th><th>Discord Username</th><th>Position</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+const DEFAULT_RESULT_COLUMNS = ["Roblox Username", "Discord Username", "Position"];
+const LEGACY_RESULT_KEYS = ["roblox", "discord", "position"];
+function ResultsHtml(application) {
+  const columns = Array.isArray(application.resultColumns) && application.resultColumns.length ? application.resultColumns : DEFAULT_RESULT_COLUMNS;
+  const entries = (Array.isArray(application.results) ? application.results : []).filter(Boolean);
+  const rows = entries.length ? entries.map((entry) => `<tr>${columns.map((column, index) => ResultCell(Array.isArray(entry) ? entry[index] : entry[LEGACY_RESULT_KEYS[index]])).join("")}</tr>`).join("") : `<tr><td class="tbd only" colspan="${columns.length}">To Be Determined</td></tr>`;
+  return `<div class="outcome"><h3 class="cond">Results</h3><div class="scroll"><table><thead><tr>${columns.map((column) => `<th>${Esc(column)}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div></div>`;
 }
 function ApplicationHtml(application) {
   const byline = [FormatDate(application.date), application.deadline ? "Deadline: " + FormatDate(application.deadline) : ""].filter(Boolean).map(Esc).join(" | ");
   const apply = !IsClosed(application) && /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
   const closed = IsClosed(application);
   const stamp = closed ? `<div class="stamp" aria-hidden="true"><span class="stamp-top">Military Police School</span><b class="stamp-main">Closed</b><span class="stamp-bot">Applications no longer accepted</span></div>` : "";
-  const outcome = closed && Array.isArray(application.results) ? ResultsHtml(application.results) : "";
+  const outcome = closed && Array.isArray(application.results) ? ResultsHtml(application) : "";
   return `${stamp}${outcome}<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
 }
 function ProfileLink(name) { return "#/leadership/profile/" + encodeURIComponent(name); }
