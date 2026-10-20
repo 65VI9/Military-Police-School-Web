@@ -310,11 +310,11 @@ nav a{font-size:1.15rem}
 .award-group h4{display:flex;align-items:center;gap:14px;margin:0 0 22px;font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-size:1.2rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
 .award-group h4::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(201,162,39,.7),transparent)}
 .award-group h4 small{order:2;padding:1px 10px;border:1px solid rgba(201,162,39,.6);font-size:.95rem;letter-spacing:.08em;color:#fff200}
-.case-low{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(201,162,39,.28)}
+.case-low{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:44px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(201,162,39,.28)}
 .award-grid{display:grid;gap:28px 10px}
 .award-grid.medals{grid-template-columns:repeat(10,minmax(0,1fr))}
-.award-grid.ribbons{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}
-.award-grid.badges{grid-template-columns:repeat(3,minmax(0,1fr))}
+.award-grid.ribbons{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}
+.award-grid.badges{grid-template-columns:repeat(4,minmax(0,1fr))}
 .award{display:flex;flex-direction:column;gap:10px;min-width:0}
 .award-art{width:100%}
 .award-art img{width:100%;height:100%;object-fit:contain;object-position:center top;filter:drop-shadow(0 8px 8px rgba(0,0,0,.65))}
@@ -332,7 +332,15 @@ nav a{font-size:1.15rem}
 @media (hover:hover) and (pointer:fine){.award:hover{transform:translateY(-5px)}}
 @media (max-width:1100px){.award-grid.medals{grid-template-columns:repeat(5,minmax(0,1fr))}.medals .plate{font-size:.82rem}}
 @media (max-width:900px){.case-low{grid-template-columns:1fr;gap:36px}}
-@media (max-width:560px){.case{padding:24px 14px 24px;border-width:9px}.award-grid.medals{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 10px}.medals .plate{font-size:.64rem;letter-spacing:0}.plate{font-size:.78rem}.award-grid.badges{grid-template-columns:repeat(2,minmax(0,1fr))}.award-group h4{letter-spacing:.2em}}
+@media (max-width:560px){.award-grid.ribbons{grid-template-columns:repeat(2,minmax(0,1fr))}.case{padding:24px 14px 24px;border-width:9px}.award-grid.medals{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 10px}.medals .plate{font-size:.64rem;letter-spacing:0}.plate{font-size:.78rem}.award-grid.badges{grid-template-columns:repeat(2,minmax(0,1fr))}.award-group h4{letter-spacing:.2em}}
+.award-art{position:relative}
+.stars{position:absolute;left:50%;top:15%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:2px;width:72%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.8))}
+.stars i{width:14px;height:14px;background:#d4d8de;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.stars i.b{background:#c07a3a}
+.ribbons .stars{top:50%;transform:translate(-50%,-50%)}
+.ribbons .stars i{width:15px;height:15px}
+.plate small{display:block;margin-top:2px;font-size:.82em;letter-spacing:.08em;opacity:.85}
+.badges .plate{font-size:.74rem}
 </style>
 </head>
 <body>
@@ -677,13 +685,17 @@ function PromotionHtml(history) {
 const AWARD_PATH = "assets/awards/";
 const AWARDS = {
   X_AgsFang: {
-    medals: [["medals/silver-star", "Silver Star"], ["medals/bronze-star", "Bronze Star"], ["medals/meritorious-service", "Meritorious Service"], ["medals/navy-marine-corps-commendation", "Navy and Marine Corps Commendation"], ["medals/marine-corps-good-conduct", "Marine Corps Good Conduct"], ["medals/marine-corps-expeditionary", "Marine Corps Expeditionary"], ["medals/national-defense-service", "National Defense"], ["medals/antarctica-service", "Antarctica Service"], ["medals/armed-forces-expeditionary", "Armed Forces Expeditionary"], ["medals/southwest-asia-service", "Southwest Asia Service"], ["medals/kosovo-campaign", "Kosovo Campaign"], ["medals/afghanistan-campaign", "Afghanistan Campaign"], ["medals/iraq-campaign", "Iraq Campaign"], ["medals/global-war-on-terrorism-service", "Global War on Terrorism"], ["medals/armed-forces-service", "Armed Forces Service"], ["medals/military-outstanding-volunteer-service", "Outstanding Volunteer Service"], ["medals/armed-forces-reserve", "Armed Forces Reserve"], ["medals/nato-isaf", "NATO ISAF"], ["medals/saudi-arabia-kuwait-liberation", "Kuwait Liberation (Saudi Arabia)"], ["medals/kuwait-liberation", "Kuwait Liberation"]],
-    ribbons: [["ribbons/presidential-unit-citation", "Presidential Unit Citation"], ["ribbons/navy-unit-commendation", "Navy Unit Commendation"], ["ribbons/navy-e", "Navy E"], ["ribbons/sea-service-deployment", "Sea Service Deployment"]],
-    badges: [["marksmanship/rifle-sharpshooter", "Rifle Sharpshooter"], ["marksmanship/pistol-sharpshooter", "Pistol Sharpshooter"], ["badges/marine-raider-insignia", "Marine Raider"]]
+    medals: [["medals/silver-star", "Silver Star"], ["medals/bronze-star", "Bronze Star"], ["medals/meritorious-service", "Meritorious Service"], ["medals/navy-marine-corps-commendation", "Navy and Marine Corps Commendation"], ["medals/marine-corps-good-conduct", "Marine Corps Good Conduct"], ["medals/marine-corps-expeditionary", "Marine Corps Expeditionary", "10th Award", [1, 4]], ["medals/national-defense-service", "National Defense"], ["medals/antarctica-service", "Antarctica Service", "2nd Award", [0, 1]], ["medals/armed-forces-expeditionary", "Armed Forces Expeditionary"], ["medals/southwest-asia-service", "Southwest Asia Service"], ["medals/kosovo-campaign", "Kosovo Campaign"], ["medals/afghanistan-campaign", "Afghanistan Campaign", "6th Award", [1, 0]], ["medals/iraq-campaign", "Iraq Campaign"], ["medals/global-war-on-terrorism-service", "Global War on Terrorism"], ["medals/armed-forces-service", "Armed Forces Service"], ["medals/military-outstanding-volunteer-service", "Outstanding Volunteer Service"], ["medals/armed-forces-reserve", "Armed Forces Reserve"], ["medals/nato-isaf", "NATO ISAF"], ["medals/saudi-arabia-kuwait-liberation", "Kuwait Liberation (Saudi Arabia)"], ["medals/kuwait-liberation", "Kuwait Liberation (Kuwait)"]],
+    ribbons: [["ribbons/navy-marine-corps-combat-action", "Navy and Marine Corps Combat Action", "2nd Award", [0, 1]], ["ribbons/navy-unit-commendation", "Navy Unit Commendation", "2nd Award", [0, 1]], ["ribbons/navy-e", "Navy Battle Efficiency E"], ["ribbons/sea-service-deployment", "Navy Sea Service Deployment", "2nd Award", [0, 1]], ["ribbons/navy-overseas-service", "Navy and Marine Corps Overseas Service"], ["ribbons/combat-instructor", "Combat Instructor"]],
+    badges: [["badges/marine-raider-insignia", "Marine Special Operator"], ["marksmanship/rifle-sharpshooter", "Rifle Sharpshooter"], ["marksmanship/pistol-sharpshooter", "Pistol Sharpshooter"], ["badges/service-stripes", "Service Stripes", "8x"]]
   }
 };
-function AwardCellHtml([path, label], index) {
-  return `<div class="award" style="--i:${index}"><div class="award-art"><img src="${AWARD_PATH}${Esc(path)}.webp" alt="${Esc(label)}" loading="lazy"></div><div class="plate">${Esc(label)}</div></div>`;
+function AwardStarsHtml(stars) {
+  const [silverCount, bronzeCount] = stars || [0, 0];
+  return silverCount + bronzeCount ? `<div class="stars">${"<i></i>".repeat(silverCount)}${"<i class=\"b\"></i>".repeat(bronzeCount)}</div>` : "";
+}
+function AwardCellHtml([path, label, note, stars], index) {
+  return `<div class="award" style="--i:${index}"><div class="award-art"><img src="${AWARD_PATH}${Esc(path)}.webp" alt="${Esc(label)}" loading="lazy">${AwardStarsHtml(stars)}</div><div class="plate"><span>${Esc(label)}${note ? `<small>${Esc(note)}</small>` : ""}</span></div></div>`;
 }
 function AwardGroupHtml(title, kind, entries) {
   return `<div class="award-group"><h4>${title}<small>${entries.length}</small></h4><div class="award-grid ${kind}">${entries.map(AwardCellHtml).join("")}</div></div>`;
