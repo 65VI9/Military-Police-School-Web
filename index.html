@@ -313,13 +313,13 @@ nav a{font-size:1.15rem}
 .case-low{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:44px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(201,162,39,.28)}
 .award-grid{display:grid;gap:28px 10px}
 .award-grid.medals{grid-template-columns:repeat(10,minmax(0,1fr))}
-.award-grid.ribbons{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}
+.award-grid.ribbons{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 6px;padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,39,.35);align-self:start}
 .award-grid.badges{grid-template-columns:repeat(4,minmax(0,1fr))}
 .award{display:flex;flex-direction:column;gap:10px;min-width:0}
 .award-art{width:100%}
 .award-art img{width:100%;height:100%;object-fit:contain;object-position:center top;filter:drop-shadow(0 8px 8px rgba(0,0,0,.65))}
 .medals .award-art{aspect-ratio:1/2.15;padding:0 4px}
-.ribbons .award-art{aspect-ratio:3.66/1;box-shadow:0 0 0 1px rgba(0,0,0,.7),0 6px 10px rgba(0,0,0,.55)}
+.ribbons .award{gap:0}.ribbons .award-art{aspect-ratio:3.66/1;box-shadow:0 0 0 1px rgba(0,0,0,.7),0 6px 10px rgba(0,0,0,.55)}
 .ribbons .award-art img{object-fit:cover;object-position:center;filter:none}
 .badges .award-art{aspect-ratio:1/1}
 .badges .award-art img{object-position:center}
@@ -695,7 +695,7 @@ function AwardStarsHtml(stars) {
   return silverCount + bronzeCount ? `<div class="stars">${"<i></i>".repeat(silverCount)}${"<i class=\"b\"></i>".repeat(bronzeCount)}</div>` : "";
 }
 function AwardCellHtml([path, label, note, stars], index) {
-  return `<div class="award" style="--i:${index}"><div class="award-art"><img src="${AWARD_PATH}${Esc(path)}.webp" alt="${Esc(label)}" loading="lazy">${AwardStarsHtml(stars)}</div><div class="plate"><span>${Esc(label)}${note ? `<small>${Esc(note)}</small>` : ""}</span></div></div>`;
+  return `<div class="award" style="--i:${index}" title="${Esc(label)}"><div class="award-art"><img src="${AWARD_PATH}${Esc(path)}.webp" alt="${Esc(label)}" loading="lazy">${AwardStarsHtml(stars)}</div>${path.startsWith("ribbons/") ? "" : `<div class="plate"><span>${Esc(label)}${note ? `<small>${Esc(note)}</small>` : ""}</span></div>`}</div>`;
 }
 function AwardGroupHtml(title, kind, entries) {
   return `<div class="award-group"><h4>${title}<small>${entries.length}</small></h4><div class="award-grid ${kind}">${entries.map(AwardCellHtml).join("")}</div></div>`;
