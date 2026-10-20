@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src https://api.github.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
 <link rel="icon" type="image/png" href="../assets/logo.png">
 <link rel="apple-touch-icon" href="../assets/logo.png">
 <meta name="robots" content="noindex,nofollow">
@@ -52,6 +54,11 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 .preview{max-width:340px;margin-top:10px;border-bottom:5px solid var(--scarlet)}
 #status{position:fixed;left:16px;right:16px;bottom:16px;padding:12px 16px;background:var(--navy);color:#fff;border-left:8px solid var(--scarlet);max-width:640px;margin-inline:auto}
 #status.bad{background:var(--maroon)}
+.rscroll{overflow-x:auto;margin-top:8px}
+.rgrid{display:grid;gap:8px;min-width:520px;align-items:start}
+.rgrid input[data-rcol]{font-weight:700;background:var(--tint)}
+.rgrid button{padding:6px 10px;font-size:.8rem}
+.rgrid div button{margin-top:4px}
 @media (max-width:640px){.grid2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -91,6 +98,7 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <div class="nw"><label for="f-category">CATEGORY</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
 <div><label for="f-date">DATE</label><input type="date" id="f-date" data-field="date"></div>
 <div class="ap"><label for="f-deadline">DEADLINE</label><input type="date" id="f-deadline" data-field="deadline"></div>
+<div class="ap"><label for="f-status">STATUS</label><select id="f-status" data-field="status"><option value="auto">Auto (closes at deadline)</option><option value="open">Open</option><option value="closed">Closed</option></select></div>
 <div class="ap"><label for="f-link">APPLICATION LINK (Google Forms)</label><input type="text" id="f-link" data-field="link" placeholder="https://forms.gle/..."></div>
 <div class="nw"><label for="f-author">AUTHOR</label><input type="text" id="f-author" data-field="author"></div>
 <div class="nw"><label for="f-tags">TAGS (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
@@ -113,6 +121,12 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <label class="nw"><input type="checkbox" data-field="pinned"> Pinned to top</label>
 <label><input type="checkbox" data-field="published"> Published (untick for draft)</label>
 </div>
+<div class="ap">
+<label>RESULTS TABLE (shown on the site when the application is closed)</label>
+<p class="hint">Rename the columns, add or remove columns and rows. With no rows the site shows To Be Determined.</p>
+<div class="rscroll"><div class="rgrid" id="resultsGrid"></div></div>
+<div class="row" style="margin-top:10px"><button type="button" id="addColumn">Add column</button><button type="button" id="addRow">Add row</button></div>
+</div>
 <label>ARTICLE BODY</label>
 <div id="blockList"></div>
 <div class="row" style="margin-top:14px">
@@ -131,7 +145,7 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 </section>
 <section id="viewSettings" hidden>
 <h2 class="cond">Settings</h2>
-<p class="hint">Saved in this browser only. The token never leaves your device except to call GitHub.</p>
+<p class="hint">Settings are saved in this browser. The token is kept for this tab only and never leaves your device except to call GitHub.</p>
 <div class="grid2">
 <div><label for="s-owner">GITHUB OWNER</label><input type="text" id="s-owner" data-setting="owner"></div>
 <div><label for="s-repo">REPOSITORY</label><input type="text" id="s-repo" data-setting="repo"></div>
@@ -149,6 +163,7 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 <div class="row" style="margin-top:24px">
 <button class="solid" type="button" id="saveSettings">Save settings</button>
 <button type="button" id="testBtn">Test connection</button>
+<button type="button" id="clearToken">Clear token</button>
 </div>
 </section>
 </main>
@@ -158,7 +173,11 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 const PASSWORD_HASH = "c628de1e870e6975ba04a83e9cfe1c988039696a1578754ae396ebd4c5aea268";
 const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", appDir: "applications", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center"};
 const BLOCK_LABELS = {p: "Paragraph", ul: "List", h: "Heading", qa: "Q&A", quote: "Quote", img: "Image"};
-const settings = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem("mpsManager") || "{}"));
+const storedSettings = JSON.parse(localStorage.getItem("mpsManager") || "{}");
+if (storedSettings.token && !sessionStorage.getItem("mpsToken")) sessionStorage.setItem("mpsToken", storedSettings.token);
+delete storedSettings.token;
+localStorage.setItem("mpsManager", JSON.stringify(storedSettings));
+const settings = Object.assign({}, DEFAULTS, storedSettings, {token: sessionStorage.getItem("mpsToken") || ""});
 let kind = "news";
 let draft = null;
 let draftIsNew = true;
@@ -227,6 +246,11 @@ function OpenEditor(article) {
   draftIsNew = !article;
   draft = article ? JSON.parse(JSON.stringify(article)) : NewDraft();
   headerFile = null;
+  if (kind === "app") {
+    const table = NormalizeResults(draft);
+    draft.resultColumns = table.columns; draft.results = table.rows;
+    draft.status = draft.status || "auto";
+  }
   document.getElementById("editTitle").textContent = (draftIsNew ? "New " : "Edit ") + (kind === "app" ? "application" : "post");
   document.getElementById("viewEdit").classList.toggle("app", kind === "app");
   document.getElementById("f-id").readOnly = !draftIsNew;
@@ -237,7 +261,7 @@ function OpenEditor(article) {
     else input.value = Array.isArray(fieldValue) ? fieldValue.join(", ") : (fieldValue ?? "");
   });
   document.getElementById("catList").innerHTML = settings.categories.split(",").map((name) => `<option value="${Esc(name.trim())}">`).join("");
-  RenderBlocks(); RenderPreview(); Show("viewEdit");
+  RenderBlocks(); RenderResults(); RenderPreview(); Show("viewEdit");
 }
 function RenderPreview() {
   const picture = document.getElementById("imagePreview");
@@ -251,6 +275,24 @@ function BlockFields(block) {
   if (block.type === "quote") return `<textarea data-key="text" style="min-height:70px">${Esc(block.text)}</textarea><label>SPEAKER</label><input type="text" data-key="by" value="${Esc(block.by)}">`;
   if (block.type === "qa") return `<label>QUESTION</label><input type="text" data-key="q" value="${Esc(block.q)}"><label>ANSWER</label><textarea data-key="a">${Esc(block.a)}</textarea>`;
   return `<input type="file" data-key="file" accept="image/*"><p class="hint">Or image URL or repo path</p><input type="text" data-key="src" value="${Esc(block.src)}"><label>CAPTION</label><input type="text" data-key="caption" value="${Esc(block.caption)}">`;
+}
+const DEFAULT_RESULT_COLUMNS = ["Roblox Username", "Discord Username", "Position"];
+const LEGACY_RESULT_KEYS = ["roblox", "discord", "position"];
+const TODAY = new Date().toLocaleDateString("sv-SE");
+function IsApplicationClosed(post) { return post.status === "closed" || (post.status !== "open" && !!post.deadline && post.deadline < TODAY); }
+function NormalizeResults(article) {
+  const columns = Array.isArray(article.resultColumns) && article.resultColumns.length ? article.resultColumns.map(String) : DEFAULT_RESULT_COLUMNS.slice();
+  const rows = (Array.isArray(article.results) ? article.results : []).map((entry) => columns.map((column, index) => String((Array.isArray(entry) ? entry[index] : entry[LEGACY_RESULT_KEYS[index]]) ?? "")));
+  return {columns, rows};
+}
+function RenderResults() {
+  if (kind !== "app" || !draft.resultColumns) return;
+  const grid = document.getElementById("resultsGrid");
+  const columnCount = draft.resultColumns.length;
+  grid.style.gridTemplateColumns = `repeat(${columnCount}, minmax(0, 1fr)) auto`;
+  const headerCells = draft.resultColumns.map((name, index) => `<div><input type="text" data-rcol="${index}" value="${Esc(name)}" aria-label="Column ${index + 1} name"><button type="button" data-rdelcol="${index}"${columnCount < 2 ? " disabled" : ""}>Remove column</button></div>`).join("");
+  const bodyCells = draft.results.map((row, rowIndex) => row.map((cell, cellIndex) => `<input type="text" data-rrow="${rowIndex}" data-rcell="${cellIndex}" value="${Esc(cell)}">`).join("") + `<button type="button" data-rdelrow="${rowIndex}">Remove row</button>`).join("");
+  grid.innerHTML = headerCells + "<div></div>" + bodyCells;
 }
 function RenderBlocks() {
   document.getElementById("blockList").innerHTML = draft.body.map((block, index) =>
@@ -267,7 +309,7 @@ async function ListPosts() {
     listBox.innerHTML = posts.length ? "" : "<p>No posts yet.</p>";
     posts.forEach((post) => {
       const row = document.createElement("div"); row.className = "post";
-      row.innerHTML = `<div><b>${Esc(post.title)}</b>${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}<small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="row"><button type="button" data-edit>Edit</button><button type="button" data-delete>Delete</button></div>`;
+      row.innerHTML = `<div><b>${Esc(post.title)}</b>${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}${kind === "app" ? `<span class="tag">${IsApplicationClosed(post) ? "Closed" : "Open"}</span>` : ""}<small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="row"><button type="button" data-edit>Edit</button><button type="button" data-delete>Delete</button></div>`;
       row.querySelector("[data-edit]").onclick = () => OpenEditor(post);
       row.querySelector("[data-delete]").onclick = () => DeletePost(post);
       listBox.appendChild(row);
@@ -287,7 +329,11 @@ async function DeletePost(post) {
 function CleanArticle() {
   const article = JSON.parse(JSON.stringify(draft));
   article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
-  if (kind === "app") return {id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, published: draft.published, status: draft.status, results: draft.results, excerpt: (draft.excerpt || "").trim(), body: article.body};
+  if (kind === "app") {
+    const columns = draft.resultColumns.map((name, index) => name.trim() || "Column " + (index + 1));
+    const rows = draft.results.map((row) => row.map((cell) => cell.trim())).filter((row) => row.some(Boolean));
+    return {id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, published: draft.published, status: draft.status === "auto" ? undefined : draft.status, resultColumns: columns, results: rows, excerpt: (draft.excerpt || "").trim(), body: article.body};
+  }
   article.tags = Array.isArray(draft.tags) ? draft.tags : String(draft.tags).split(",").map((tag) => tag.trim()).filter(Boolean);
   article.excerpt = draft.excerpt.trim();
   article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
@@ -348,7 +394,8 @@ document.getElementById("publishBtn").onclick = Publish;
 document.getElementById("downloadBtn").onclick = DownloadJson;
 document.getElementById("saveSettings").onclick = () => {
   document.querySelectorAll("[data-setting]").forEach((input) => { settings[input.dataset.setting] = input.type === "number" ? Number(input.value) : input.value.trim(); });
-  localStorage.setItem("mpsManager", JSON.stringify(settings)); Say("Settings saved");
+  const persisted = Object.assign({}, settings); delete persisted.token;
+  localStorage.setItem("mpsManager", JSON.stringify(persisted)); sessionStorage.setItem("mpsToken", settings.token); Say("Settings saved");
 };
 document.getElementById("testBtn").onclick = async () => {
   try { const repoInfo = await Gh(""); Say(repoInfo ? "Connected to " + repoInfo.full_name : "[NEWS MANAGER] repo not found", !repoInfo); } catch (problem) { Say(problem.message, true); }
@@ -375,6 +422,29 @@ document.getElementById("blockList").addEventListener("click", (event) => {
   RenderBlocks();
 });
 document.querySelectorAll("[data-add]").forEach((button) => button.addEventListener("click", () => { draft.body.push({type: button.dataset.add}); RenderBlocks(); }));
+document.getElementById("clearToken").onclick = () => {
+  settings.token = ""; sessionStorage.removeItem("mpsToken");
+  document.getElementById("s-token").value = ""; Say("Token cleared");
+};
+document.getElementById("resultsGrid").addEventListener("input", (event) => {
+  const input = event.target;
+  if (input.dataset.rcol !== undefined) draft.resultColumns[Number(input.dataset.rcol)] = input.value;
+  else if (input.dataset.rrow !== undefined) draft.results[Number(input.dataset.rrow)][Number(input.dataset.rcell)] = input.value;
+});
+document.getElementById("resultsGrid").addEventListener("click", (event) => {
+  const target = event.target;
+  if (target.dataset.rdelcol !== undefined && draft.resultColumns.length > 1) {
+    const column = Number(target.dataset.rdelcol);
+    draft.resultColumns.splice(column, 1);
+    draft.results.forEach((row) => row.splice(column, 1));
+    RenderResults();
+  } else if (target.dataset.rdelrow !== undefined) {
+    draft.results.splice(Number(target.dataset.rdelrow), 1);
+    RenderResults();
+  }
+});
+document.getElementById("addColumn").onclick = () => { draft.resultColumns.push("New column"); draft.results.forEach((row) => row.push("")); RenderResults(); };
+document.getElementById("addRow").onclick = () => { draft.results.push(draft.resultColumns.map(() => "")); RenderResults(); };
 if (sessionStorage.getItem("mpsUnlocked") === "1") Unlock();
 </script>
 </body>
