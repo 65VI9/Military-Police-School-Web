@@ -332,7 +332,9 @@ nav a{font-size:1.15rem}
 .rack .award-art img{object-fit:cover;object-position:center;filter:none}
 .rack .stars{top:50%;transform:translate(-50%,-50%)}
 .rack .stars i{width:9px;height:9px}
-.case-foot{display:flex;justify-content:center;margin-top:38px}
+.case-foot{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px 34px;margin-top:38px}
+.foot-insig{flex:none;display:grid;place-items:center;width:120px}
+.foot-insig img{max-width:100px;max-height:76px;width:auto;height:auto;filter:drop-shadow(4px 7px 6px rgba(0,0,0,.75))}
 .nameplate{display:flex;flex-direction:column;align-items:center;gap:3px;width:fit-content;min-width:min(100%,380px);max-width:100%;padding:14px 30px;border:3px solid;border-image:url(assets/awards/nameplate-box.png) 1 fill/3px;text-align:center;text-transform:uppercase;color:#99902B;box-shadow:0 6px 10px rgba(0,0,0,.65)}
 .nameplate b{font-size:1.45rem;line-height:1.1;letter-spacing:.1em;color:#99902B}
 .nameplate span,.nameplate em{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-style:normal;font-weight:700;letter-spacing:.12em}
@@ -345,7 +347,7 @@ nav a{font-size:1.15rem}
 @media (hover:hover) and (pointer:fine){.award:hover{transform:translateY(-5px)}}
 @media (max-width:1100px){.case{--per-row:min(var(--dense,7),10);--cell:96px}}
 @media (max-width:760px){.case{--per-row:min(var(--dense,7),6)}.case-low{grid-template-columns:1fr 1fr;grid-template-areas:"rack rack" "left right";gap:28px 14px}.case-low .left,.case-low .right{justify-content:center}}
-@media (max-width:560px){.case{--per-row:min(var(--dense,7),3);--cell:84px;--gap:8px;--pad:12px;--rib:64px;padding:24px var(--pad) 24px;border-width:14px 11px 12px 11px}.plate{letter-spacing:0}.nameplate{padding:12px 20px}.nameplate b{font-size:1.2rem}.nameplate span{font-size:.8rem}.nameplate em{font-size:.9rem}}
+@media (max-width:560px){.case{--per-row:min(var(--dense,7),3);--cell:84px;--gap:8px;--pad:12px;--rib:64px;padding:24px var(--pad) 24px;border-width:14px 11px 12px 11px}.plate{letter-spacing:0}.nameplate{padding:12px 20px;order:-1}.foot-insig{width:auto}.foot-insig img{max-width:84px;max-height:60px}.nameplate b{font-size:1.2rem}.nameplate span{font-size:.8rem}.nameplate em{font-size:.9rem}}
 </style>
 </head>
 <body>
@@ -731,6 +733,9 @@ function AwardRackHtml(ribbons) {
 function AwardSideHtml(badges, side) {
   return `<div class="side ${side}">${badges.map(AwardCellHtml).join("")}</div>`;
 }
+function AwardInsigniaHtml(person) {
+  return IMG[person.insignia] ? `<div class="foot-insig"><img src="${IMG[person.insignia]}" alt="${Esc(person.rank)} insignia"></div>` : "";
+}
 function AwardNameplateHtml(person) {
   const since = person.history?.[0]?.[0];
   return `<div class="nameplate"><b class="cond">${Esc(RANK_ABBREVIATIONS[person.rank] || person.rank)} ${Esc(person.name)}</b><span>Military Police School</span>${since ? `<em>Since ${Esc(since)}</em>` : ""}</div>`;
@@ -739,7 +744,7 @@ function AwardsHtml(person) {
   const awards = AWARDS[person.name];
   if (!awards) return "";
   const leftCount = Math.ceil(awards.badges.length / 2);
-  return `<div class="awards"><h3 class="cond">Awards</h3><div class="case" style="--count:${Math.max(1, awards.medals.length)};--dense:${AwardsPerRow(awards.medals.length)}"><div class="medal-field">${awards.medals.map(AwardCellHtml).join("")}</div>${awards.ribbons.length + awards.badges.length ? `<div class="case-low">${AwardSideHtml(awards.badges.slice(0, leftCount), "left")}${AwardRackHtml(awards.ribbons)}${AwardSideHtml(awards.badges.slice(leftCount), "right")}</div>` : ""}<div class="case-foot">${AwardNameplateHtml(person)}</div></div></div>`;
+  return `<div class="awards"><h3 class="cond">Awards</h3><div class="case" style="--count:${Math.max(1, awards.medals.length)};--dense:${AwardsPerRow(awards.medals.length)}"><div class="medal-field">${awards.medals.map(AwardCellHtml).join("")}</div>${awards.ribbons.length + awards.badges.length ? `<div class="case-low">${AwardSideHtml(awards.badges.slice(0, leftCount), "left")}${AwardRackHtml(awards.ribbons)}${AwardSideHtml(awards.badges.slice(leftCount), "right")}</div>` : ""}<div class="case-foot">${AwardInsigniaHtml(person)}${AwardNameplateHtml(person)}${AwardInsigniaHtml(person)}</div></div></div>`;
 }
 function ProfileHtml(person) {
   const biography = person.bio ? `<p class="body">${Multiline(person.bio)}</p>` : "";
