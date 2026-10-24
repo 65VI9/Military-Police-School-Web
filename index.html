@@ -333,7 +333,7 @@ nav a{font-size:1.15rem}
 .rack .stars{top:50%;transform:translate(-50%,-50%)}
 .rack .stars i{width:9px;height:9px}
 .case-foot{display:flex;justify-content:center;margin-top:38px}
-.nameplate{display:flex;flex-direction:column;align-items:center;gap:3px;width:min(100%,380px);padding:14px 30px;border:3px solid;border-image:url(assets/awards/nameplate-box.png) 1 fill/3px;text-align:center;text-transform:uppercase;color:#99902B;box-shadow:0 6px 10px rgba(0,0,0,.65)}
+.nameplate{display:flex;flex-direction:column;align-items:center;gap:3px;width:fit-content;min-width:min(100%,380px);max-width:100%;padding:14px 30px;border:3px solid;border-image:url(assets/awards/nameplate-box.png) 1 fill/3px;text-align:center;text-transform:uppercase;color:#99902B;box-shadow:0 6px 10px rgba(0,0,0,.65)}
 .nameplate b{font-size:1.45rem;line-height:1.1;letter-spacing:.1em;color:#99902B}
 .nameplate span,.nameplate em{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-style:normal;font-weight:700;letter-spacing:.12em}
 .nameplate span{font-size:.9rem}
@@ -698,6 +698,11 @@ const AWARDS = {
     medals: [["medals/navy-marine-corps-commendation", "Navy and Marine Corps Commendation"], ["medals/navy-marine-corps-achievement", "Navy and Marine Corps Achievement"], ["medals/marine-corps-good-conduct", "Marine Corps Good Conduct"], ["medals/marine-corps-expeditionary", "Marine Corps Expeditionary", null, [1, 0]], ["medals/national-defense-service", "National Defense"], ["medals/antarctica-service", "Antarctica Service", null, [0, 1]], ["medals/southwest-asia-service", "Southwest Asia Service"], ["medals/kosovo-campaign", "Kosovo Campaign"], ["medals/afghanistan-campaign", "Afghanistan Campaign"], ["medals/iraq-campaign", "Iraq Campaign"], ["medals/inherent-resolve-campaign", "Inherent Resolve Campaign"], ["medals/global-war-on-terrorism-service", "Global War on Terrorism"], ["medals/armed-forces-reserve", "Armed Forces Reserve"], ["medals/kuwait-liberation", "Kuwait Liberation (Kuwait)"]],
     ribbons: [["ribbons/presidential-unit-citation", "Navy Presidential Unit Citation"], ["ribbons/navy-unit-commendation", "Navy Unit Commendation", null, [0, 2]], ["ribbons/meritorious-unit-commendation", "Navy Meritorious Unit Commendation"], ["ribbons/navy-e", "Navy Battle Efficiency E"], ["ribbons/sea-service-deployment", "Navy Sea Service Deployment"], ["ribbons/blue-red-center", "Recruiter"], ["ribbons/drill-instructor", "Drill Instructor"], ["ribbons/combat-instructor", "Combat Instructor"]],
     badges: [["marksmanship/pistol-sharpshooter", "Pistol Sharpshooter"]]
+  },
+  Policeswat8934dudess: {
+    medals: [["medals/navy-marine-corps-commendation", "Navy and Marine Corps Commendation"], ["medals/navy-marine-corps-achievement", "Navy and Marine Corps Achievement"], ["medals/marine-corps-good-conduct", "Marine Corps Good Conduct"], ["medals/national-defense-service", "National Defense"], ["medals/antarctica-service", "Antarctica Service"], ["medals/global-war-on-terrorism-service", "Global War on Terrorism"]],
+    ribbons: [["ribbons/navy-unit-commendation", "Navy Unit Commendation"]],
+    badges: []
   }
 };
 function AwardStarsHtml(stars) {
