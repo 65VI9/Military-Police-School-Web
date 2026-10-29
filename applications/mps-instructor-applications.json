@@ -16,22 +16,35 @@
   "body": [
     {
       "type": "h",
-      "text": "Before applying, please ensure that you meet all of the requirements. Do not apply if you will not attempt to meet your basic standards!"
+      "text": "MILITARY POLICE SCHOOL INSTRUCTOR APPLICATIONS"
     },
     {
-      "type": "qa",
-      "q": "What is MPS?",
-      "a": "Military Police School is the backbone and a vital component for Military Police personnel, tasked with the recruitment and training of future Marines/Graduates from this program. They guarantee that all Military Police personnel receive comprehensive instruction. Military Police School focuses on Leadership, Discipline, Passion, Teamwork, Community Engagement, and the ability to ooze confidence. We offer a variety of options for exploration around Military Police School, also known as MPS, and bring the willingness to lead others."
+      "type": "p",
+      "text": "Welcome to MPS Instructor Applications! Military Police School High Command is currently searching for active and dedicated personnel to fill its low command ranks. Before applying, please ensure that you meet all of the requirements. Do not apply if you will not attempt to meet your basic standards! \n"
     },
     {
-      "type": "qa",
-      "q": "What's the requirements?",
-      "a": "--> You must be E2+.\n--> You must not have any excessive NCIS cases.\n--> Active and disciplined.\n--> Answer every question in detail.\n--> Maturity.\n--> Preferably mic active."
+      "type": "p",
+      "text": "What is MPS?"
     },
     {
-      "type": "qa",
-      "q": "What's the benefits?",
-      "a": "Benefits:\nQuick quota-based promotions.\nA high base rank within MP.\nMedals.\nRegular Deployments.\nOCS Recommendations."
+      "type": "ul",
+      "text": "Military Police School is the backbone and a vital component for Military Police personnel, tasked with the recruitment and training of future Marines/Graduates from this program. They guarantee that all Military Police personnel receive comprehensive instruction. Military Police School focuses on Leadership, Discipline, Passion, Teamwork, Community Engagement, and the ability to ooze confidence. We offer a variety of options for exploration around Military Police School, also known as MPS, and bring the willingness to lead others."
+    },
+    {
+      "type": "p",
+      "text": "Requirements:"
+    },
+    {
+      "type": "ul",
+      "text": "You must be E2+.\nYou must not have any excessive NCIS cases.\nActive and disciplined.\nAnswer every question in detail.\nMaturity.\nPreferably mic active."
+    },
+    {
+      "type": "p",
+      "text": "Benefits:"
+    },
+    {
+      "type": "ul",
+      "text": "Quick quota-based promotions.\nA high base rank within MP.\nMedals.\nRegular Deployments.\nOCS Recommendations."
     },
     {
       "type": "p",
@@ -39,7 +52,7 @@
     },
     {
       "type": "ul",
-      "text": "Chain of Command:\nChairman, Major General, mike0w73\nVice Chairman, Brigadier General, X_AgsFang\nSenior Enlisted Advisor, Sergeant Major, AnthonyUnbeatable\nAide-De-Camp, Colonel, 65VI9"
+      "text": "Chairman, Major General, mike0w73\nVice Chairman, Brigadier General, X_AgsFang\nSenior Enlisted Advisor, Sergeant Major, AnthonyUnbeatable\nAide-De-Camp, Colonel, 65VI9"
     }
   ]
 }
