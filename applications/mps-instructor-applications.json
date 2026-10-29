@@ -16,10 +16,6 @@
   "body": [
     {
       "type": "h",
-      "text": "MILITARY POLICE SCHOOL INSTRUCTOR APPLICATIONS"
-    },
-    {
-      "type": "h",
       "text": "Before applying, please ensure that you meet all of the requirements. Do not apply if you will not attempt to meet your basic standards!"
     },
     {
@@ -39,7 +35,11 @@
     },
     {
       "type": "p",
-      "text": "Chain of Command:\nChairman, Major General, mike0w73\nVice Chairman, Brigadier General, X_AgsFang\nSenior Enlisted Advisor, Sergeant Major, AnthonyUnbeatable\nAide-De-Camp, Colonel, 65VI9\nIf you have any issues, please get in touch with us from the bottom up."
+      "text": "Chain of Command:"
+    },
+    {
+      "type": "ul",
+      "text": "Chain of Command:\nChairman, Major General, mike0w73\nVice Chairman, Brigadier General, X_AgsFang\nSenior Enlisted Advisor, Sergeant Major, AnthonyUnbeatable\nAide-De-Camp, Colonel, 65VI9"
     }
   ]
 }
