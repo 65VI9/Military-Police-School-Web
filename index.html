@@ -351,6 +351,7 @@ nav a{font-size:1.15rem}
 @media (max-width:760px){.case{--per-row:min(var(--dense,7),6)}.case-low{grid-template-columns:1fr 1fr;grid-template-areas:"rack rack" "left right";gap:28px 14px}.case-low .left,.case-low .right{justify-content:center}}
 @media (max-width:560px){.case{--per-row:min(var(--dense,7),3);--cell:84px;--gap:8px;--pad:12px;--rib:64px;padding:24px var(--pad) 24px;border-width:14px 11px 12px 11px}.plate{letter-spacing:0}.nameplate{padding:12px 20px}.nameplate b{font-size:1.2rem}.nameplate span{font-size:.8rem}.nameplate em{font-size:.9rem}}
 </style>
+<link rel="stylesheet" href="assets/article.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="inkWear" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="4" result="warp"/><feDisplacementMap in="SourceGraphic" in2="warp" scale="2" xChannelSelector="R" yChannelSelector="G" result="rough"/><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 6.2" result="holes"/><feComposite in="rough" in2="holes" operator="in"/></filter></svg>
@@ -484,6 +485,7 @@ Ping: @MPS Staff</pre>
 <p><em>Vertutis Disciplina</em></p>
 </div>
 </footer>
+<script src="assets/markdown.js"></script>
 <script>
 const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "assets/portrait.png", o1: "assets/o1.webp", o8: "assets/o8.webp", o7: "assets/o7.webp", o4: "assets/o4.webp", o3: "assets/o3.webp", o2: "assets/o2.webp", e2: "assets/e2.webp", e3: "assets/e3.webp", e4: "assets/e4.webp", e5: "assets/e5.webp", e6: "assets/e6.webp", e7: "assets/e7.webp", e8a: "assets/e8a.webp", e8b: "assets/e8b.webp", e9a: "assets/e9a.webp", e9b: "assets/e9b.webp", e9c: "assets/e9c.webp", e9d: "assets/e9d.webp", o6: "assets/o6.webp", o5: "assets/o5.webp"};
 let ARTICLES = [];
@@ -623,36 +625,7 @@ function FilterNews() {
   document.getElementById("resultCount").textContent = "Results: " + found.length;
   FillGrid(document.getElementById("newsGrid"), found);
 }
-function BlockHtml(block) {
-  if (block.type === "h") return `<h3 class="slab sub">${Esc(block.text)}</h3>`;
-  if (block.type === "qa") return `<div class="qa"><h3 class="slab">${Esc(block.q)}</h3><p>${Multiline(block.a)}</p></div>`;
-  if (block.type === "ul") return `<ul class="list">${String(block.text).split("\n").filter(Boolean).map((line) => `<li>${Esc(line)}</li>`).join("")}</ul>`;
-  if (block.type === "quote") return `<blockquote class="slab">${Multiline(block.text)}${block.by ? `<cite>${Esc(block.by)}</cite>` : ""}</blockquote>`;
-  if (block.type === "img") return `<figure><img src="${Esc(block.src)}" alt="${Esc(block.caption || "")}">${block.caption ? `<figcaption>${Esc(block.caption)}</figcaption>` : ""}</figure>`;
-  return `<p class="body">${Multiline(block.text)}</p>`;
-}
-function ArticleHtml(article) {
-  const lead = article.image ? `<figure class="lead"><img src="${Esc(article.image)}" alt="${Esc(article.imageCaption || article.title)}">${article.imageCaption ? `<figcaption>${Esc(article.imageCaption)}</figcaption>` : ""}</figure>` : "";
-  const byline = [article.category, FormatDate(article.date), article.author].filter(Boolean).map(Esc).join(" | ");
-  return `<p class="meta">${byline}</p>${lead}${(article.body || []).map(BlockHtml).join("")}<a class="back" href="#/news">Back to all news</a>`;
-}
-function ResultCell(text) { return text ? `<td>${Esc(text)}</td>` : `<td class="tbd">To Be Determined</td>`; }
-const DEFAULT_RESULT_COLUMNS = ["Roblox Username", "Discord Username", "Position"];
-const LEGACY_RESULT_KEYS = ["roblox", "discord", "position"];
-function ResultsHtml(application) {
-  const columns = Array.isArray(application.resultColumns) && application.resultColumns.length ? application.resultColumns : DEFAULT_RESULT_COLUMNS;
-  const entries = (Array.isArray(application.results) ? application.results : []).filter(Boolean);
-  const rows = entries.length ? entries.map((entry) => `<tr>${columns.map((column, index) => ResultCell(Array.isArray(entry) ? entry[index] : entry[LEGACY_RESULT_KEYS[index]])).join("")}</tr>`).join("") : `<tr><td class="tbd only" colspan="${columns.length}">To Be Determined</td></tr>`;
-  return `<div class="outcome"><h3 class="cond">Results</h3><div class="scroll"><table><thead><tr>${columns.map((column) => `<th>${Esc(column)}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div></div>`;
-}
-function ApplicationHtml(application) {
-  const byline = [FormatDate(application.date), application.deadline ? "Deadline: " + FormatDate(application.deadline) : ""].filter(Boolean).map(Esc).join(" | ");
-  const apply = !IsClosed(application) && /^https?:\/\//.test(application.link || "") ? `<p><a class="btn solid" href="${Esc(application.link)}" target="_blank" rel="noopener noreferrer">Apply now</a></p>` : "";
-  const closed = IsClosed(application);
-  const stamp = closed ? `<div class="stamp" aria-hidden="true"><span class="stamp-top">Military Police School</span><b class="stamp-main">Closed</b><span class="stamp-bot">Applications no longer accepted</span></div>` : "";
-  const outcome = closed && Array.isArray(application.results) ? ResultsHtml(application) : "";
-  return `${stamp}${outcome}<p class="meta">${byline}</p>${(application.body || []).map(BlockHtml).join("")}${apply}<a class="back" href="#/join">Back to Join</a>`;
-}
+const {BlockHtml, ArticleHtml, ApplicationHtml} = Md;
 function ProfileLink(name) { return "#/leadership/profile/" + encodeURIComponent(name); }
 function FindPerson(name) {
   for (const group of PEOPLE) {
