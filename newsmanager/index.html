@@ -9,64 +9,190 @@
 <link rel="apple-touch-icon" href="../assets/logo.png">
 <meta name="robots" content="noindex,nofollow">
 <title>News Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/article.css">
 <style>
-:root{--scarlet:#c8102e;--maroon:#7a0c1b;--navy:#0c1a33;--tint:#fcf4f4;--line:#e9d3d6;--muted:#586073;color-scheme:light}
+:root{--scarlet:#c8102e;--maroon:#7a0c1b;--navy:#0c1a33;--gold:#c9a227;--tint:#fcf4f4;--line:#e9d3d6;--muted:#586073;--paper:#f4f5f8;--edge:#cfd4de;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:#fff;color:var(--navy);font:16px/1.55 "Public Sans",system-ui,sans-serif}
+body{margin:0;background:var(--paper);color:var(--navy);font:16px/1.55 "Public Sans",system-ui,sans-serif}
 .cond{font-family:"Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase}
+.slab{font-family:"Zilla Slab",Rockwell,Georgia,serif}
 [hidden]{display:none!important}
 #gate{min-height:100vh;display:grid;place-items:center;padding:20px;background:var(--tint)}
 .box{width:min(420px,100%);background:#fff;border:3px solid var(--navy);border-top:10px solid var(--scarlet);padding:32px}
 .box h1{margin:0 0 18px;font-size:2.4rem;line-height:1}
-.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--navy);color:#fff;border-bottom:6px solid var(--scarlet)}
-.bar img{width:40px;height:40px}
-.bar h1{margin:0;font-size:1.7rem}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 24px;background:var(--navy);color:#fff;border-bottom:6px solid var(--scarlet)}
+.bar img{width:38px;height:38px}
+.bar h1{margin:0;font-size:1.6rem}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
-button,.btn{font:600 .95rem "Public Sans",sans-serif;padding:9px 16px;border:2px solid var(--scarlet);background:#fff;color:var(--scarlet);cursor:pointer}
+button{font:600 .92rem "Public Sans",sans-serif;padding:8px 15px;border:2px solid var(--scarlet);background:#fff;color:var(--scarlet);cursor:pointer;transition:background .15s,color .15s}
 button:hover{background:var(--scarlet);color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
 button.solid{background:var(--scarlet);color:#fff}
 button.solid:hover{background:var(--maroon);border-color:var(--maroon)}
-.bar button{background:transparent;color:#fff;border-color:#fff}
+button.quiet{border-color:var(--edge);color:var(--navy)}
+button.quiet:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+button.sm{padding:4px 10px;font-size:.8rem}
+button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.bar button{background:transparent;color:#fff;border-color:#ffffff66}
 .bar button.on,.bar button:hover{background:var(--scarlet);border-color:var(--scarlet)}
-main{width:min(1000px,100% - 32px);margin:28px auto 80px}
-label{display:block;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--maroon);margin:16px 0 4px}
-input[type=text],input[type=password],input[type=date],input[type=number],select,textarea{width:100%;padding:10px 12px;border:1px solid #b9bfca;font:inherit;background:#fff}
-textarea{min-height:110px;resize:vertical}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
-.checks{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px}
-.checks label{display:flex;gap:8px;align-items:center;margin:0;font-size:.95rem;letter-spacing:0;color:var(--navy)}
-h2{margin:0 0 6px;font-size:2rem;line-height:1.1;display:flex;gap:12px;align-items:center}
-h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
-.hint{color:var(--muted);font-size:.9rem;margin:2px 0 0}
-.post{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:14px 0;border-bottom:2px solid var(--line)}
-.post b{font-size:1.1rem}
-.post small{display:block;color:var(--muted)}
-.tag{display:inline-block;margin-left:6px;padding:0 8px;font-size:.75rem;font-weight:700;background:var(--navy);color:#fff}
+main{width:min(1560px,100% - 32px);margin:24px auto 90px}
+.narrow{max-width:1000px;margin-inline:auto}
+label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.09em;color:var(--maroon);margin:14px 0 4px;text-transform:uppercase}
+input[type=text],input[type=password],input[type=date],input[type=number],input[type=search],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--edge);border-radius:0;font:inherit;background:#fff;color:var(--navy)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--scarlet);outline-offset:-1px;border-color:var(--scarlet)}
+textarea{min-height:100px;resize:vertical;line-height:1.5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.checks{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px}
+.checks label{display:flex;gap:8px;align-items:center;margin:0;font-size:.92rem;letter-spacing:0;color:var(--navy);text-transform:none;font-weight:600}
+.vh{margin:0 0 4px;font-size:2rem;line-height:1.1;display:flex;gap:12px;align-items:center}
+.vh::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
+.hint{color:var(--muted);font-size:.86rem;margin:3px 0 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0}
+.tools input[type=search]{max-width:280px}
+.tools select{width:auto}
+.seg{display:flex}
+.seg button{border-right-width:0}
+.seg button:last-child{border-right-width:2px}
+.plist{background:#fff;border:1px solid var(--edge)}
+.post{display:flex;gap:14px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--edge)}
+.post:last-child{border-bottom:0}
+.post:hover{background:var(--tint)}
+.thumb{flex:none;width:92px;height:60px;background:var(--navy) center/cover;border-bottom:4px solid var(--scarlet)}
+.pinfo{flex:1;min-width:0}
+.pinfo b{display:block;font-size:1.05rem;line-height:1.25;overflow-wrap:anywhere}
+.pinfo small{color:var(--muted)}
+.tag{display:inline-block;margin-left:6px;padding:0 7px;font-size:.7rem;font-weight:700;background:var(--navy);color:#fff;vertical-align:middle;text-transform:uppercase;letter-spacing:.05em}
 .tag.draft{background:#8a6d00}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.block{margin-top:14px;padding:14px;border:2px solid var(--line);border-left:6px solid var(--scarlet);background:#fff}
-.bh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
-.bh button{padding:4px 10px;font-size:.8rem}
+.tag.closed{background:var(--maroon)}
+.pact{display:flex;gap:6px;flex-wrap:wrap}
+.pact a{font:600 .8rem "Public Sans",sans-serif;padding:4px 10px;border:2px solid var(--edge);color:var(--navy);text-decoration:none}
+.pact a:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.abar{position:sticky;top:0;z-index:20;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:0 0 18px;padding:10px 14px;background:#fff;border:1px solid var(--edge);border-left:6px solid var(--scarlet);box-shadow:0 4px 12px #0c1a3314}
+.abar h2{margin:0;font-size:1.5rem;line-height:1}
+#dirty{font-size:.82rem;font-weight:600;color:var(--muted)}
+#dirty.on{color:var(--maroon)}
+.restore{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 16px;padding:10px 14px;background:#fbf6e3;border:1px solid var(--gold);border-left:6px solid var(--gold)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.card{background:#fff;border:1px solid var(--edge);margin:0 0 16px}
+.card>summary{list-style:none;cursor:pointer;padding:11px 16px;font:700 1.15rem "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;border-left:6px solid var(--navy);display:flex;justify-content:space-between;align-items:center}
+.card>summary::-webkit-details-marker{display:none}
+.card>summary::after{content:"+";font-size:1.3rem;color:var(--scarlet)}
+.card[open]>summary::after{content:"-"}
+.card[open]>summary{border-bottom:1px solid var(--edge)}
+.cbody{padding:2px 16px 18px}
 #viewEdit.app .nw,#viewEdit:not(.app) .ap{display:none}
-.kinds{display:flex;gap:8px;margin:14px 0}
-.kinds button.on{background:var(--scarlet);color:#fff}
-.preview{max-width:340px;margin-top:10px;border-bottom:5px solid var(--scarlet)}
-#status{position:fixed;left:16px;right:16px;bottom:16px;padding:12px 16px;background:var(--navy);color:#fff;border-left:8px solid var(--scarlet);max-width:640px;margin-inline:auto}
-#status.bad{background:var(--maroon)}
+.mdf{border:1px solid var(--edge);background:#fff}
+.mdf:focus-within{border-color:var(--scarlet)}
+.mdf textarea{border:0;min-height:90px}
+.mdf textarea:focus{outline:0}
+.tb{display:flex;flex-wrap:wrap;gap:2px;padding:4px;background:#eef0f5;border-bottom:1px solid var(--edge)}
+.tb button{padding:3px 8px;min-width:30px;border:1px solid transparent;background:transparent;color:var(--navy);font-size:.8rem}
+.tb button:hover{background:var(--navy);color:#fff}
+.tb .sep{width:1px;background:var(--edge);margin:2px 4px}
+.tb [data-tool=bold]{font-weight:800}
+.tb [data-tool=italic]{font-style:italic}
+.tb [data-tool=underline]{text-decoration:underline}
+.tb [data-tool=strike]{text-decoration:line-through}
+.block{margin-top:12px;border:1px solid var(--edge);border-left:6px solid var(--scarlet);background:#fff}
+.block.flash{animation:flash 1.2s}
+@keyframes flash{0%{box-shadow:0 0 0 4px #c8102e66}100%{box-shadow:0 0 0 0 #c8102e00}}
+.bh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;background:#f7f8fb;border-bottom:1px solid var(--edge)}
+.bh b{font:700 1.05rem "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.bh small{color:var(--muted);margin-left:8px}
+.bf{padding:2px 12px 12px}
+.palette{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin-top:14px}
+.palette button{padding:9px 8px;text-align:left}
+.guide{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+.guide td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.guide td:first-child{width:46%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;white-space:pre-wrap;color:var(--maroon)}
+.preview{width:100%;max-width:340px;margin-top:10px;border-bottom:5px solid var(--scarlet)}
+.pane-prev{position:sticky;top:78px;height:calc(100vh - 96px);display:flex;flex-direction:column;border:1px solid var(--edge);background:#fff}
+.pvtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 10px;background:var(--navy);color:#fff}
+.pvtools .sp{flex:1}
+.pvtools button{background:transparent;color:#fff;border-color:#ffffff55;padding:4px 10px;font-size:.8rem}
+.pvtools button.on,.pvtools button:hover{background:var(--scarlet);border-color:var(--scarlet)}
+.pvtools select{width:auto;padding:3px 6px;font-size:.8rem}
+.pvstage{flex:1;overflow:auto;background:#dfe3ec;padding:16px}
+.pvpage{margin:0 auto;max-width:900px;min-height:200px;background:#fff;color:var(--navy);font:17px/1.65 "Public Sans",system-ui,sans-serif;box-shadow:0 6px 24px #0c1a3326;transition:max-width .2s}
+.pvpage.mob{max-width:390px}
+.pvhero{padding:26px 24px;background:linear-gradient(120deg,#0c1a33,#1a2a4d);border-bottom:6px solid var(--scarlet);color:#fff}
+.pvhero h1{margin:0;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;overflow-wrap:anywhere}
+.pvbody{padding:26px 24px 40px}
+.pvpage .article{max-width:760px}
+.pvpage .meta{margin:0 0 24px;color:var(--muted);font-weight:600}
+.pvpage .body{margin:0 0 20px}
+.pvpage .qa{margin:0 0 28px}
+.pvpage .qa h3{margin:0 0 8px;padding-left:16px;border-left:6px solid var(--scarlet);font-size:1.45rem;line-height:1.25;color:var(--maroon)}
+.pvpage .sub{margin:32px 0 12px;font-size:1.65rem;line-height:1.15}
+.pvpage figure{margin:0 0 26px}
+.pvpage figure img{display:block;width:100%}
+.pvpage figcaption{font-size:.9rem;color:var(--muted);margin-top:6px}
+.pvpage .lead{margin:0 0 26px}
+.pvpage .lead img{border-bottom:6px solid var(--scarlet)}
+.pvpage blockquote{margin:0 0 28px;padding:6px 0 6px 20px;border-left:6px solid var(--scarlet);font-size:1.4rem;line-height:1.3;color:var(--maroon)}
+.pvpage blockquote cite{display:block;margin-top:8px;font:600 1rem "Public Sans",sans-serif;color:var(--muted)}
+.pvpage .back{display:inline-block;margin-top:22px;font-weight:700;color:var(--scarlet);text-decoration:none}
+.pvpage .btn{display:inline-block;padding:12px 24px;font-weight:700;text-decoration:none;border:3px solid var(--scarlet)}
+.pvpage .btn.solid{background:var(--scarlet);color:#fff}
+.pvpage .stamp{display:table;position:relative;margin:0 0 30px;padding:12px 34px 14px;border:5px solid var(--scarlet);color:var(--scarlet);text-align:center;text-transform:uppercase;transform:rotate(-3deg);transform-origin:left center;opacity:.93;filter:url(#inkWear)}
+.pvpage .stamp::before{content:"";position:absolute;inset:4px;border:2px solid currentColor}
+.pvpage .stamp>*{display:block;position:relative;font-family:"Barlow Condensed",sans-serif;line-height:1}
+.pvpage .stamp-top{padding:0 0 7px .42em;border-bottom:2px solid currentColor;font-size:.95rem;font-weight:700;letter-spacing:.42em}
+.pvpage .stamp-main{padding:8px 0 4px .2em;font-size:4rem;font-weight:700;letter-spacing:.2em}
+.pvpage .stamp-bot{padding:7px 0 0 .3em;border-top:2px solid currentColor;font-size:.85rem;font-weight:600;letter-spacing:.3em}
+.pvpage .outcome{margin:0 0 36px}
+.pvpage .outcome h3{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:1.8rem;text-transform:uppercase;color:var(--scarlet)}
+.pvpage .outcome h3::before{content:"";width:12px;height:26px;background:var(--scarlet)}
+.pvpage .outcome .scroll{overflow-x:auto;border:3px solid var(--navy)}
+.pvpage .outcome table{width:100%;min-width:420px;border-collapse:collapse}
+.pvpage .outcome th{padding:11px 14px;background:var(--navy);border-bottom:4px solid var(--scarlet);color:#fff;text-align:left;font:700 1.1rem "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.pvpage .outcome td{padding:12px 14px;border-top:1px solid var(--line);font-weight:600;overflow-wrap:anywhere}
+.pvpage .outcome tbody tr:nth-child(even){background:var(--tint)}
+.pvpage .outcome td.tbd{color:var(--muted);font-style:italic;font-weight:500}
+.pvpage .outcome td.only{padding:32px 14px;color:var(--maroon);font-style:normal;font-weight:700;letter-spacing:.22em;text-align:center;text-transform:uppercase}
+.pvpage .blk{cursor:pointer;outline:2px dashed transparent;outline-offset:6px;transition:outline-color .15s}
+.pvpage .blk:hover{outline-color:#c8102e88}
+.tilebox{width:380px;max-width:100%;margin:0 auto}
+.tilebox.wide{width:100%}
+.tilebox .tile{position:relative;display:block;min-height:300px;overflow:hidden;color:#fff;background:var(--navy)}
+.tilebox .tile.big{min-height:380px}
+.tilebox .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.tilebox .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0c1a331a,#0c1a33e0)}
+.tilebox .txt{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:24px 26px}
+.tilebox .txt::before{content:"";display:block;width:60px;height:3px;background:var(--scarlet);margin-bottom:14px}
+.tilebox h3{margin:0;font-size:1.7rem;line-height:1.15;text-transform:uppercase;font-weight:700}
+.tilebox p{margin:10px 0 0;font-size:.98rem;color:#e3e6ee}
+.tilebox .more{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:.78rem;font-weight:700;letter-spacing:.2em}
+.tilebox .more::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--scarlet)}
 .rscroll{overflow-x:auto;margin-top:8px}
 .rgrid{display:grid;gap:8px;min-width:520px;align-items:start}
 .rgrid input[data-rcol]{font-weight:700;background:var(--tint)}
-.rgrid button{padding:6px 10px;font-size:.8rem}
+.rgrid button{padding:5px 9px;font-size:.78rem}
 .rgrid div button{margin-top:4px}
-@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.mtabs{display:none}
+#status{position:fixed;z-index:50;left:16px;right:16px;bottom:16px;padding:12px 16px;background:var(--navy);color:#fff;border-left:8px solid var(--scarlet);max-width:640px;margin-inline:auto}
+#status.bad{background:var(--maroon)}
+@media (max-width:1000px){
+.split{display:block}
+.pane-prev{display:none;position:static;height:70vh}
+.split.show-prev .pane-edit{display:none}
+.split.show-prev .pane-prev{display:flex}
+.mtabs{display:flex;position:fixed;z-index:30;left:0;right:0;bottom:0;background:var(--navy);padding:8px;gap:8px}
+.mtabs button{flex:1;background:transparent;color:#fff;border-color:#ffffff66}
+.mtabs button.on{background:var(--scarlet);border-color:var(--scarlet)}
+#status{bottom:70px}
+}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}.post{flex-wrap:wrap}.thumb{width:72px;height:48px}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="inkWear" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="4" result="warp"/><feDisplacementMap in="SourceGraphic" in2="warp" scale="2" xChannelSelector="R" yChannelSelector="G" result="rough"/><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 6.2" result="holes"/><feComposite in="rough" in2="holes" operator="in"/></filter></svg>
 <div id="gate">
 <form class="box" id="gateForm">
 <h1 class="cond">News Manager</h1>
-<label for="pw">PASSWORD</label>
+<label for="pw">Password</label>
 <input id="pw" type="password" autocomplete="current-password" required>
 <p class="hint" id="gateError"></p>
 <p><button class="solid" type="submit">Unlock</button></p>
@@ -74,7 +200,7 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 </div>
 <div id="app" hidden>
 <div class="bar">
-<div class="row" style="align-items:center"><img src="../assets/logo.png" alt=""><h1 class="cond">News Manager</h1></div>
+<div class="row"><img src="../assets/logo.png" alt=""><h1 class="cond">News Manager</h1></div>
 <div class="tabs">
 <button data-view="viewPosts">Posts</button>
 <button data-view="viewEdit" id="newTab">New post</button>
@@ -83,110 +209,206 @@ h2::before{content:"";width:12px;height:1.1em;background:var(--scarlet)}
 </div>
 </div>
 <main>
-<section id="viewPosts">
-<h2 class="cond">Posts</h2>
+<section id="viewPosts" class="narrow">
+<h2 class="vh cond">Posts</h2>
 <p class="hint">Every post is a JSON file in its folder. Deleting a post deletes its file.</p>
-<div class="kinds"><button type="button" data-kind="news" class="on">News</button><button type="button" data-kind="app">Applications</button></div>
-<p><button id="refreshBtn" type="button">Refresh</button></p>
-<div id="postList"></div>
+<div class="tools">
+<div class="seg"><button type="button" data-kind="news" class="on">News</button><button type="button" data-kind="app">Applications</button></div>
+<input type="search" id="postSearch" placeholder="Search title or file name">
+<select id="postFilter"><option value="">All</option><option value="live">Published</option><option value="draft">Drafts</option></select>
+<button type="button" id="refreshBtn" class="quiet">Refresh</button>
+<button type="button" id="createBtn" class="solid">Create new</button>
+</div>
+<div class="plist" id="postList"></div>
 </section>
 <section id="viewEdit" hidden>
-<h2 class="cond" id="editTitle">New post</h2>
+<div class="abar">
+<div class="row"><h2 class="cond" id="editTitle">New post</h2><span id="dirty">No changes</span></div>
+<div class="row">
+<button type="button" id="cancelBtn" class="quiet">Back</button>
+<button type="button" id="saveLocalBtn" class="quiet">Save draft locally</button>
+<button type="button" id="downloadBtn" class="quiet">Download JSON</button>
+<button class="solid" type="button" id="publishBtn">Publish to GitHub</button>
+</div>
+</div>
+<div class="restore" id="restoreBar" hidden><span id="restoreText"></span><button type="button" id="restoreBtn" class="sm">Restore</button><button type="button" id="discardBtn" class="sm quiet">Discard</button></div>
+<div class="split" id="split">
+<div class="pane-edit">
+<details class="card" open>
+<summary>Details</summary>
+<div class="cbody">
 <div class="grid2">
-<div><label for="f-title">TITLE</label><input type="text" id="f-title" data-field="title"></div>
-<div><label for="f-id">FILE NAME (ID)</label><input type="text" id="f-id" data-field="id"></div>
-<div class="nw"><label for="f-category">CATEGORY</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
-<div><label for="f-date">DATE</label><input type="date" id="f-date" data-field="date"></div>
-<div class="ap"><label for="f-deadline">DEADLINE</label><input type="date" id="f-deadline" data-field="deadline"></div>
-<div class="ap"><label for="f-status">STATUS</label><select id="f-status" data-field="status"><option value="auto">Auto (closes at deadline)</option><option value="open">Open</option><option value="closed">Closed</option></select></div>
-<div class="ap"><label for="f-link">APPLICATION LINK (Google Forms)</label><input type="text" id="f-link" data-field="link" placeholder="https://forms.gle/..."></div>
-<div class="nw"><label for="f-author">AUTHOR</label><input type="text" id="f-author" data-field="author"></div>
-<div class="nw"><label for="f-tags">TAGS (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
+<div><label for="f-title">Title</label><input type="text" id="f-title" data-field="title"></div>
+<div><label for="f-id">File name (ID)</label><input type="text" id="f-id" data-field="id"></div>
+<div class="nw"><label for="f-category">Category</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
+<div><label for="f-date">Date</label><input type="date" id="f-date" data-field="date"></div>
+<div class="ap"><label for="f-deadline">Deadline</label><input type="date" id="f-deadline" data-field="deadline"></div>
+<div class="ap"><label for="f-status">Status</label><select id="f-status" data-field="status"><option value="auto">Auto (closes at deadline)</option><option value="open">Open</option><option value="closed">Closed</option></select></div>
+<div class="ap"><label for="f-link">Application link (Google Forms)</label><input type="text" id="f-link" data-field="link" placeholder="https://forms.gle/..."></div>
+<div class="nw"><label for="f-author">Author</label><input type="text" id="f-author" data-field="author"></div>
+<div class="nw"><label for="f-tags">Tags (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
 </div>
-<label for="f-excerpt">EXCERPT (shown on tiles and under the title)</label>
-<textarea id="f-excerpt" data-field="excerpt" style="min-height:80px"></textarea>
-<div class="nw">
-<label for="f-imageFile">HEADER IMAGE</label>
-<input type="file" id="f-imageFile" accept="image/*">
-<p class="hint">Or use an image URL or a path already in the repo</p>
-<input type="text" id="f-image" data-field="image" placeholder="https://... or assets/news/photo.jpg">
-<img class="preview" id="imagePreview" alt="" hidden>
-<div class="grid2">
-<div><label for="f-imagePosition">IMAGE FOCUS ON TILE</label><select id="f-imagePosition" data-field="imagePosition"><option>center</option><option>top</option><option>bottom</option><option>left</option><option>right</option></select></div>
-<div><label for="f-imageCaption">IMAGE CAPTION</label><input type="text" id="f-imageCaption" data-field="imageCaption"></div>
-</div>
-</div>
+<label for="f-excerpt">Excerpt (tile text and search)</label>
+<textarea id="f-excerpt" data-field="excerpt" style="min-height:70px"></textarea>
 <div class="checks">
 <label><input type="checkbox" data-field="featured"> Featured (wide tile)</label>
 <label class="nw"><input type="checkbox" data-field="pinned"> Pinned to top</label>
 <label><input type="checkbox" data-field="published"> Published (untick for draft)</label>
 </div>
-<div class="ap">
-<label>RESULTS TABLE (shown on the site when the application is closed)</label>
-<p class="hint">Rename the columns, add or remove columns and rows. With no rows the site shows To Be Determined.</p>
-<div class="rscroll"><div class="rgrid" id="resultsGrid"></div></div>
-<div class="row" style="margin-top:10px"><button type="button" id="addColumn">Add column</button><button type="button" id="addRow">Add row</button></div>
 </div>
-<label>ARTICLE BODY</label>
-<div id="blockList"></div>
-<div class="row" style="margin-top:14px">
-<button type="button" data-add="p">Add paragraph</button>
-<button type="button" data-add="ul">Add list</button>
-<button type="button" data-add="h">Add heading</button>
-<button type="button" data-add="qa">Add Q&amp;A</button>
-<button type="button" data-add="quote">Add quote</button>
-<button type="button" data-add="img">Add image</button>
-</div>
-<div class="row" style="margin-top:28px">
-<button class="solid" type="button" id="publishBtn">Publish to GitHub</button>
-<button type="button" id="downloadBtn">Download JSON</button>
-<button type="button" id="cancelBtn">Cancel</button>
-</div>
-</section>
-<section id="viewSettings" hidden>
-<h2 class="cond">Settings</h2>
-<p class="hint">Settings are saved in this browser. The token is kept for this tab only and never leaves your device except to call GitHub.</p>
+</details>
+<details class="card nw" open>
+<summary>Header image</summary>
+<div class="cbody">
+<label for="f-imageFile">Upload</label>
+<input type="file" id="f-imageFile" accept="image/*">
+<label for="f-image">Or image URL / repo path</label>
+<input type="text" id="f-image" data-field="image" placeholder="https://... or assets/news/photo.jpg">
+<img class="preview" id="imagePreview" alt="" hidden>
 <div class="grid2">
-<div><label for="s-owner">GITHUB OWNER</label><input type="text" id="s-owner" data-setting="owner"></div>
-<div><label for="s-repo">REPOSITORY</label><input type="text" id="s-repo" data-setting="repo"></div>
-<div><label for="s-branch">BRANCH</label><input type="text" id="s-branch" data-setting="branch"></div>
-<div><label for="s-token">FINE-GRAINED TOKEN (Contents: read and write)</label><input type="password" id="s-token" data-setting="token" autocomplete="off"></div>
-<div><label for="s-newsDir">NEWS FOLDER</label><input type="text" id="s-newsDir" data-setting="newsDir"></div>
-<div><label for="s-appDir">APPLICATIONS FOLDER</label><input type="text" id="s-appDir" data-setting="appDir"></div>
-<div><label for="s-imageDir">IMAGE FOLDER</label><input type="text" id="s-imageDir" data-setting="imageDir"></div>
-<div><label for="s-maxImageWidth">MAX IMAGE WIDTH (px)</label><input type="number" id="s-maxImageWidth" data-setting="maxImageWidth" min="400" max="4000"></div>
-<div><label for="s-jpegQuality">JPEG QUALITY (0.3 to 1)</label><input type="number" id="s-jpegQuality" data-setting="jpegQuality" min="0.3" max="1" step="0.05"></div>
-<div><label for="s-categories">CATEGORIES (comma separated)</label><input type="text" id="s-categories" data-setting="categories"></div>
-<div><label for="s-defaultAuthor">DEFAULT AUTHOR</label><input type="text" id="s-defaultAuthor" data-setting="defaultAuthor"></div>
-<div><label for="s-defaultImagePosition">DEFAULT IMAGE FOCUS</label><select id="s-defaultImagePosition" data-setting="defaultImagePosition"><option>center</option><option>top</option><option>bottom</option></select></div>
+<div><label for="f-imagePosition">Image focus on tile</label><select id="f-imagePosition" data-field="imagePosition"><option>center</option><option>top</option><option>bottom</option><option>left</option><option>right</option></select></div>
+<div><label for="f-imageCaption">Image caption</label><input type="text" id="f-imageCaption" data-field="imageCaption"></div>
 </div>
-<div class="row" style="margin-top:24px">
+</div>
+</details>
+<details class="card ap">
+<summary>Results table</summary>
+<div class="cbody">
+<p class="hint">Shown on the site when the application is closed. With no rows the site shows To Be Determined. Use the preview switch to see the closed version.</p>
+<div class="rscroll"><div class="rgrid" id="resultsGrid"></div></div>
+<div class="row" style="margin-top:10px"><button type="button" id="addColumn" class="quiet">Add column</button><button type="button" id="addRow" class="quiet">Add row</button></div>
+</div>
+</details>
+<details class="card" open>
+<summary>Article body</summary>
+<div class="cbody">
+<p class="hint">Click any block in the preview to jump to it here. Discord style formatting works in text blocks, see the guide below.</p>
+<div id="blockList"></div>
+<div class="palette" id="palette"></div>
+</div>
+</details>
+<details class="card">
+<summary>Formatting guide</summary>
+<div class="cbody">
+<p class="hint">Works in Text, Lists, Q&amp;A answers, Quotes, Callouts and Table cells. Shortcuts: Ctrl+B, Ctrl+I, Ctrl+U, Ctrl+K link, Ctrl+E code, Ctrl+Shift+X strike, Ctrl+Shift+P spoiler.</p>
+<table class="guide">
+<tr><td>**bold**</td><td>Bold</td></tr>
+<tr><td>*italic* or _italic_</td><td>Italic</td></tr>
+<tr><td>__underline__</td><td>Underline</td></tr>
+<tr><td>~~strike~~</td><td>Strikethrough</td></tr>
+<tr><td>***bold italic***</td><td>Combine styles, nest freely: __**both**__</td></tr>
+<tr><td>||spoiler||</td><td>Hidden until the reader clicks</td></tr>
+<tr><td>`inline code`</td><td>Inline code</td></tr>
+<tr><td>```
+code block
+```</td><td>Code block (nothing inside is formatted)</td></tr>
+<tr><td># Big
+## Medium
+### Small</td><td>Headings, at the start of a line</td></tr>
+<tr><td>-# small text</td><td>Subtext</td></tr>
+<tr><td>> one line quote
+>>> quote to the end</td><td>Block quote</td></tr>
+<tr><td>- item
+  - nested item
+1. numbered</td><td>Lists, indent two spaces to nest</td></tr>
+<tr><td>[text](https://example.com)</td><td>Masked link. #/news/some-post links inside the site</td></tr>
+<tr><td>&lt;https://example.com&gt;</td><td>Link written out in full</td></tr>
+<tr><td>&lt;t:1790000000:F&gt;</td><td>Timestamp. Styles t T d D f F R. A date like &lt;t:2026-11-03:D&gt; works too</td></tr>
+<tr><td>&lt;@Name&gt; &lt;#channel&gt; &lt;@&amp;Role&gt;</td><td>Mention style highlight</td></tr>
+<tr><td>:fire: :tada: :salute: :shield:</td><td>Emoji shortcodes: smile grin joy heart fire star tada thumbsup thumbsdown wave salute warning white_check_mark x eyes pray muscle trophy medal shield rotating_light police_car cop flag_us 100 clap rocket handshake</td></tr>
+<tr><td>\*not italic\*</td><td>Backslash shows the symbol literally</td></tr>
+</table>
+</div>
+</details>
+</div>
+<div class="pane-prev" id="panePrev">
+<div class="pvtools">
+<button type="button" data-pv="article" class="on">Page</button>
+<button type="button" data-pv="tile">Tile</button>
+<span class="sp"></span>
+<select id="pvClosed" class="ap" aria-label="Preview state"><option value="auto">Auto</option><option value="open">As open</option><option value="closed">As closed</option></select>
+<button type="button" data-pw="desk" class="on">Desktop</button>
+<button type="button" data-pw="mob">Mobile</button>
+</div>
+<div class="pvstage"><div class="pvpage" id="pvPage"></div></div>
+</div>
+</div>
+<div class="mtabs"><button type="button" data-pane="edit" class="on">Edit</button><button type="button" data-pane="prev">Preview</button></div>
+</section>
+<section id="viewSettings" class="narrow" hidden>
+<h2 class="vh cond">Settings</h2>
+<p class="hint">Settings are saved in this browser. The token is kept for this tab only and never leaves your device except to call GitHub.</p>
+<div class="card"><div class="cbody">
+<div class="grid2">
+<div><label for="s-owner">GitHub owner</label><input type="text" id="s-owner" data-setting="owner"></div>
+<div><label for="s-repo">Repository</label><input type="text" id="s-repo" data-setting="repo"></div>
+<div><label for="s-branch">Branch</label><input type="text" id="s-branch" data-setting="branch"></div>
+<div><label for="s-token">Fine-grained token (Contents: read and write)</label><input type="password" id="s-token" data-setting="token" autocomplete="off"></div>
+<div><label for="s-newsDir">News folder</label><input type="text" id="s-newsDir" data-setting="newsDir"></div>
+<div><label for="s-appDir">Applications folder</label><input type="text" id="s-appDir" data-setting="appDir"></div>
+<div><label for="s-imageDir">Image folder</label><input type="text" id="s-imageDir" data-setting="imageDir"></div>
+<div><label for="s-maxImageWidth">Max image width (px)</label><input type="number" id="s-maxImageWidth" data-setting="maxImageWidth" min="400" max="4000"></div>
+<div><label for="s-jpegQuality">JPEG quality (0.3 to 1)</label><input type="number" id="s-jpegQuality" data-setting="jpegQuality" min="0.3" max="1" step="0.05"></div>
+<div><label for="s-categories">Categories (comma separated)</label><input type="text" id="s-categories" data-setting="categories"></div>
+<div><label for="s-defaultAuthor">Default author</label><input type="text" id="s-defaultAuthor" data-setting="defaultAuthor"></div>
+<div><label for="s-defaultImagePosition">Default image focus</label><select id="s-defaultImagePosition" data-setting="defaultImagePosition"><option>center</option><option>top</option><option>bottom</option></select></div>
+</div>
+<div class="row" style="margin-top:22px">
 <button class="solid" type="button" id="saveSettings">Save settings</button>
 <button type="button" id="testBtn">Test connection</button>
-<button type="button" id="clearToken">Clear token</button>
+<button type="button" id="clearToken" class="quiet">Clear token</button>
 </div>
+</div></div>
 </section>
 </main>
 </div>
 <div id="status" role="status" hidden></div>
+<script src="../assets/markdown.js"></script>
 <script>
 const PASSWORD_HASH = "c628de1e870e6975ba04a83e9cfe1c988039696a1578754ae396ebd4c5aea268";
 const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", appDir: "applications", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center"};
-const BLOCK_LABELS = {p: "Paragraph", ul: "List", h: "Heading", qa: "Q&A", quote: "Quote", img: "Image"};
+const BLOCK_LABELS = {p: "Text", h: "Heading", ul: "Bullet list", ol: "Numbered list", qa: "Q&A", quote: "Quote", img: "Image", callout: "Callout", table: "Table", button: "Button", divider: "Divider"};
+const BLOCK_STARTERS = {callout: {variant: "info"}, button: {style: "solid"}, table: {text: "Name | Role\nExample | Example"}};
+const TOOLS = [
+  {id: "bold", label: "B", tip: "Bold", wrap: ["**", "**"]},
+  {id: "italic", label: "I", tip: "Italic", wrap: ["*", "*"]},
+  {id: "underline", label: "U", tip: "Underline", wrap: ["__", "__"]},
+  {id: "strike", label: "S", tip: "Strikethrough", wrap: ["~~", "~~"]},
+  {id: "spoiler", label: "Spoiler", tip: "Spoiler", wrap: ["||", "||"]},
+  {id: "code", label: "Code", tip: "Inline code", wrap: ["`", "`"]},
+  {id: "codeblock", label: "Block", tip: "Code block", wrap: ["```\n", "\n```"], block: true},
+  {id: "link", label: "Link", tip: "Masked link"},
+  {sep: true},
+  {id: "h1", label: "H1", tip: "Big heading", line: "# ", block: true},
+  {id: "h2", label: "H2", tip: "Medium heading", line: "## ", block: true},
+  {id: "h3", label: "H3", tip: "Small heading", line: "### ", block: true},
+  {id: "sub", label: "Small", tip: "Subtext", line: "-# ", block: true},
+  {sep: true},
+  {id: "quote", label: "Quote", tip: "Block quote", line: "> ", block: true},
+  {id: "list", label: "List", tip: "Bullet list", line: "- ", block: true},
+  {id: "olist", label: "1.", tip: "Numbered list", line: "1. ", block: true},
+  {id: "time", label: "Time", tip: "Timestamp"}
+];
+const SHORTCUTS = {b: "bold", i: "italic", u: "underline", k: "link", e: "code", X: "strike", P: "spoiler"};
+const LINE_MARK = /^(#{1,3} |-# |> |[-*] |\d+\. )/;
 const storedSettings = JSON.parse(localStorage.getItem("mpsManager") || "{}");
 if (storedSettings.token && !sessionStorage.getItem("mpsToken")) sessionStorage.setItem("mpsToken", storedSettings.token);
 delete storedSettings.token;
 localStorage.setItem("mpsManager", JSON.stringify(storedSettings));
 const settings = Object.assign({}, DEFAULTS, storedSettings, {token: sessionStorage.getItem("mpsToken") || ""});
+const postCache = {news: null, app: null};
 let kind = "news";
 let draft = null;
 let draftIsNew = true;
 let headerFile = null;
-function Esc(text) { return String(text ?? "").replace(/[&<>"']/g, (char) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char])); }
+let headerUrl = "";
+let dirty = false;
+let pvTab = "article";
+const Esc = Md.Esc;
 function Say(text, bad) {
   const box = document.getElementById("status");
   box.textContent = text; box.hidden = false; box.classList.toggle("bad", !!bad);
-  clearTimeout(Say.timer); Say.timer = setTimeout(() => { box.hidden = true; }, bad ? 9000 : 5000);
+  clearTimeout(Say.timer); Say.timer = setTimeout(() => { box.hidden = true; }, bad ? 9000 : 4500);
 }
 async function Sha256(text) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
@@ -238,14 +460,53 @@ function Show(viewId) {
   document.querySelectorAll("main section").forEach((view) => { view.hidden = view.id !== viewId; });
   document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.classList.toggle("on", tab.dataset.view === viewId));
 }
-function ImageSrc(path) { return /^(https?:|data:)/.test(path) ? path : "../" + path; }
+const ImageSrc = (path) => /^(https?:|data:|blob:)/.test(path) ? path : "../" + path;
 function NewDraft() {
   return {id: "", title: "", category: settings.categories.split(",")[0].trim(), date: new Date().toISOString().slice(0, 10), author: settings.defaultAuthor, excerpt: "", image: "", imagePosition: settings.defaultImagePosition, imageCaption: "", tags: [], featured: false, pinned: false, published: true, link: "", deadline: "", body: []};
 }
-function OpenEditor(article) {
-  draftIsNew = !article;
+const DEFAULT_RESULT_COLUMNS = ["Roblox Username", "Discord Username", "Position"];
+const LEGACY_RESULT_KEYS = ["roblox", "discord", "position"];
+function NormalizeResults(article) {
+  const columns = Array.isArray(article.resultColumns) && article.resultColumns.length ? article.resultColumns.map(String) : DEFAULT_RESULT_COLUMNS.slice();
+  const rows = (Array.isArray(article.results) ? article.results : []).map((entry) => columns.map((column, index) => String((Array.isArray(entry) ? entry[index] : entry[LEGACY_RESULT_KEYS[index]]) ?? "")));
+  return {columns, rows};
+}
+const DraftKey = () => `mpsDraft:${kind}:${draftIsNew ? "new" : draft.id}`;
+function Serializable() {
+  const copy = JSON.parse(JSON.stringify(draft));
+  copy.body.forEach((block) => { delete block._file; delete block._preview; });
+  return copy;
+}
+function SaveLocal(loud) {
+  try {
+    localStorage.setItem(DraftKey(), JSON.stringify({savedAt: Date.now(), draft: Serializable()}));
+    if (loud) Say("Draft saved in this browser");
+  } catch (problem) { Say("[NEWS MANAGER] could not save draft locally, download the JSON instead", true); }
+}
+function SetDirty(state) {
+  dirty = state;
+  const label = document.getElementById("dirty");
+  label.textContent = state ? "Unsaved changes" : "No changes";
+  label.classList.toggle("on", state);
+}
+function Touch() {
+  if (!dirty) SetDirty(true);
+  document.getElementById("restoreBar").hidden = true;
+  clearTimeout(Touch.timer);
+  Touch.timer = setTimeout(() => { SaveLocal(false); RenderPreview(); }, 120);
+}
+function FillFields() {
+  document.querySelectorAll("[data-field]").forEach((input) => {
+    const fieldValue = draft[input.dataset.field];
+    if (input.type === "checkbox") input.checked = !!fieldValue;
+    else input.value = Array.isArray(fieldValue) ? fieldValue.join(", ") : (fieldValue ?? "");
+  });
+}
+function OpenEditor(article, asCopy) {
+  draftIsNew = !article || !!asCopy;
   draft = article ? JSON.parse(JSON.stringify(article)) : NewDraft();
-  headerFile = null;
+  if (asCopy) { draft.title += " (copy)"; draft.id = Slug(draft.title); draft.published = false; draft.pinned = false; }
+  headerFile = null; headerUrl = "";
   if (kind === "app") {
     const table = NormalizeResults(draft);
     draft.resultColumns = table.columns; draft.results = table.rows;
@@ -255,36 +516,53 @@ function OpenEditor(article) {
   document.getElementById("viewEdit").classList.toggle("app", kind === "app");
   document.getElementById("f-id").readOnly = !draftIsNew;
   document.getElementById("f-imageFile").value = "";
-  document.querySelectorAll("[data-field]").forEach((input) => {
-    const fieldValue = draft[input.dataset.field];
-    if (input.type === "checkbox") input.checked = !!fieldValue;
-    else input.value = Array.isArray(fieldValue) ? fieldValue.join(", ") : (fieldValue ?? "");
-  });
+  document.getElementById("pvClosed").value = "auto";
   document.getElementById("catList").innerHTML = settings.categories.split(",").map((name) => `<option value="${Esc(name.trim())}">`).join("");
-  RenderBlocks(); RenderResults(); RenderPreview(); Show("viewEdit");
+  FillFields(); RenderBlocks(); RenderResults(); RenderHeaderImage(); SetDirty(false); SetPane("edit");
+  const stored = localStorage.getItem(DraftKey());
+  document.getElementById("restoreBar").hidden = !stored;
+  if (stored) document.getElementById("restoreText").textContent = "An unsaved draft from " + new Date(JSON.parse(stored).savedAt).toLocaleString() + " was found for this post.";
+  RenderPreview(); Show("viewEdit"); window.scrollTo(0, 0);
 }
-function RenderPreview() {
+function RestoreDraft() {
+  const stored = JSON.parse(localStorage.getItem(DraftKey()));
+  draft = stored.draft; headerFile = null; headerUrl = "";
+  FillFields(); RenderBlocks(); RenderResults(); RenderHeaderImage(); RenderPreview();
+  document.getElementById("restoreBar").hidden = true;
+  SetDirty(true);
+}
+function RenderHeaderImage() {
   const picture = document.getElementById("imagePreview");
-  const source = headerFile ? URL.createObjectURL(headerFile) : (draft.image ? ImageSrc(draft.image) : "");
+  const source = headerUrl || (draft.image ? ImageSrc(draft.image) : "");
   picture.hidden = !source; if (source) picture.src = source;
 }
+function MdField(key, text, rows, inlineOnly) {
+  const buttons = TOOLS.filter((tool) => !(inlineOnly && tool.block)).map((tool) => tool.sep ? '<span class="sep"></span>' : `<button type="button" class="sm" data-tool="${tool.id}" title="${tool.tip}">${tool.label}</button>`).join("");
+  return `<div class="mdf"><div class="tb">${buttons}</div><textarea data-key="${key}" rows="${rows}">${Esc(text)}</textarea></div>`;
+}
+function Input(key, text) { return `<input type="text" data-key="${key}" value="${Esc(text)}">`; }
+function Choice(key, current, choices) { return `<select data-key="${key}">${choices.map(([name, label]) => `<option value="${name}"${name === current ? " selected" : ""}>${label}</option>`).join("")}</select>`; }
 function BlockFields(block) {
-  if (block.type === "p") return `<textarea data-key="text">${Esc(block.text)}</textarea>`;
-  if (block.type === "ul") return `<textarea data-key="text">${Esc(block.text)}</textarea><p class="hint">One item per line</p>`;
-  if (block.type === "h") return `<input type="text" data-key="text" value="${Esc(block.text)}">`;
-  if (block.type === "quote") return `<textarea data-key="text" style="min-height:70px">${Esc(block.text)}</textarea><label>SPEAKER</label><input type="text" data-key="by" value="${Esc(block.by)}">`;
-  if (block.type === "qa") return `<label>QUESTION</label><input type="text" data-key="q" value="${Esc(block.q)}"><label>ANSWER</label><textarea data-key="a">${Esc(block.a)}</textarea>`;
-  return `<input type="file" data-key="file" accept="image/*"><p class="hint">Or image URL or repo path</p><input type="text" data-key="src" value="${Esc(block.src)}"><label>CAPTION</label><input type="text" data-key="caption" value="${Esc(block.caption)}">`;
+  if (block.type === "p") return MdField("text", block.text, 7);
+  if (block.type === "h") return Input("text", block.text);
+  if (block.type === "ul" || block.type === "ol") return MdField("text", block.text, 5, true) + '<p class="hint">One item per line</p>';
+  if (block.type === "quote") return MdField("text", block.text, 3, true) + "<label>Speaker</label>" + Input("by", block.by);
+  if (block.type === "qa") return "<label>Question</label>" + Input("q", block.q) + "<label>Answer</label>" + MdField("a", block.a, 4);
+  if (block.type === "callout") return '<div class="grid2"><div><label>Style</label>' + Choice("variant", block.variant, [["info", "Info (navy)"], ["important", "Important (scarlet)"], ["notice", "Notice (gold)"], ["success", "Success (green)"]]) + "</div><div><label>Title (optional)</label>" + Input("title", block.title) + "</div></div><label>Text</label>" + MdField("text", block.text, 4);
+  if (block.type === "table") return `<textarea data-key="text" rows="5" style="font-family:ui-monospace,Menlo,Consolas,monospace">${Esc(block.text)}</textarea><p class="hint">One row per line, cells split with |. The first row is the header.</p>`;
+  if (block.type === "button") return '<div class="grid2"><div><label>Label</label>' + Input("label", block.label) + "</div><div><label>Style</label>" + Choice("style", block.style, [["solid", "Solid"], ["hollow", "Outline"]]) + "</div></div><label>Link</label>" + Input("url", block.url) + '<p class="hint">https://... or #/news/post-id for a page on this site</p>';
+  if (block.type === "divider") return '<p class="hint" style="padding-top:10px">A horizontal line between sections.</p>';
+  return `<label>Upload</label><input type="file" data-key="file" accept="image/*"><label>Or image URL / repo path</label>${Input("src", block.src)}<label>Caption</label>${Input("caption", block.caption)}`;
 }
-const DEFAULT_RESULT_COLUMNS = ["Roblox Username", "Discord Username", "Position"];
-const LEGACY_RESULT_KEYS = ["roblox", "discord", "position"];
-const TODAY = new Date().toLocaleDateString("sv-SE");
-function IsApplicationClosed(post) { return post.status === "closed" || (post.status !== "open" && !!post.deadline && post.deadline < TODAY); }
-function NormalizeResults(article) {
-  const columns = Array.isArray(article.resultColumns) && article.resultColumns.length ? article.resultColumns.map(String) : DEFAULT_RESULT_COLUMNS.slice();
-  const rows = (Array.isArray(article.results) ? article.results : []).map((entry) => columns.map((column, index) => String((Array.isArray(entry) ? entry[index] : entry[LEGACY_RESULT_KEYS[index]]) ?? "")));
-  return {columns, rows};
+function Snippet(block) {
+  const raw = String(block.text || block.q || block.label || block.src || block.title || "").replace(/\s+/g, " ").trim();
+  return raw.length > 46 ? raw.slice(0, 46) + "..." : raw;
 }
+function RenderBlocks() {
+  document.getElementById("blockList").innerHTML = draft.body.map((block, index) =>
+    `<div class="block" data-index="${index}"><div class="bh"><span><b>${BLOCK_LABELS[block.type] || block.type}</b><small>${Esc(Snippet(block))}</small></span><span class="row"><button type="button" class="sm quiet" data-act="up">Up</button><button type="button" class="sm quiet" data-act="down">Down</button><button type="button" class="sm quiet" data-act="dup">Copy</button><button type="button" class="sm" data-act="del">Remove</button></span></div><div class="bf">${BlockFields(block)}</div></div>`).join("");
+}
+function IsApplicationClosed(post) { return Md.IsClosed(post); }
 function RenderResults() {
   if (kind !== "app" || !draft.resultColumns) return;
   const grid = document.getElementById("resultsGrid");
@@ -294,54 +572,95 @@ function RenderResults() {
   const bodyCells = draft.results.map((row, rowIndex) => row.map((cell, cellIndex) => `<input type="text" data-rrow="${rowIndex}" data-rcell="${cellIndex}" value="${Esc(cell)}">`).join("") + `<button type="button" data-rdelrow="${rowIndex}">Remove row</button>`).join("");
   grid.innerHTML = headerCells + "<div></div>" + bodyCells;
 }
-function RenderBlocks() {
-  document.getElementById("blockList").innerHTML = draft.body.map((block, index) =>
-    `<div class="block" data-index="${index}"><div class="bh"><b>${BLOCK_LABELS[block.type]}</b><span class="row"><button type="button" data-act="up">Up</button><button type="button" data-act="down">Down</button><button type="button" data-act="del">Remove</button></span></div>${BlockFields(block)}</div>`).join("");
+function PreviewView() {
+  const view = JSON.parse(JSON.stringify(draft));
+  view.body = draft.body.map((block) => block._preview ? Object.assign({}, block, {src: block._preview}) : block);
+  if (headerUrl) view.image = headerUrl;
+  return view;
+}
+function RenderPreview() {
+  const view = PreviewView();
+  const page = document.getElementById("pvPage");
+  const closedPick = document.getElementById("pvClosed").value;
+  if (pvTab === "tile") {
+    page.innerHTML = `<div class="pvbody"><div class="tilebox${draft.featured ? " wide" : ""}">${Md.TileHtml(view, {base: "../", label: kind === "app" ? "VIEW APPLICATION" : "READ MORE"})}</div><p class="hint" style="text-align:center;margin-top:14px">${draft.featured ? "Featured tile, spans the full width" : "Normal tile, three per row"}${draft.featured ? "" : ". Excerpt shows only on featured tiles"}</p></div>`;
+    return;
+  }
+  const opts = {base: "../", mark: true};
+  if (kind === "app" && closedPick !== "auto") opts.closed = closedPick === "closed";
+  page.innerHTML = `<div class="pvhero"><h1 class="cond">${Esc(draft.title || "Untitled")}</h1></div><div class="pvbody"><div class="article">${kind === "app" ? Md.ApplicationHtml(view, opts) : Md.ArticleHtml(view, opts)}</div></div>`;
+}
+function SetPane(name) {
+  document.getElementById("split").classList.toggle("show-prev", name === "prev");
+  document.querySelectorAll(".mtabs [data-pane]").forEach((tab) => tab.classList.toggle("on", tab.dataset.pane === name));
+}
+function PostPasses(post) {
+  const word = document.getElementById("postSearch").value.trim().toLowerCase();
+  const filter = document.getElementById("postFilter").value;
+  const text = (post.title + " " + post.id + " " + (post.category || "")).toLowerCase();
+  return (!word || text.includes(word)) && (!filter || (filter === "draft") === (post.published === false));
+}
+function RenderPostList() {
+  const listBox = document.getElementById("postList");
+  const posts = (postCache[kind] || []).filter(PostPasses);
+  if (!postCache[kind]) { listBox.innerHTML = '<p style="padding:16px;margin:0">Open Settings and connect your repository first.</p>'; return; }
+  if (!posts.length) { listBox.innerHTML = '<p style="padding:16px;margin:0">No posts found.</p>'; return; }
+  listBox.innerHTML = "";
+  posts.forEach((post) => {
+    const row = document.createElement("div"); row.className = "post";
+    const picture = post.image ? ` style="background-image:url('${Esc(encodeURI(ImageSrc(post.image)))}')"` : "";
+    const siteLink = `../#/${kind === "app" ? "applications" : "news"}/${encodeURIComponent(post.id)}`;
+    row.innerHTML = `<div class="thumb"${picture}></div><div class="pinfo"><b>${Esc(post.title)}${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}${kind === "app" ? `<span class="tag${IsApplicationClosed(post) ? " closed" : ""}">${IsApplicationClosed(post) ? "Closed" : "Open"}</span>` : ""}</b><small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="pact"><button type="button" class="sm" data-edit>Edit</button><button type="button" class="sm quiet" data-copy>Duplicate</button><a href="${Esc(siteLink)}" target="_blank" rel="noopener">View</a><button type="button" class="sm quiet" data-delete>Delete</button></div>`;
+    row.querySelector("[data-edit]").onclick = () => OpenEditor(post);
+    row.querySelector("[data-copy]").onclick = () => OpenEditor(post, true);
+    row.querySelector("[data-delete]").onclick = () => DeletePost(post);
+    listBox.appendChild(row);
+  });
 }
 async function ListPosts() {
   const listBox = document.getElementById("postList");
-  listBox.textContent = "Loading...";
+  listBox.innerHTML = '<p style="padding:16px;margin:0">Loading...</p>';
+  const loadingKind = kind;
   try {
     const files = await Gh(`contents/${Dir()}?ref=${settings.branch}`);
     const jsonFiles = (files || []).filter((file) => file.name.endsWith(".json"));
     const posts = await Promise.all(jsonFiles.map(async (file) => JSON.parse(FromBase64((await Gh(`contents/${file.path}?ref=${settings.branch}`)).content))));
     posts.sort((first, second) => String(second.date).localeCompare(String(first.date)));
-    listBox.innerHTML = posts.length ? "" : "<p>No posts yet.</p>";
-    posts.forEach((post) => {
-      const row = document.createElement("div"); row.className = "post";
-      row.innerHTML = `<div><b>${Esc(post.title)}</b>${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}${kind === "app" ? `<span class="tag">${IsApplicationClosed(post) ? "Closed" : "Open"}</span>` : ""}<small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="row"><button type="button" data-edit>Edit</button><button type="button" data-delete>Delete</button></div>`;
-      row.querySelector("[data-edit]").onclick = () => OpenEditor(post);
-      row.querySelector("[data-delete]").onclick = () => DeletePost(post);
-      listBox.appendChild(row);
-    });
+    postCache[loadingKind] = posts;
+    if (loadingKind === kind) RenderPostList();
   } catch (problem) { listBox.textContent = ""; Say(problem.message, true); }
 }
 async function DeletePost(post) {
   if (!confirm("Delete " + post.title + "? This removes its JSON file.")) return;
   try {
     await DeleteFile(`${Dir()}/${post.id}.json`, Tag() + " delete " + post.id);
-    const owned = [post.image, ...post.body.filter((block) => block.type === "img").map((block) => block.src)].filter((path) => path && path.startsWith(settings.imageDir + "/" + post.id));
+    const owned = [post.image, ...(post.body || []).filter((block) => block.type === "img").map((block) => block.src)].filter((path) => path && path.startsWith(settings.imageDir + "/" + post.id));
     for (const path of owned) await DeleteFile(path, Tag() + " delete image for " + post.id);
+    localStorage.removeItem(`mpsDraft:${kind}:${post.id}`);
     Say("Deleted. The site refreshes after the next deploy, about a minute.");
     ListPosts();
   } catch (problem) { Say(problem.message, true); }
 }
+const HasContent = (block) => block.type === "divider" || !!(block.text || block.q || block.src || block.label);
 function CleanArticle() {
-  const article = JSON.parse(JSON.stringify(draft));
-  article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
+  const body = draft.body.filter(HasContent).map((block) => { const kept = Object.assign({}, block); delete kept._file; delete kept._preview; return kept; });
   if (kind === "app") {
     const columns = draft.resultColumns.map((name, index) => name.trim() || "Column " + (index + 1));
     const rows = draft.results.map((row) => row.map((cell) => cell.trim())).filter((row) => row.some(Boolean));
-    return {id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, published: draft.published, status: draft.status === "auto" ? undefined : draft.status, resultColumns: columns, results: rows, excerpt: (draft.excerpt || "").trim(), body: article.body};
+    return {id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, published: draft.published, status: draft.status === "auto" ? undefined : draft.status, resultColumns: columns, results: rows, excerpt: (draft.excerpt || "").trim(), body};
   }
+  const article = JSON.parse(JSON.stringify(draft));
   article.tags = Array.isArray(draft.tags) ? draft.tags : String(draft.tags).split(",").map((tag) => tag.trim()).filter(Boolean);
   article.excerpt = draft.excerpt.trim();
-  article.body = draft.body.filter((block) => block.text || block.q || block.src).map((block) => { const kept = Object.assign({}, block); delete kept._file; return kept; });
+  article.body = body;
   return article;
 }
 async function Publish() {
   if (!draft.title.trim() || !draft.id.trim()) return Say("[NEWS MANAGER] title and file name are required", true);
+  const publishButton = document.getElementById("publishBtn");
   try {
+    if (draftIsNew && await Gh(`contents/${Dir()}/${draft.id}.json?ref=${settings.branch}`) && !confirm("A post named " + draft.id + " already exists. Overwrite it?")) return;
+    publishButton.disabled = true;
     Say("Publishing...");
     if (headerFile) {
       draft.image = `${settings.imageDir}/${draft.id}-header.jpg`;
@@ -351,21 +670,84 @@ async function Publish() {
       if (block.type === "img" && block._file) {
         block.src = `${settings.imageDir}/${draft.id}-${index}.jpg`;
         await PutFile(block.src, await ResizeImage(block._file), Tag() + " image " + index + " for " + draft.id);
-        delete block._file;
+        delete block._file; delete block._preview;
       }
     }
     await PutFile(`${Dir()}/${draft.id}.json`, ToBase64(JSON.stringify(CleanArticle(), null, 2)), Tag() + (draftIsNew ? " add " : " update ") + draft.id);
+    localStorage.removeItem(DraftKey());
+    SetDirty(false);
     Say("Saved. The site updates after the deploy finishes, about a minute.");
     Show("viewPosts"); ListPosts();
   } catch (problem) { Say(problem.message, true); }
+  publishButton.disabled = false;
 }
 function DownloadJson() {
   const link = document.createElement("a");
   link.href = URL.createObjectURL(new Blob([JSON.stringify(CleanArticle(), null, 2)], {type: "application/json"}));
   link.download = (draft.id || "post") + ".json"; link.click();
 }
+function Leave() {
+  if (dirty && !confirm("You have unsaved changes. They are kept as a local draft, leave anyway?")) return false;
+  SetDirty(false);
+  return true;
+}
+function ApplyTool(area, toolId) {
+  const tool = TOOLS.find((entry) => entry.id === toolId);
+  const whole = area.value;
+  const from = area.selectionStart;
+  const to = area.selectionEnd;
+  const picked = whole.slice(from, to);
+  if (toolId === "link") {
+    const label = picked || "link text";
+    area.setRangeText(`[${label}](https://)`, from, to, "end");
+    area.setSelectionRange(from + label.length + 3, from + label.length + 11);
+  } else if (toolId === "time") {
+    const typed = prompt("Date and time, for example 2026-11-03 18:00 (your local time)", (draft.date || new Date().toISOString().slice(0, 10)) + " 12:00");
+    if (!typed) return;
+    const moment = new Date(typed.trim().replace(" ", "T"));
+    if (isNaN(moment)) return Say("[NEWS MANAGER] could not read that date", true);
+    area.setRangeText(`<t:${Math.floor(moment.getTime() / 1000)}:F>`, from, to, "end");
+  } else if (tool.wrap) {
+    const [open, close] = tool.wrap;
+    if (whole.slice(from - open.length, from) === open && whole.slice(to, to + close.length) === close) {
+      area.setRangeText(picked, from - open.length, to + close.length, "end");
+      area.setSelectionRange(from - open.length, from - open.length + picked.length);
+    } else {
+      area.setRangeText(open + picked + close, from, to, "end");
+      area.setSelectionRange(from + open.length, from + open.length + picked.length);
+    }
+  } else {
+    const lineStart = whole.lastIndexOf("\n", from - 1) + 1;
+    const lineEndAt = whole.indexOf("\n", to);
+    const lineEnd = lineEndAt === -1 ? whole.length : lineEndAt;
+    const lines = whole.slice(lineStart, lineEnd).split("\n");
+    const ordered = toolId === "olist";
+    const marked = lines.every((line) => ordered ? /^\d+\. /.test(line) : line.startsWith(tool.line));
+    const changed = lines.map((line, index) => marked ? line.replace(ordered ? /^\d+\. / : tool.line, "") : (ordered ? `${index + 1}. ` : tool.line) + line.replace(LINE_MARK, ""));
+    area.setRangeText(changed.join("\n"), lineStart, lineEnd, "select");
+  }
+  area.focus();
+  area.dispatchEvent(new Event("input", {bubbles: true}));
+}
+function ContinueList(area, event) {
+  if (event.key !== "Enter" || event.shiftKey || area.selectionStart !== area.selectionEnd) return;
+  const caret = area.selectionStart;
+  const lineStart = area.value.lastIndexOf("\n", caret - 1) + 1;
+  const listed = area.value.slice(lineStart, caret).match(/^(\s*)([-*]|(\d+)\.) (.*)$/);
+  if (!listed || area.value.slice(caret).split("\n")[0] !== "") return;
+  event.preventDefault();
+  if (!listed[4].trim()) area.setRangeText("", lineStart, caret, "end");
+  else area.setRangeText("\n" + listed[1] + (listed[3] ? (Number(listed[3]) + 1) + "." : listed[2]) + " ", caret, caret, "end");
+  area.dispatchEvent(new Event("input", {bubbles: true}));
+}
 function FillSettings() {
   document.querySelectorAll("[data-setting]").forEach((input) => { input.value = settings[input.dataset.setting]; });
+}
+function Unlock() {
+  document.getElementById("gate").hidden = true; document.getElementById("app").hidden = false;
+  FillSettings(); Show("viewPosts");
+  document.getElementById("palette").innerHTML = Object.entries(BLOCK_LABELS).map(([type, label]) => `<button type="button" class="quiet" data-add="${type}">+ ${label}</button>`).join("");
+  if (settings.owner && settings.token) ListPosts(); else RenderPostList();
 }
 document.getElementById("gateForm").addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -373,25 +755,27 @@ document.getElementById("gateForm").addEventListener("submit", async (event) => 
     sessionStorage.setItem("mpsUnlocked", "1"); Unlock();
   } else document.getElementById("gateError").textContent = "Wrong password";
 });
-function Unlock() {
-  document.getElementById("gate").hidden = true; document.getElementById("app").hidden = false;
-  FillSettings(); Show("viewPosts");
-  if (settings.owner && settings.token) ListPosts(); else { document.getElementById("postList").textContent = "Open Settings and connect your repository first."; }
-}
 document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.addEventListener("click", () => {
+  if (document.getElementById("viewEdit").hidden === false && !Leave()) return;
   if (tab.dataset.view === "viewEdit") OpenEditor(null); else Show(tab.dataset.view);
   if (tab.dataset.view === "viewPosts" && settings.token) ListPosts();
 }));
 document.getElementById("lockBtn").onclick = () => { sessionStorage.clear(); location.reload(); };
 document.getElementById("refreshBtn").onclick = ListPosts;
+document.getElementById("createBtn").onclick = () => OpenEditor(null);
+document.getElementById("postSearch").addEventListener("input", RenderPostList);
+document.getElementById("postFilter").addEventListener("change", RenderPostList);
 document.querySelectorAll("[data-kind]").forEach((button) => button.addEventListener("click", () => {
   kind = button.dataset.kind;
   document.querySelectorAll("[data-kind]").forEach((other) => other.classList.toggle("on", other === button));
-  if (settings.token) ListPosts();
+  if (postCache[kind]) RenderPostList(); else if (settings.token) ListPosts(); else RenderPostList();
 }));
-document.getElementById("cancelBtn").onclick = () => Show("viewPosts");
+document.getElementById("cancelBtn").onclick = () => { if (Leave()) Show("viewPosts"); };
 document.getElementById("publishBtn").onclick = Publish;
 document.getElementById("downloadBtn").onclick = DownloadJson;
+document.getElementById("saveLocalBtn").onclick = () => { SaveLocal(true); SetDirty(false); };
+document.getElementById("restoreBtn").onclick = RestoreDraft;
+document.getElementById("discardBtn").onclick = () => { localStorage.removeItem(DraftKey()); document.getElementById("restoreBar").hidden = true; };
 document.getElementById("saveSettings").onclick = () => {
   document.querySelectorAll("[data-setting]").forEach((input) => { settings[input.dataset.setting] = input.type === "number" ? Number(input.value) : input.value.trim(); });
   const persisted = Object.assign({}, settings); delete persisted.token;
@@ -400,36 +784,94 @@ document.getElementById("saveSettings").onclick = () => {
 document.getElementById("testBtn").onclick = async () => {
   try { const repoInfo = await Gh(""); Say(repoInfo ? "Connected to " + repoInfo.full_name : "[NEWS MANAGER] repo not found", !repoInfo); } catch (problem) { Say(problem.message, true); }
 };
-document.getElementById("viewEdit").addEventListener("input", (event) => {
-  const input = event.target;
-  if (input.id === "f-imageFile") { headerFile = input.files[0] || null; RenderPreview(); return; }
-  if (!input.dataset.field) return;
-  draft[input.dataset.field] = input.type === "checkbox" ? input.checked : input.value;
-  if (input.dataset.field === "title" && draftIsNew) { draft.id = Slug(input.value); document.getElementById("f-id").value = draft.id; }
-  if (input.dataset.field === "image") RenderPreview();
-  if (input.dataset.field === "tags") draft.tags = input.value;
-});
-document.getElementById("blockList").addEventListener("input", (event) => {
-  const input = event.target; const box = input.closest(".block"); if (!box) return;
-  const block = draft.body[Number(box.dataset.index)];
-  if (input.dataset.key === "file") block._file = input.files[0]; else block[input.dataset.key] = input.value;
-});
-document.getElementById("blockList").addEventListener("click", (event) => {
-  const act = event.target.dataset.act; if (!act) return;
-  const index = Number(event.target.closest(".block").dataset.index);
-  if (act === "del") draft.body.splice(index, 1);
-  else { const target = act === "up" ? index - 1 : index + 1; if (target < 0 || target >= draft.body.length) return; [draft.body[index], draft.body[target]] = [draft.body[target], draft.body[index]]; }
-  RenderBlocks();
-});
-document.querySelectorAll("[data-add]").forEach((button) => button.addEventListener("click", () => { draft.body.push({type: button.dataset.add}); RenderBlocks(); }));
 document.getElementById("clearToken").onclick = () => {
   settings.token = ""; sessionStorage.removeItem("mpsToken");
   document.getElementById("s-token").value = ""; Say("Token cleared");
 };
+document.getElementById("viewEdit").addEventListener("input", (event) => {
+  const input = event.target;
+  if (input.id === "f-imageFile") {
+    headerFile = input.files[0] || null;
+    if (headerUrl) URL.revokeObjectURL(headerUrl);
+    headerUrl = headerFile ? URL.createObjectURL(headerFile) : "";
+    RenderHeaderImage(); Touch(); return;
+  }
+  if (!input.dataset.field) return;
+  draft[input.dataset.field] = input.type === "checkbox" ? input.checked : input.value;
+  if (input.dataset.field === "title" && draftIsNew) { draft.id = Slug(input.value); document.getElementById("f-id").value = draft.id; }
+  if (input.dataset.field === "image") RenderHeaderImage();
+  Touch();
+});
+const blockList = document.getElementById("blockList");
+blockList.addEventListener("input", (event) => {
+  const input = event.target;
+  const box = input.closest(".block");
+  if (!box || !input.dataset.key) return;
+  const block = draft.body[Number(box.dataset.index)];
+  if (input.dataset.key === "file") {
+    block._file = input.files[0];
+    if (block._preview) URL.revokeObjectURL(block._preview);
+    block._preview = block._file ? URL.createObjectURL(block._file) : "";
+  } else block[input.dataset.key] = input.value;
+  if (input.dataset.key === "text" || input.dataset.key === "q" || input.dataset.key === "label") box.querySelector(".bh small").textContent = Snippet(block);
+  Touch();
+});
+blockList.addEventListener("click", (event) => {
+  const tool = event.target.closest("[data-tool]");
+  if (tool) { ApplyTool(tool.closest(".mdf").querySelector("textarea"), tool.dataset.tool); return; }
+  const act = event.target.dataset.act;
+  if (!act) return;
+  const index = Number(event.target.closest(".block").dataset.index);
+  if (act === "del") draft.body.splice(index, 1);
+  else if (act === "dup") draft.body.splice(index + 1, 0, JSON.parse(JSON.stringify(Object.assign({}, draft.body[index], {_file: undefined, _preview: undefined}))));
+  else { const target = act === "up" ? index - 1 : index + 1; if (target < 0 || target >= draft.body.length) return; [draft.body[index], draft.body[target]] = [draft.body[target], draft.body[index]]; }
+  RenderBlocks(); Touch();
+});
+blockList.addEventListener("keydown", (event) => {
+  const area = event.target;
+  if (area.tagName !== "TEXTAREA" || !area.closest(".mdf")) return;
+  ContinueList(area, event);
+  if (!(event.ctrlKey || event.metaKey)) return;
+  const toolId = SHORTCUTS[event.shiftKey ? event.key.toUpperCase() : event.key.toLowerCase()];
+  if (toolId && (event.shiftKey === (toolId === "strike" || toolId === "spoiler"))) { event.preventDefault(); ApplyTool(area, toolId); }
+});
+document.getElementById("palette").addEventListener("click", (event) => {
+  const type = event.target.dataset.add;
+  if (!type) return;
+  draft.body.push(Object.assign({type}, BLOCK_STARTERS[type]));
+  RenderBlocks(); Touch();
+  const added = blockList.lastElementChild;
+  added.scrollIntoView({behavior: "smooth", block: "center"});
+  const firstField = added.querySelector("textarea, input[type=text]");
+  if (firstField) firstField.focus({preventScroll: true});
+});
+document.getElementById("pvPage").addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (link && (link.getAttribute("href") || "").startsWith("#")) event.preventDefault();
+  const marked = event.target.closest("[data-b]");
+  if (!marked || event.target.closest(".spoiler")) return;
+  SetPane("edit");
+  const target = blockList.querySelector(`[data-index="${marked.dataset.b}"]`);
+  if (!target) return;
+  target.scrollIntoView({behavior: "smooth", block: "center"});
+  target.classList.remove("flash"); void target.offsetWidth; target.classList.add("flash");
+});
+document.querySelectorAll("[data-pv]").forEach((button) => button.addEventListener("click", () => {
+  pvTab = button.dataset.pv;
+  document.querySelectorAll("[data-pv]").forEach((other) => other.classList.toggle("on", other === button));
+  RenderPreview();
+}));
+document.querySelectorAll("[data-pw]").forEach((button) => button.addEventListener("click", () => {
+  document.getElementById("pvPage").classList.toggle("mob", button.dataset.pw === "mob");
+  document.querySelectorAll("[data-pw]").forEach((other) => other.classList.toggle("on", other === button));
+}));
+document.getElementById("pvClosed").addEventListener("change", RenderPreview);
+document.querySelectorAll("[data-pane]").forEach((button) => button.addEventListener("click", () => SetPane(button.dataset.pane)));
 document.getElementById("resultsGrid").addEventListener("input", (event) => {
   const input = event.target;
   if (input.dataset.rcol !== undefined) draft.resultColumns[Number(input.dataset.rcol)] = input.value;
   else if (input.dataset.rrow !== undefined) draft.results[Number(input.dataset.rrow)][Number(input.dataset.rcell)] = input.value;
+  Touch();
 });
 document.getElementById("resultsGrid").addEventListener("click", (event) => {
   const target = event.target;
@@ -437,14 +879,18 @@ document.getElementById("resultsGrid").addEventListener("click", (event) => {
     const column = Number(target.dataset.rdelcol);
     draft.resultColumns.splice(column, 1);
     draft.results.forEach((row) => row.splice(column, 1));
-    RenderResults();
+    RenderResults(); Touch();
   } else if (target.dataset.rdelrow !== undefined) {
     draft.results.splice(Number(target.dataset.rdelrow), 1);
-    RenderResults();
+    RenderResults(); Touch();
   }
 });
-document.getElementById("addColumn").onclick = () => { draft.resultColumns.push("New column"); draft.results.forEach((row) => row.push("")); RenderResults(); };
-document.getElementById("addRow").onclick = () => { draft.results.push(draft.resultColumns.map(() => "")); RenderResults(); };
+document.getElementById("addColumn").onclick = () => { draft.resultColumns.push("New column"); draft.results.forEach((row) => row.push("")); RenderResults(); Touch(); };
+document.getElementById("addRow").onclick = () => { draft.results.push(draft.resultColumns.map(() => "")); RenderResults(); Touch(); };
+document.addEventListener("keydown", (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s" && !document.getElementById("viewEdit").hidden) { event.preventDefault(); SaveLocal(true); SetDirty(false); }
+});
+window.addEventListener("beforeunload", (event) => { if (dirty) event.preventDefault(); });
 if (sessionStorage.getItem("mpsUnlocked") === "1") Unlock();
 </script>
 </body>
