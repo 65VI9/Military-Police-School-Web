@@ -166,11 +166,77 @@ textarea{min-height:100px;resize:vertical;line-height:1.5}
 .tilebox p{margin:10px 0 0;font-size:.98rem;color:#e3e6ee}
 .tilebox .more{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:.78rem;font-weight:700;letter-spacing:.2em}
 .tilebox .more::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--scarlet)}
+.tagbox{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px;border:1px solid var(--edge);background:#fff;cursor:text}
+.tagbox:focus-within{border-color:var(--scarlet)}
+.tagbox input{flex:1;min-width:150px;border:0;padding:4px 6px}
+.tagbox input:focus{outline:0}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:2px 2px 2px 10px;background:var(--navy);color:#fff;font-size:.84rem;font-weight:600}
+.chip button{padding:0 7px;border:0;background:transparent;color:#fff;font-size:.9rem;line-height:1.5}
+.chip button:hover{background:var(--scarlet)}
+.sugs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.sugs .hint{width:100%;margin:0}
+.sug{padding:2px 10px;font-size:.8rem;border:1px dashed var(--edge);background:#fff;color:var(--navy)}
+.sug.hit{border-style:solid;border-color:var(--scarlet);color:var(--scarlet)}
+.sug:hover{background:var(--scarlet);border-color:var(--scarlet);color:#fff}
 .rscroll{overflow-x:auto;margin-top:8px}
 .rgrid{display:grid;gap:8px;min-width:520px;align-items:start}
 .rgrid input[data-rcol]{font-weight:700;background:var(--tint)}
 .rgrid button{padding:5px 9px;font-size:.78rem}
 .rgrid div button{margin-top:4px}
+.more{position:relative}
+.more>summary{list-style:none;cursor:pointer;padding:8px 15px;border:2px solid var(--edge);background:#fff;font:600 .92rem "Public Sans",sans-serif}
+.more>summary::-webkit-details-marker{display:none}
+.more[open]>summary{background:var(--navy);border-color:var(--navy);color:#fff}
+.menu{position:absolute;right:0;top:calc(100% + 4px);z-index:40;display:flex;flex-direction:column;min-width:230px;background:#fff;border:1px solid var(--edge);box-shadow:0 8px 24px #0c1a3330}
+.menu button{border:0;border-bottom:1px solid var(--edge);text-align:left;color:var(--navy);padding:10px 14px}
+.abar select{width:auto;padding:7px 8px}
+.steps{display:flex;margin:0 0 16px;border:1px solid var(--edge);background:#fff}
+.steps button{flex:1;border:0;border-right:1px solid var(--edge);padding:10px 12px;color:var(--navy);text-align:left}
+.steps button:last-child{border-right:0}
+.steps button b{display:inline-block;width:24px;height:24px;margin-right:8px;border-radius:50%;background:var(--scarlet);color:#fff;text-align:center;line-height:24px}
+.steps button:hover b{background:#fff;color:var(--scarlet)}
+.cklist{list-style:none;margin:8px 0 0;padding:0}
+.cklist li{display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid #eef0f5;font-size:.92rem}
+.cklist .sm{margin-left:auto;flex:none}
+.lvl{flex:none;min-width:44px;padding:0 6px;background:#2e7d4f;color:#fff;text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.lv-bad .lvl{background:var(--scarlet)}
+.lv-warn .lvl{background:#a97c00}
+.lv-info .lvl{background:#4a5a78}
+#checkBadge{margin-left:10px;color:var(--muted);font:600 .8rem "Public Sans",sans-serif;letter-spacing:0;text-transform:none}
+.grip{flex:none;margin-right:8px;padding:2px 8px;border:1px dashed var(--edge);color:var(--muted);font-size:.7rem;font-weight:700;text-transform:uppercase;cursor:grab;user-select:none}
+.bh small{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.block.dragging{opacity:.4}
+.block.over{outline:3px dashed var(--scarlet)}
+.block.folded .bf{display:none}
+#modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px}
+#modal .mback{position:absolute;inset:0;background:#0c1a33b3}
+.mbox{position:relative;width:min(780px,100%);max-height:90vh;overflow:auto;padding:0 22px 22px;background:#fff;border-top:8px solid var(--scarlet)}
+.mhead{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:14px 0 10px;background:#fff;border-bottom:1px solid var(--edge)}
+.mhead b{font-size:1.6rem}
+.mh{margin:18px 0 6px;font:700 1.1rem "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.changes{margin:0;padding-left:20px}
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.tpls button{padding:14px;border-color:var(--edge);border-left:6px solid var(--scarlet);color:var(--navy);text-align:left}
+.tpls button b{display:block;font-size:1.05rem}
+.tpls button span{font-size:.85rem;font-weight:400;color:var(--muted)}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.lib button{padding:0;border-color:var(--edge);text-align:left}
+.lib img{display:block;width:100%;height:90px;object-fit:cover}
+.lib span{display:block;padding:4px 6px;overflow-wrap:anywhere;color:var(--navy);font-size:.72rem}
+.emo{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px}
+.emo button{padding:6px 8px;border-color:var(--edge);color:var(--navy);text-align:left;font-size:.8rem}
+.emo i{margin-right:6px;font-size:1.3rem;font-style:normal}
+.how{margin:0 0 12px;padding-left:22px}
+label.inl{display:flex;gap:8px;align-items:center;color:var(--navy);font-size:.9rem;letter-spacing:0;text-transform:none}
+.chunk{margin:0 0 14px}
+.chunk textarea{min-height:150px;font-size:.9rem}
+.chunk .row{justify-content:space-between;margin-bottom:4px}
+.tag.sched{background:#8a6d00}
+.split.lay-edit{grid-template-columns:minmax(0,920px);justify-content:center}
+.split.lay-edit .pane-prev{display:none}
+.split.lay-prev{grid-template-columns:minmax(0,1fr)}
+.split.lay-prev .pane-edit{display:none}
+.split.lay-prev .pane-prev{height:calc(100vh - 160px)}
 .mtabs{display:none}
 #status{position:fixed;z-index:50;left:16px;right:16px;bottom:16px;padding:12px 16px;background:var(--navy);color:#fff;border-left:8px solid var(--scarlet);max-width:640px;margin-inline:auto}
 #status.bad{background:var(--maroon)}
@@ -205,55 +271,101 @@ textarea{min-height:100px;resize:vertical;line-height:1.5}
 <button data-view="viewPosts">Posts</button>
 <button data-view="viewEdit" id="newTab">New post</button>
 <button data-view="viewSettings">Settings</button>
+<button id="helpBtn">Help</button>
 <button id="lockBtn">Lock</button>
 </div>
 </div>
 <main>
 <section id="viewPosts" class="narrow">
 <h2 class="vh cond">Posts</h2>
+<details class="card" id="welcome" open>
+<summary>How this works</summary>
+<div class="cbody">
+<ol class="how">
+<li><b>Pick or create</b> a post. Starting from a template saves time.</li>
+<li><b>Write on the left</b>, the page on the right updates as you type. Use the toolbar or Discord style formatting.</li>
+<li><b>Review and publish.</b> A checklist tells you what to fix, then the site updates in about a minute.</li>
+</ol>
+<div class="row"><button type="button" id="hideWelcome" class="sm quiet">Got it, hide this</button><span class="hint">Press ? anywhere for shortcuts. The Help button brings this back.</span></div>
+</div>
+</details>
 <p class="hint">Every post is a JSON file in its folder. Deleting a post deletes its file.</p>
+<p class="hint" id="postStats"></p>
 <div class="tools">
 <div class="seg"><button type="button" data-kind="news" class="on">News</button><button type="button" data-kind="app">Applications</button></div>
 <input type="search" id="postSearch" placeholder="Search title or file name">
 <select id="postFilter"><option value="">All</option><option value="live">Published</option><option value="draft">Drafts</option></select>
+<select id="postSort" aria-label="Sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">Title A to Z</option></select>
 <button type="button" id="refreshBtn" class="quiet">Refresh</button>
 <button type="button" id="createBtn" class="solid">Create new</button>
 </div>
 <div class="plist" id="postList"></div>
+<div id="localDrafts"></div>
 </section>
 <section id="viewEdit" hidden>
 <div class="abar">
 <div class="row"><h2 class="cond" id="editTitle">New post</h2><span id="dirty">No changes</span></div>
 <div class="row">
 <button type="button" id="cancelBtn" class="quiet">Back</button>
-<button type="button" id="saveLocalBtn" class="quiet">Save draft locally</button>
-<button type="button" id="downloadBtn" class="quiet">Download JSON</button>
-<button class="solid" type="button" id="publishBtn">Publish to GitHub</button>
+<button type="button" id="undoBtn" class="quiet" title="Undo (Ctrl+Z outside a text box)">Undo</button>
+<button type="button" id="redoBtn" class="quiet" title="Redo (Ctrl+Y)">Redo</button>
+<select id="layoutSel" aria-label="Layout"><option value="split">Split view</option><option value="edit">Editor only</option><option value="prev">Preview only</option></select>
+<details class="more"><summary>More</summary><div class="menu">
+<button type="button" id="findBtn">Find and replace</button>
+<button type="button" id="historyBtn">Version history</button>
+<button type="button" id="discordBtn">Copy for Discord</button>
+<button type="button" id="linkBtn">Copy link to this post</button>
+<button type="button" id="saveLocalBtn">Save draft locally</button>
+<button type="button" id="downloadBtn">Download JSON</button>
+<button type="button" id="importBtn">Import JSON</button>
+</div></details>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<button class="solid" type="button" id="publishBtn">Review and publish</button>
 </div>
 </div>
 <div class="restore" id="restoreBar" hidden><span id="restoreText"></span><button type="button" id="restoreBtn" class="sm">Restore</button><button type="button" id="discardBtn" class="sm quiet">Discard</button></div>
+<div class="steps" id="steps">
+<button type="button" data-step="details"><b>1</b>Details</button>
+<button type="button" data-step="content"><b>2</b>Write the content</button>
+<button type="button" data-step="review"><b>3</b>Review and publish</button>
+</div>
 <div class="split" id="split">
 <div class="pane-edit">
-<details class="card" open>
+<details class="card" open id="cardCheck">
+<summary>Before you publish<span id="checkBadge"></span></summary>
+<div class="cbody"><div class="hint" id="statLine"></div><ul class="cklist" id="checkList"></ul></div>
+</details>
+<details class="card" open id="cardDetails">
 <summary>Details</summary>
 <div class="cbody">
 <div class="grid2">
 <div><label for="f-title">Title</label><input type="text" id="f-title" data-field="title"></div>
 <div><label for="f-id">File name (ID)</label><input type="text" id="f-id" data-field="id"></div>
-<div class="nw"><label for="f-category">Category</label><input type="text" id="f-category" data-field="category" list="catList"><datalist id="catList"></datalist></div>
+<div class="nw"><label for="f-category">Category</label><select id="f-category" data-field="category"></select></div>
 <div><label for="f-date">Date</label><input type="date" id="f-date" data-field="date"></div>
 <div class="ap"><label for="f-deadline">Deadline</label><input type="date" id="f-deadline" data-field="deadline"></div>
 <div class="ap"><label for="f-status">Status</label><select id="f-status" data-field="status"><option value="auto">Auto (closes at deadline)</option><option value="open">Open</option><option value="closed">Closed</option></select></div>
 <div class="ap"><label for="f-link">Application link (Google Forms)</label><input type="text" id="f-link" data-field="link" placeholder="https://forms.gle/..."></div>
 <div class="nw"><label for="f-author">Author</label><input type="text" id="f-author" data-field="author"></div>
-<div class="nw"><label for="f-tags">Tags (comma separated)</label><input type="text" id="f-tags" data-field="tags"></div>
+<div class="nw" style="grid-column:1/-1" id="tagWrap"><label for="tagInput">Tags</label><div class="tagbox" id="tagBox"><span id="tagChips" class="row" style="gap:6px"></span><input type="text" id="tagInput" placeholder="Type a tag, press Enter or comma" autocomplete="off"></div><div class="sugs" id="tagSugs"></div></div>
 </div>
-<label for="f-excerpt">Excerpt (tile text and search)</label>
+<label for="f-excerpt">Excerpt (tile text and search) <span id="excerptCount" class="hint"></span></label>
 <textarea id="f-excerpt" data-field="excerpt" style="min-height:70px"></textarea>
+<p style="margin:6px 0 0"><button type="button" id="autoExcerpt" class="sm quiet">Fill from the text</button></p>
 <div class="checks">
 <label><input type="checkbox" data-field="featured"> Featured (wide tile)</label>
 <label class="nw"><input type="checkbox" data-field="pinned"> Pinned to top</label>
 <label><input type="checkbox" data-field="published"> Published (untick for draft)</label>
+</div>
+</div>
+</details>
+<details class="card" id="cardSchedule">
+<summary>Schedule</summary>
+<div class="cbody">
+<p class="hint">Optional. The site shows or hides the post by itself on these dates, no need to publish again.</p>
+<div class="grid2">
+<div><label for="f-publishAt">Show on the site from</label><input type="date" id="f-publishAt" data-field="publishAt"></div>
+<div><label for="f-unpublishAt">Hide from the site after</label><input type="date" id="f-unpublishAt" data-field="unpublishAt"></div>
 </div>
 </div>
 </details>
@@ -262,6 +374,7 @@ textarea{min-height:100px;resize:vertical;line-height:1.5}
 <div class="cbody">
 <label for="f-imageFile">Upload</label>
 <input type="file" id="f-imageFile" accept="image/*">
+<p style="margin:8px 0 0"><button type="button" id="libHeader" class="sm quiet">Browse repo images</button></p>
 <label for="f-image">Or image URL / repo path</label>
 <input type="text" id="f-image" data-field="image" placeholder="https://... or assets/news/photo.jpg">
 <img class="preview" id="imagePreview" alt="" hidden>
@@ -279,10 +392,10 @@ textarea{min-height:100px;resize:vertical;line-height:1.5}
 <div class="row" style="margin-top:10px"><button type="button" id="addColumn" class="quiet">Add column</button><button type="button" id="addRow" class="quiet">Add row</button></div>
 </div>
 </details>
-<details class="card" open>
+<details class="card" open id="cardBody">
 <summary>Article body</summary>
 <div class="cbody">
-<p class="hint">Click any block in the preview to jump to it here. Discord style formatting works in text blocks, see the guide below.</p>
+<div class="row" style="justify-content:space-between"><p class="hint">Click a block in the preview to jump to it. Drag the grip to reorder. Paste or drop images anywhere.</p><span class="row"><button type="button" id="foldAll" class="sm quiet">Hide all</button><button type="button" id="unfoldAll" class="sm quiet">Show all</button></span></div>
 <div id="blockList"></div>
 <div class="palette" id="palette"></div>
 </div>
@@ -350,6 +463,7 @@ code block
 <div><label for="s-maxImageWidth">Max image width (px)</label><input type="number" id="s-maxImageWidth" data-setting="maxImageWidth" min="400" max="4000"></div>
 <div><label for="s-jpegQuality">JPEG quality (0.3 to 1)</label><input type="number" id="s-jpegQuality" data-setting="jpegQuality" min="0.3" max="1" step="0.05"></div>
 <div><label for="s-categories">Categories (comma separated)</label><input type="text" id="s-categories" data-setting="categories"></div>
+<div><label for="s-siteUrl">Site address (for Discord links)</label><input type="text" id="s-siteUrl" data-setting="siteUrl" placeholder="https://owner.github.io/repo/"></div>
 <div><label for="s-defaultAuthor">Default author</label><input type="text" id="s-defaultAuthor" data-setting="defaultAuthor"></div>
 <div><label for="s-defaultImagePosition">Default image focus</label><select id="s-defaultImagePosition" data-setting="defaultImagePosition"><option>center</option><option>top</option><option>bottom</option></select></div>
 </div>
@@ -362,11 +476,12 @@ code block
 </section>
 </main>
 </div>
+<div id="modal" hidden><div class="mback"></div><div class="mbox" role="dialog" aria-modal="true"><div class="mhead"><b class="cond" id="modalTitle"></b><button type="button" id="modalClose" class="sm quiet">Close</button></div><div id="modalBody"></div></div></div>
 <div id="status" role="status" hidden></div>
 <script src="../assets/markdown.js"></script>
 <script>
 const PASSWORD_HASH = "c628de1e870e6975ba04a83e9cfe1c988039696a1578754ae396ebd4c5aea268";
-const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", appDir: "applications", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center"};
+const DEFAULTS = {owner: "", repo: "", branch: "main", token: "", newsDir: "news", appDir: "applications", imageDir: "assets/news", maxImageWidth: 1600, jpegQuality: 0.85, categories: "News,Interviews,Events,Announcements", defaultAuthor: "Military Police School", defaultImagePosition: "center", siteUrl: ""};
 const BLOCK_LABELS = {p: "Text", h: "Heading", ul: "Bullet list", ol: "Numbered list", qa: "Q&A", quote: "Quote", img: "Image", callout: "Callout", table: "Table", button: "Button", divider: "Divider"};
 const BLOCK_STARTERS = {callout: {variant: "info"}, button: {style: "solid"}, table: {text: "Name | Role\nExample | Example"}};
 const TOOLS = [
@@ -387,6 +502,7 @@ const TOOLS = [
   {id: "quote", label: "Quote", tip: "Block quote", line: "> ", block: true},
   {id: "list", label: "List", tip: "Bullet list", line: "- ", block: true},
   {id: "olist", label: "1.", tip: "Numbered list", line: "1. ", block: true},
+  {id: "emoji", label: "Emoji", tip: "Insert emoji"},
   {id: "time", label: "Time", tip: "Timestamp"}
 ];
 const SHORTCUTS = {b: "bold", i: "italic", u: "underline", k: "link", e: "code", X: "strike", P: "spoiler"};
@@ -404,6 +520,33 @@ let headerFile = null;
 let headerUrl = "";
 let dirty = false;
 let pvTab = "article";
+let loadedSha = "";
+let baseline = "";
+let snaps = [];
+let snapAt = -1;
+let lastArea = null;
+let dragFrom = null;
+let libraryTarget = null;
+let modalHandler = null;
+const pending = new Map();
+const collapsed = new Set();
+const TODAY = new Date().toLocaleDateString("sv-SE");
+const TEXT_KEYS = ["text", "q", "a", "title", "caption", "by", "label"];
+const LEVEL_NAMES = {ok: "OK", bad: "Fix", warn: "Tip", info: "Info"};
+const LEVEL_ORDER = {bad: 0, warn: 1, info: 2, ok: 3};
+const TEMPLATES = {
+  news: [
+    {name: "Blank post", note: "Start from nothing", body: []},
+    {name: "Announcement", note: "Headline news with a highlighted notice", category: "Announcements", body: [{type: "p", text: "Write the announcement in one or two sentences. Use **bold** for the key facts."}, {type: "h", text: "What this means"}, {type: "ul", text: "First point\nSecond point\nThird point"}, {type: "callout", variant: "important", title: "Important", text: "Anything members must read before acting."}, {type: "button", label: "Join the Discord", url: "https://discord.gg/", style: "solid"}]},
+    {name: "Interview", note: "Introduction plus questions and answers", category: "Interviews", body: [{type: "p", text: "Introduce the person and why this interview matters."}, {type: "h", text: "The interview"}, {type: "qa", q: "First question", a: ""}, {type: "qa", q: "Second question", a: ""}, {type: "qa", q: "Third question", a: ""}, {type: "quote", text: "", by: ""}]},
+    {name: "Appointment", note: "Promotion or new role", category: "Announcements", body: [{type: "p", text: "State who was appointed, to what role, and by whom."}, {type: "h", text: "Why them"}, {type: "p", text: ""}, {type: "h", text: "What the role involves"}, {type: "p", text: ""}, {type: "h", text: "In their own words"}, {type: "quote", text: "", by: ""}, {type: "h", text: "Congratulate them"}, {type: "p", text: "Everyone is invited to congratulate them in the announcement channel."}]},
+    {name: "Event recap", note: "Photos, highlights and results", category: "Events", body: [{type: "p", text: "A short summary of what happened."}, {type: "img", src: "", caption: ""}, {type: "h", text: "Highlights"}, {type: "ul", text: "Highlight one\nHighlight two"}, {type: "divider"}, {type: "table", text: "Name | Result\nExample | Example"}]}
+  ],
+  app: [
+    {name: "Blank application", note: "Start from nothing", body: []},
+    {name: "Standard application", note: "About, requirements, benefits and a notice", body: [{type: "h", text: "ABOUT THE POSITION"}, {type: "p", text: "Describe what the position is and who you are looking for."}, {type: "h", text: "Requirements"}, {type: "ul", text: "First requirement\nSecond requirement"}, {type: "h", text: "Benefits"}, {type: "ul", text: "First benefit\nSecond benefit"}, {type: "callout", variant: "notice", title: "Before you apply", text: "Answer every question in detail."}]}
+  ]
+};
 const Esc = Md.Esc;
 function Say(text, bad) {
   const box = document.getElementById("status");
@@ -451,12 +594,13 @@ function ResizeImage(file) {
         pen.drawImage(picture, 0, 0, canvas.width, canvas.height);
         resolve(canvas.toDataURL("image/jpeg", Number(settings.jpegQuality)).split(",")[1]);
       };
-      picture.onerror = reject; picture.src = reader.result;
+      picture.onerror = () => reject(new Error("[NEWS MANAGER] could not read that image file")); picture.src = reader.result;
     };
     reader.onerror = reject; reader.readAsDataURL(file);
   });
 }
 function Show(viewId) {
+  if (viewId === "viewPosts" && typeof RenderLocalDrafts === "function") RenderLocalDrafts();
   document.querySelectorAll("main section").forEach((view) => { view.hidden = view.id !== viewId; });
   document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.classList.toggle("on", tab.dataset.view === viewId));
 }
@@ -493,7 +637,53 @@ function Touch() {
   if (!dirty) SetDirty(true);
   document.getElementById("restoreBar").hidden = true;
   clearTimeout(Touch.timer);
-  Touch.timer = setTimeout(() => { SaveLocal(false); RenderPreview(); }, 120);
+  Touch.timer = setTimeout(() => { SaveLocal(false); RenderPreview(); UpdateMeta(); if (kind === "news") RenderTagSuggestions(); }, 120);
+  clearTimeout(Touch.hist);
+  Touch.hist = setTimeout(PushHistory, 700);
+}
+const STOP_WORDS = new Set("this that with from have been will were their there about after before into over under than then them they your what when which while would could should also more most some such only other these those because between during announced announcement military police school".split(" "));
+function NormalizeTags(list) {
+  const raw = Array.isArray(list) ? list : String(list || "").split(",");
+  const seen = new Set();
+  return raw.map((tag) => String(tag).trim().replace(/^#/, "")).filter((tag) => tag && tag.toLowerCase() !== "undefined" && !seen.has(tag.toLowerCase()) && seen.add(tag.toLowerCase()));
+}
+function CategoryList() {
+  const used = (postCache.news || []).map((post) => post.category);
+  return [...new Set([...settings.categories.split(","), ...used, draft ? draft.category : ""].map((name) => String(name || "").trim()).filter(Boolean))];
+}
+function FillCategories() {
+  const select = document.getElementById("f-category");
+  const names = CategoryList();
+  select.innerHTML = names.map((name) => `<option value="${Esc(name)}">${Esc(name)}</option>`).join("") + '<option value="__new">New category...</option>';
+  if (!draft.category) draft.category = names[0] || "";
+  select.value = draft.category;
+}
+function SuggestTags() {
+  const have = new Set(draft.tags.map((tag) => tag.toLowerCase()));
+  const text = [draft.title, draft.excerpt, draft.category, ...draft.body.map((block) => [block.text, block.q, block.a].join(" "))].join(" ").toLowerCase();
+  const counts = new Map();
+  (postCache.news || []).forEach((post) => NormalizeTags(post.tags).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
+  const pool = [...counts].sort((first, second) => second[1] - first[1]).map(([tag]) => tag);
+  const Fresh = (list) => list.filter((tag, index) => tag && !have.has(tag.toLowerCase()) && list.findIndex((other) => other.toLowerCase() === tag.toLowerCase()) === index);
+  const matched = Fresh(pool.filter((tag) => text.includes(tag.toLowerCase())));
+  const fromTitle = (draft.title.match(/[A-Za-z0-9][\w-]{3,}/g) || []).filter((word) => !STOP_WORDS.has(word.toLowerCase()));
+  const others = Fresh([draft.category, ...fromTitle, ...pool]).filter((tag) => !matched.some((hit) => hit.toLowerCase() === tag.toLowerCase()));
+  return {matched: matched.slice(0, 10), others: others.slice(0, 10)};
+}
+function RenderTagSuggestions() {
+  const {matched, others} = SuggestTags();
+  const box = document.getElementById("tagSugs");
+  const Pill = (tag, hit) => `<button type="button" class="sug${hit ? " hit" : ""}" data-tagadd="${Esc(tag)}">+ ${Esc(tag)}</button>`;
+  box.innerHTML = matched.length || others.length ? `<p class="hint">Suggested from your text and past posts. Solid outline means it appears in this post.</p>${matched.map((tag) => Pill(tag, true)).join("")}${others.map((tag) => Pill(tag, false)).join("")}${matched.length > 1 ? '<button type="button" class="sm" id="tagAll">Add all matched</button>' : ""}` : '<p class="hint">Suggestions appear as you write</p>';
+}
+function RenderTags() {
+  document.getElementById("tagChips").innerHTML = draft.tags.map((tag, index) => `<span class="chip">${Esc(tag)}<button type="button" data-tagdel="${index}" aria-label="Remove ${Esc(tag)}">x</button></span>`).join("");
+  RenderTagSuggestions();
+}
+function AddTags(list) {
+  const before = draft.tags.length;
+  draft.tags = NormalizeTags([...draft.tags, ...list]);
+  if (draft.tags.length !== before) { RenderTags(); Touch(); }
 }
 function FillFields() {
   document.querySelectorAll("[data-field]").forEach((input) => {
@@ -501,35 +691,6 @@ function FillFields() {
     if (input.type === "checkbox") input.checked = !!fieldValue;
     else input.value = Array.isArray(fieldValue) ? fieldValue.join(", ") : (fieldValue ?? "");
   });
-}
-function OpenEditor(article, asCopy) {
-  draftIsNew = !article || !!asCopy;
-  draft = article ? JSON.parse(JSON.stringify(article)) : NewDraft();
-  if (asCopy) { draft.title += " (copy)"; draft.id = Slug(draft.title); draft.published = false; draft.pinned = false; }
-  headerFile = null; headerUrl = "";
-  if (kind === "app") {
-    const table = NormalizeResults(draft);
-    draft.resultColumns = table.columns; draft.results = table.rows;
-    draft.status = draft.status || "auto";
-  }
-  document.getElementById("editTitle").textContent = (draftIsNew ? "New " : "Edit ") + (kind === "app" ? "application" : "post");
-  document.getElementById("viewEdit").classList.toggle("app", kind === "app");
-  document.getElementById("f-id").readOnly = !draftIsNew;
-  document.getElementById("f-imageFile").value = "";
-  document.getElementById("pvClosed").value = "auto";
-  document.getElementById("catList").innerHTML = settings.categories.split(",").map((name) => `<option value="${Esc(name.trim())}">`).join("");
-  FillFields(); RenderBlocks(); RenderResults(); RenderHeaderImage(); SetDirty(false); SetPane("edit");
-  const stored = localStorage.getItem(DraftKey());
-  document.getElementById("restoreBar").hidden = !stored;
-  if (stored) document.getElementById("restoreText").textContent = "An unsaved draft from " + new Date(JSON.parse(stored).savedAt).toLocaleString() + " was found for this post.";
-  RenderPreview(); Show("viewEdit"); window.scrollTo(0, 0);
-}
-function RestoreDraft() {
-  const stored = JSON.parse(localStorage.getItem(DraftKey()));
-  draft = stored.draft; headerFile = null; headerUrl = "";
-  FillFields(); RenderBlocks(); RenderResults(); RenderHeaderImage(); RenderPreview();
-  document.getElementById("restoreBar").hidden = true;
-  SetDirty(true);
 }
 function RenderHeaderImage() {
   const picture = document.getElementById("imagePreview");
@@ -552,7 +713,7 @@ function BlockFields(block) {
   if (block.type === "table") return `<textarea data-key="text" rows="5" style="font-family:ui-monospace,Menlo,Consolas,monospace">${Esc(block.text)}</textarea><p class="hint">One row per line, cells split with |. The first row is the header.</p>`;
   if (block.type === "button") return '<div class="grid2"><div><label>Label</label>' + Input("label", block.label) + "</div><div><label>Style</label>" + Choice("style", block.style, [["solid", "Solid"], ["hollow", "Outline"]]) + "</div></div><label>Link</label>" + Input("url", block.url) + '<p class="hint">https://... or #/news/post-id for a page on this site</p>';
   if (block.type === "divider") return '<p class="hint" style="padding-top:10px">A horizontal line between sections.</p>';
-  return `<label>Upload</label><input type="file" data-key="file" accept="image/*"><label>Or image URL / repo path</label>${Input("src", block.src)}<label>Caption</label>${Input("caption", block.caption)}`;
+  return `<label>Upload</label><input type="file" data-key="file" accept="image/*"><label>Or image URL / repo path</label>${Input("src", block.src)}<p style="margin:6px 0 0"><button type="button" class="sm quiet" data-act="lib">Browse repo images</button></p><label>Caption</label>${Input("caption", block.caption)}`;
 }
 function Snippet(block) {
   const raw = String(block.text || block.q || block.label || block.src || block.title || "").replace(/\s+/g, " ").trim();
@@ -560,7 +721,7 @@ function Snippet(block) {
 }
 function RenderBlocks() {
   document.getElementById("blockList").innerHTML = draft.body.map((block, index) =>
-    `<div class="block" data-index="${index}"><div class="bh"><span><b>${BLOCK_LABELS[block.type] || block.type}</b><small>${Esc(Snippet(block))}</small></span><span class="row"><button type="button" class="sm quiet" data-act="up">Up</button><button type="button" class="sm quiet" data-act="down">Down</button><button type="button" class="sm quiet" data-act="dup">Copy</button><button type="button" class="sm" data-act="del">Remove</button></span></div><div class="bf">${BlockFields(block)}</div></div>`).join("");
+    `<div class="block${collapsed.has(block._uid) ? " folded" : ""}" data-index="${index}"><div class="bh"><span class="row" style="flex:1;min-width:0;flex-wrap:nowrap"><span class="grip" draggable="true" title="Drag to reorder">Drag</span><b>${BLOCK_LABELS[block.type] || block.type}</b><small>${Esc(Snippet(block))}</small></span><span class="row"><button type="button" class="sm quiet" data-act="fold">${collapsed.has(block._uid) ? "Show" : "Hide"}</button><button type="button" class="sm quiet" data-act="up">Up</button><button type="button" class="sm quiet" data-act="down">Down</button><button type="button" class="sm quiet" data-act="dup">Copy</button><button type="button" class="sm" data-act="del">Remove</button></span></div><div class="bf">${BlockFields(block)}</div></div>`).join("") || '<p class="hint" style="padding:12px 0">Nothing here yet. Pick a block type below, or paste an image straight into the page.</p>';
 }
 function IsApplicationClosed(post) { return Md.IsClosed(post); }
 function RenderResults() {
@@ -602,16 +763,25 @@ function PostPasses(post) {
 }
 function RenderPostList() {
   const listBox = document.getElementById("postList");
-  const posts = (postCache[kind] || []).filter(PostPasses);
-  if (!postCache[kind]) { listBox.innerHTML = '<p style="padding:16px;margin:0">Open Settings and connect your repository first.</p>'; return; }
+  const all = postCache[kind];
+  const stats = document.getElementById("postStats");
+  if (!all) { listBox.innerHTML = '<p style="padding:16px;margin:0">Open Settings and connect your repository first.</p>'; stats.textContent = ""; return; }
+  const scheduled = all.filter((post) => post.published !== false && post.publishAt && post.publishAt > TODAY).length;
+  const drafts = all.filter((post) => post.published === false).length;
+  stats.textContent = `${all.length} total | ${all.length - drafts - scheduled} live | ${drafts} drafts | ${scheduled} scheduled`;
+  const sort = document.getElementById("postSort").value;
+  const posts = all.filter(PostPasses).sort((first, second) => sort === "az" ? first.title.localeCompare(second.title) : sort === "old" ? String(first.date).localeCompare(String(second.date)) : String(second.date).localeCompare(String(first.date)));
   if (!posts.length) { listBox.innerHTML = '<p style="padding:16px;margin:0">No posts found.</p>'; return; }
   listBox.innerHTML = "";
   posts.forEach((post) => {
     const row = document.createElement("div"); row.className = "post";
     const picture = post.image ? ` style="background-image:url('${Esc(encodeURI(ImageSrc(post.image)))}')"` : "";
     const siteLink = `../#/${kind === "app" ? "applications" : "news"}/${encodeURIComponent(post.id)}`;
-    row.innerHTML = `<div class="thumb"${picture}></div><div class="pinfo"><b>${Esc(post.title)}${post.published === false ? '<span class="tag draft">Draft</span>' : ""}${post.pinned ? '<span class="tag">Pinned</span>' : ""}${post.featured ? '<span class="tag">Featured</span>' : ""}${kind === "app" ? `<span class="tag${IsApplicationClosed(post) ? " closed" : ""}">${IsApplicationClosed(post) ? "Closed" : "Open"}</span>` : ""}</b><small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="pact"><button type="button" class="sm" data-edit>Edit</button><button type="button" class="sm quiet" data-copy>Duplicate</button><a href="${Esc(siteLink)}" target="_blank" rel="noopener">View</a><button type="button" class="sm quiet" data-delete>Delete</button></div>`;
+    const badges = (post.published === false ? '<span class="tag draft">Draft</span>' : "") + (post.publishAt && post.publishAt > TODAY ? '<span class="tag sched">Scheduled</span>' : "") + (post.unpublishAt && post.unpublishAt <= TODAY ? '<span class="tag closed">Expired</span>' : "") + (post.pinned ? '<span class="tag">Pinned</span>' : "") + (post.featured ? '<span class="tag">Featured</span>' : "") + (kind === "app" ? `<span class="tag${IsApplicationClosed(post) ? " closed" : ""}">${IsApplicationClosed(post) ? "Closed" : "Open"}</span>` : "");
+    row.innerHTML = `<div class="thumb"${picture}></div><div class="pinfo"><b>${Esc(post.title)}${badges}</b><small>${Esc(post.category || "Application")} | ${Esc(post.date)} | ${Esc(post.id)}.json</small></div><div class="pact"><button type="button" class="sm" data-edit>Edit</button><button type="button" class="sm quiet" data-pub>${post.published === false ? "Publish" : "Unpublish"}</button><button type="button" class="sm quiet" data-pin>${post.pinned ? "Unpin" : "Pin"}</button><button type="button" class="sm quiet" data-copy>Duplicate</button><a href="${Esc(siteLink)}" target="_blank" rel="noopener">View</a><button type="button" class="sm quiet" data-delete>Delete</button></div>`;
     row.querySelector("[data-edit]").onclick = () => OpenEditor(post);
+    row.querySelector("[data-pub]").onclick = () => QuickToggle(post, "published");
+    row.querySelector("[data-pin]").onclick = () => QuickToggle(post, "pinned");
     row.querySelector("[data-copy]").onclick = () => OpenEditor(post, true);
     row.querySelector("[data-delete]").onclick = () => DeletePost(post);
     listBox.appendChild(row);
@@ -624,7 +794,7 @@ async function ListPosts() {
   try {
     const files = await Gh(`contents/${Dir()}?ref=${settings.branch}`);
     const jsonFiles = (files || []).filter((file) => file.name.endsWith(".json"));
-    const posts = await Promise.all(jsonFiles.map(async (file) => JSON.parse(FromBase64((await Gh(`contents/${file.path}?ref=${settings.branch}`)).content))));
+    const posts = await Promise.all(jsonFiles.map(async (file) => Object.assign(JSON.parse(FromBase64((await Gh(`contents/${file.path}?ref=${settings.branch}`)).content)), {_sha: file.sha})));
     posts.sort((first, second) => String(second.date).localeCompare(String(first.date)));
     postCache[loadingKind] = posts;
     if (loadingKind === kind) RenderPostList();
@@ -641,26 +811,29 @@ async function DeletePost(post) {
     ListPosts();
   } catch (problem) { Say(problem.message, true); }
 }
-const HasContent = (block) => block.type === "divider" || !!(block.text || block.q || block.src || block.label);
+const HasContent = (block) => block.type === "divider" || !!(block.text || block.q || block.src || block.label || block._file);
 function CleanArticle() {
-  const body = draft.body.filter(HasContent).map((block) => { const kept = Object.assign({}, block); delete kept._file; delete kept._preview; return kept; });
+  const body = draft.body.filter(HasContent).map((block) => { const kept = Object.assign({}, block); delete kept._file; delete kept._preview; delete kept._uid; return kept; });
+  const schedule = {publishAt: draft.publishAt || undefined, unpublishAt: draft.unpublishAt || undefined};
   if (kind === "app") {
     const columns = draft.resultColumns.map((name, index) => name.trim() || "Column " + (index + 1));
     const rows = draft.results.map((row) => row.map((cell) => cell.trim())).filter((row) => row.some(Boolean));
-    return {id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, published: draft.published, status: draft.status === "auto" ? undefined : draft.status, resultColumns: columns, results: rows, excerpt: (draft.excerpt || "").trim(), body};
+    return Object.assign({id: draft.id, title: draft.title, date: draft.date, deadline: draft.deadline, link: (draft.link || "").trim(), featured: draft.featured, pinned: draft.pinned || undefined, published: draft.published, status: draft.status === "auto" ? undefined : draft.status, resultColumns: columns, results: rows, excerpt: (draft.excerpt || "").trim(), body}, schedule);
   }
   const article = JSON.parse(JSON.stringify(draft));
-  article.tags = Array.isArray(draft.tags) ? draft.tags : String(draft.tags).split(",").map((tag) => tag.trim()).filter(Boolean);
-  article.excerpt = draft.excerpt.trim();
+  article.tags = NormalizeTags(draft.tags);
+  article.excerpt = (draft.excerpt || "").trim();
   article.body = body;
-  return article;
+  return Object.assign(article, schedule);
 }
-async function Publish() {
+async function Publish(note) {
   if (!draft.title.trim() || !draft.id.trim()) return Say("[NEWS MANAGER] title and file name are required", true);
   const publishButton = document.getElementById("publishBtn");
   try {
-    if (draftIsNew && await Gh(`contents/${Dir()}/${draft.id}.json?ref=${settings.branch}`) && !confirm("A post named " + draft.id + " already exists. Overwrite it?")) return;
     publishButton.disabled = true;
+    const remote = await Gh(`contents/${Dir()}/${draft.id}.json?ref=${settings.branch}`);
+    if (draftIsNew && remote && !confirm("A post named " + draft.id + " already exists. Overwrite it?")) { publishButton.disabled = false; return; }
+    if (!draftIsNew && loadedSha && remote && remote.sha !== loadedSha && !confirm("This post was changed on GitHub after you opened it, maybe by someone else. Overwrite their version?")) { publishButton.disabled = false; return; }
     Say("Publishing...");
     if (headerFile) {
       draft.image = `${settings.imageDir}/${draft.id}-header.jpg`;
@@ -670,10 +843,11 @@ async function Publish() {
       if (block.type === "img" && block._file) {
         block.src = `${settings.imageDir}/${draft.id}-${index}.jpg`;
         await PutFile(block.src, await ResizeImage(block._file), Tag() + " image " + index + " for " + draft.id);
-        delete block._file; delete block._preview;
+        delete block._file; delete block._preview; pending.delete(block._uid);
       }
     }
-    await PutFile(`${Dir()}/${draft.id}.json`, ToBase64(JSON.stringify(CleanArticle(), null, 2)), Tag() + (draftIsNew ? " add " : " update ") + draft.id);
+    const saved = await PutFile(`${Dir()}/${draft.id}.json`, ToBase64(JSON.stringify(CleanArticle(), null, 2)), Tag() + (draftIsNew ? " add " : " update ") + draft.id + (note ? ": " + note : ""));
+    loadedSha = saved && saved.content ? saved.content.sha : loadedSha;
     localStorage.removeItem(DraftKey());
     SetDirty(false);
     Say("Saved. The site updates after the deploy finishes, about a minute.");
@@ -697,6 +871,7 @@ function ApplyTool(area, toolId) {
   const from = area.selectionStart;
   const to = area.selectionEnd;
   const picked = whole.slice(from, to);
+  if (toolId === "emoji") { lastArea = area; return OpenEmoji(); }
   if (toolId === "link") {
     const label = picked || "link text";
     area.setRangeText(`[${label}](https://)`, from, to, "end");
@@ -740,12 +915,387 @@ function ContinueList(area, event) {
   else area.setRangeText("\n" + listed[1] + (listed[3] ? (Number(listed[3]) + 1) + "." : listed[2]) + " ", caret, caret, "end");
   area.dispatchEvent(new Event("input", {bubbles: true}));
 }
+const Uid = () => Math.random().toString(36).slice(2, 9);
+function NewBlock(type, extra) { return Object.assign({type, _uid: Uid()}, BLOCK_STARTERS[type], extra); }
+function Plain(text) { return String(text || "").replace(/```[\s\S]*?```/g, " ").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/<t:[^>]+>|<[@#][^>]+>/g, " ").replace(/^(#{1,3} |-# |> |[-*] |\d+\. )/gm, "").replace(/[*_~|`\\]/g, "").replace(/\s+/g, " ").trim(); }
+function Prepare(article) {
+  const copy = JSON.parse(JSON.stringify(article));
+  delete copy._sha;
+  copy.title = copy.title || "";
+  copy.excerpt = copy.excerpt || "";
+  copy.date = copy.date || new Date().toISOString().slice(0, 10);
+  copy.id = copy.id || Slug(copy.title);
+  copy.body = Array.isArray(copy.body) ? copy.body : [];
+  copy.body.forEach((block) => { if (!block._uid) block._uid = Uid(); });
+  copy.tags = NormalizeTags(copy.tags);
+  copy.publishAt = copy.publishAt || "";
+  copy.unpublishAt = copy.unpublishAt || "";
+  if (kind === "app") {
+    const table = NormalizeResults(copy);
+    copy.resultColumns = table.columns; copy.results = table.rows;
+    copy.status = copy.status || "auto";
+  }
+  return copy;
+}
+function FillAll() {
+  FillCategories(); FillFields(); RenderTags(); RenderBlocks(); RenderResults(); RenderHeaderImage(); RenderPreview(); UpdateMeta(); UpdateUndo();
+}
+function LoadEditor(article, isNew, sha) {
+  draftIsNew = isNew; loadedSha = sha || ""; draft = Prepare(article);
+  headerFile = null;
+  if (headerUrl) URL.revokeObjectURL(headerUrl);
+  headerUrl = "";
+  collapsed.clear();
+  document.getElementById("editTitle").textContent = (draftIsNew ? "New " : "Edit ") + (kind === "app" ? "application" : "post");
+  document.getElementById("viewEdit").classList.toggle("app", kind === "app");
+  document.getElementById("f-id").readOnly = !draftIsNew;
+  document.getElementById("f-imageFile").value = "";
+  document.getElementById("pvClosed").value = "auto";
+  baseline = JSON.stringify(CleanArticle());
+  snaps = [Snap()]; snapAt = 0;
+  FillAll(); SetDirty(false); SetPane("edit");
+  const stored = localStorage.getItem(DraftKey());
+  document.getElementById("restoreBar").hidden = !stored;
+  if (stored) document.getElementById("restoreText").textContent = "An unsaved draft from " + new Date(JSON.parse(stored).savedAt).toLocaleString() + " was found for this post.";
+  Show("viewEdit"); window.scrollTo(0, 0);
+}
+function OpenEditor(article, asCopy) {
+  if (article && asCopy) {
+    const copy = JSON.parse(JSON.stringify(article));
+    copy.title += " (copy)"; copy.id = Slug(copy.title); copy.published = false; copy.pinned = false;
+    LoadEditor(copy, true, "");
+  } else LoadEditor(article || NewDraft(), !article, article ? article._sha : "");
+}
+function RestoreDraft() {
+  const stored = JSON.parse(localStorage.getItem(DraftKey()));
+  draft = Prepare(stored.draft); headerFile = null; headerUrl = "";
+  FillAll();
+  document.getElementById("restoreBar").hidden = true;
+  SetDirty(true); PushHistory();
+}
+function NewPost() {
+  const choices = TEMPLATES[kind];
+  OpenModal("Start a new " + (kind === "app" ? "application" : "post"), `<p class="hint">Pick a starting point. You can change everything afterwards.</p><div class="tpls">${choices.map((choice, index) => `<button type="button" data-m="tpl" data-i="${index}"><b>${Esc(choice.name)}</b><span>${Esc(choice.note)}</span></button>`).join("")}</div>`, (target) => {
+    if (target.dataset.m !== "tpl") return;
+    const chosen = choices[Number(target.dataset.i)];
+    const fresh = NewDraft();
+    if (chosen.category) fresh.category = chosen.category;
+    fresh.body = chosen.body.map((block) => Object.assign({}, block));
+    CloseModal(); LoadEditor(fresh, true, "");
+  });
+}
+function OpenModal(title, html, handler) {
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalBody").innerHTML = html;
+  document.getElementById("modal").hidden = false;
+  modalHandler = handler || null;
+}
+function CloseModal() {
+  document.getElementById("modal").hidden = true;
+  document.getElementById("modalBody").innerHTML = "";
+  modalHandler = null;
+}
+function Jump(selector) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+  const card = target.closest("details");
+  if (card) card.open = true;
+  SetPane("edit");
+  target.scrollIntoView({behavior: "smooth", block: "center"});
+  if (target.focus) target.focus({preventScroll: true});
+}
+function Snap() { return JSON.stringify(Serializable()); }
+function UpdateUndo() {
+  document.getElementById("undoBtn").disabled = snapAt <= 0;
+  document.getElementById("redoBtn").disabled = snapAt >= snaps.length - 1;
+}
+function PushHistory() {
+  if (!draft) return;
+  const now = Snap();
+  if (snaps[snapAt] === now) return;
+  snaps = snaps.slice(0, snapAt + 1); snaps.push(now);
+  if (snaps.length > 80) snaps.shift();
+  snapAt = snaps.length - 1;
+  UpdateUndo();
+}
+function Step(direction) {
+  clearTimeout(Touch.hist); PushHistory();
+  const next = snapAt + direction;
+  if (next < 0 || next >= snaps.length) return;
+  snapAt = next; draft = JSON.parse(snaps[next]);
+  draft.body.forEach((block) => { const held = pending.get(block._uid); if (held) { block._file = held.file; block._preview = held.preview; } });
+  FillAll(); SetDirty(true); SaveLocal(false);
+}
+function BodyWords() { return Plain(draft.body.map((block) => TEXT_KEYS.map((key) => block[key] || "").join(" ")).join(" ")).split(/\s+/).filter(Boolean).length; }
+function Checks() {
+  const list = [];
+  const Add = (level, text, jump) => list.push({level, text, jump});
+  const filled = draft.body.filter(HasContent);
+  const words = BodyWords();
+  if (!draft.title.trim()) Add("bad", "Add a title", "#f-title"); else Add("ok", "Title is set");
+  if (!draft.id.trim()) Add("bad", "File name is empty, it is made from the title", "#f-id");
+  else if (draftIsNew && (postCache[kind] || []).some((post) => post.id === draft.id)) Add("bad", "A post with this file name already exists, change the file name", "#f-id");
+  const excerptLength = (draft.excerpt || "").trim().length;
+  if (!excerptLength) Add("warn", "Write a short excerpt, it is shown on tiles and in search", "#f-excerpt");
+  else if (excerptLength > 200) Add("warn", `Excerpt is ${excerptLength} characters, under 200 reads better`, "#f-excerpt");
+  if (!filled.length) Add("bad", "The article body is empty, add a block", "#palette");
+  else if (words > 250 && !filled.some((block) => block.type === "h" || /^#{1,3} /m.test(block.text || ""))) Add("warn", "Long text without a heading, headings make it easier to scan", "#palette");
+  const bareImages = filled.filter((block) => block.type === "img" && !(block.caption || "").trim()).length;
+  if (bareImages) Add("warn", `${bareImages} image(s) without a caption`, "#blockList");
+  const badButtons = filled.filter((block) => block.type === "button" && !/^(https?:\/\/|#\/)/i.test(block.url || "")).length;
+  if (badButtons) Add("bad", `${badButtons} button(s) with a missing or invalid link`, "#blockList");
+  const caches = {news: postCache.news, applications: postCache.app};
+  const dead = [];
+  JSON.stringify(filled).replace(/#\/(news|applications)\/([a-z0-9-]+)/g, (whole, type, id) => { const pool = caches[type]; if (pool && !pool.some((post) => post.id === id)) dead.push(id); return whole; });
+  if (dead.length) Add("warn", "Link to a post that does not exist: " + [...new Set(dead)].join(", "), "#blockList");
+  if (kind === "news") {
+    if (!draft.image && !headerFile) Add("warn", "No header image, the default banner will be used", "#f-imageFile");
+    if (!draft.tags.length) Add("warn", "No tags yet, tags help people find related posts", "#tagInput");
+  } else {
+    if (!/^https?:\/\//.test((draft.link || "").trim())) Add("warn", "No application link, the Apply now button will not appear", "#f-link");
+    if (!draft.deadline) Add("warn", "No deadline set", "#f-deadline");
+    else if (draft.deadline < TODAY && draft.status === "auto") Add("info", "The deadline has passed, so the site shows this as CLOSED", "#f-status");
+  }
+  if (draft.published === false) Add("info", "Saved as a draft, it will not appear on the site", "[data-field=published]");
+  else if (draft.publishAt && draft.publishAt > TODAY) Add("info", "Scheduled, it appears on the site from " + draft.publishAt, "#f-publishAt");
+  if (draft.publishAt && draft.unpublishAt && draft.unpublishAt <= draft.publishAt) Add("bad", "The hide date is before the show date", "#f-unpublishAt");
+  if (!list.some((entry) => entry.level === "bad" || entry.level === "warn")) Add("ok", "Everything looks good");
+  return list.sort((first, second) => LEVEL_ORDER[first.level] - LEVEL_ORDER[second.level]);
+}
+function CheckHtml(checks) {
+  return `<ul class="cklist">${checks.map((entry) => `<li class="lv-${entry.level}"><span class="lvl">${LEVEL_NAMES[entry.level]}</span><span>${Esc(entry.text)}</span>${entry.jump ? `<button type="button" class="sm quiet" data-m="jump" data-jump="${Esc(entry.jump)}">Go</button>` : ""}</li>`).join("")}</ul>`;
+}
+function UpdateMeta() {
+  if (!draft) return;
+  const checks = Checks();
+  const todo = checks.filter((entry) => entry.level === "bad" || entry.level === "warn").length;
+  document.getElementById("checkList").innerHTML = checks.map((entry) => `<li class="lv-${entry.level}"><span class="lvl">${LEVEL_NAMES[entry.level]}</span><span>${Esc(entry.text)}</span>${entry.jump ? `<button type="button" class="sm quiet" data-jump="${Esc(entry.jump)}">Go</button>` : ""}</li>`).join("");
+  document.getElementById("checkBadge").textContent = todo ? todo + " to look at" : "all good";
+  const words = BodyWords();
+  const filled = draft.body.filter(HasContent);
+  document.getElementById("statLine").textContent = `${words} words | ${Math.max(1, Math.ceil(words / 200))} min read | ${filled.length} blocks | ${filled.filter((block) => block.type === "img").length} images`;
+  const length = (draft.excerpt || "").trim().length;
+  document.getElementById("excerptCount").textContent = length + " / 200";
+}
+function ChangeSummary() {
+  if (draftIsNew) return ["This is a new " + (kind === "app" ? "application" : "post")];
+  const now = JSON.parse(JSON.stringify(CleanArticle()));
+  const before = JSON.parse(baseline);
+  const notes = [];
+  [...new Set([...Object.keys(now), ...Object.keys(before)])].filter((key) => key !== "body" && JSON.stringify(now[key]) !== JSON.stringify(before[key])).forEach((key) => notes.push("Changed " + key));
+  const after = now.body || [];
+  const earlier = before.body || [];
+  if (after.length > earlier.length) notes.push((after.length - earlier.length) + " block(s) added");
+  if (after.length < earlier.length) notes.push((earlier.length - after.length) + " block(s) removed");
+  const edited = after.filter((block, index) => earlier[index] && JSON.stringify(block) !== JSON.stringify(earlier[index])).length;
+  if (edited) notes.push(edited + " block(s) edited or moved");
+  if (headerFile) notes.push("New header image");
+  return notes.length ? notes : ["No changes since you opened this post"];
+}
+function OpenReview() {
+  if (!draft) return;
+  const checks = Checks();
+  const blockers = checks.filter((entry) => entry.level === "bad").length;
+  OpenModal("Review before publishing", `${CheckHtml(checks)}<h4 class="mh">What will change</h4><ul class="changes">${ChangeSummary().map((note) => `<li>${Esc(note)}</li>`).join("")}</ul><label for="commitNote">Note for the history (optional)</label><input type="text" id="commitNote" placeholder="for example: fixed the deadline"><div class="row" style="margin-top:16px"><button type="button" class="solid" data-m="go"${blockers ? " disabled" : ""}>Publish now</button><button type="button" class="quiet" data-m="close">Keep editing</button></div>${blockers ? '<p class="hint">Fix the red items first.</p>' : ""}`, (target) => {
+    if (target.dataset.m !== "go") return;
+    const note = document.getElementById("commitNote").value.trim();
+    CloseModal(); Publish(note);
+  });
+}
+function OpenHelp() {
+  OpenModal("Help", `<h4 class="mh">Quick start</h4><ol class="how"><li>Press New post and pick a template.</li><li>Fill in Details, then write the content with blocks. Add a block with the buttons at the bottom.</li><li>Check the preview on the right. Click a block in it to jump to the text.</li><li>Press Review and publish. Fix red items, read the summary, publish.</li></ol><h4 class="mh">Shortcuts</h4><table class="guide"><tr><td>Ctrl+B / I / U</td><td>Bold, italic, underline</td></tr><tr><td>Ctrl+K</td><td>Link</td></tr><tr><td>Ctrl+E</td><td>Inline code</td></tr><tr><td>Ctrl+Shift+X / P</td><td>Strikethrough, spoiler</td></tr><tr><td>Ctrl+S</td><td>Save a local draft</td></tr><tr><td>Ctrl+Z / Ctrl+Y</td><td>Undo and redo structure changes (outside a text box)</td></tr><tr><td>Enter in a list</td><td>Continues the list</td></tr><tr><td>Paste an image</td><td>Adds an image block</td></tr><tr><td>?</td><td>Opens this help</td></tr></table><h4 class="mh">Good to know</h4><ul class="changes"><li>Drafts save in this browser while you type, so closing the tab does not lose work.</li><li>Version history in the More menu brings back older versions of a published post.</li><li>Schedule lets the site show or hide a post on a date without publishing again.</li><li>Copy for Discord turns the post into message sized chunks.</li></ul><p><button type="button" class="sm quiet" data-m="intro">Show the intro on the Posts page again</button></p>`, (target) => {
+    if (target.dataset.m === "intro") { localStorage.setItem("mpsWelcome", "1"); ApplyWelcome(); CloseModal(); Show("viewPosts"); }
+  });
+}
+function ApplyWelcome() { document.getElementById("welcome").hidden = localStorage.getItem("mpsWelcome") === "0"; }
+function OpenEmoji() {
+  OpenModal("Insert emoji", `<div class="emo">${Object.entries(Md.EMOJI).map(([name, points]) => `<button type="button" data-m="emo" data-name="${name}"><i>${String.fromCodePoint(...points)}</i>:${name}:</button>`).join("")}</div>`, (target) => {
+    if (target.dataset.m !== "emo" || !lastArea) return;
+    CloseModal(); lastArea.focus();
+    lastArea.setRangeText(`:${target.dataset.name}:`, lastArea.selectionStart, lastArea.selectionEnd, "end");
+    lastArea.dispatchEvent(new Event("input", {bubbles: true}));
+  });
+}
+function EachText(visit) {
+  ["title", "excerpt"].forEach((key) => { draft[key] = visit(draft[key] || ""); });
+  draft.body.forEach((block) => TEXT_KEYS.forEach((key) => { if (typeof block[key] === "string") block[key] = visit(block[key]); }));
+}
+function FindPattern() {
+  const needle = document.getElementById("fFind").value;
+  return needle ? new RegExp(needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), document.getElementById("fCase").checked ? "g" : "gi") : null;
+}
+function UpdateFindCount() {
+  const pattern = FindPattern();
+  let total = 0;
+  if (pattern) { const copy = JSON.parse(JSON.stringify(draft)); const keep = draft; draft = copy; EachText((text) => { total += (text.match(pattern) || []).length; return text; }); draft = keep; }
+  document.getElementById("fCount").textContent = pattern ? total + " match(es) in the title, excerpt and blocks" : "Type to search the title, excerpt and every block.";
+}
+function OpenFind() {
+  OpenModal("Find and replace", `<label for="fFind">Find</label><input type="text" id="fFind"><label for="fSwap">Replace with</label><input type="text" id="fSwap"><label class="inl"><input type="checkbox" id="fCase"> Match case</label><p class="hint" id="fCount">Type to search the title, excerpt and every block.</p><div class="row" style="margin-top:12px"><button type="button" class="solid" data-m="swap">Replace all</button></div>`, (target) => {
+    if (target.dataset.m !== "swap") return;
+    const pattern = FindPattern();
+    if (!pattern) return;
+    const swapText = document.getElementById("fSwap").value;
+    let total = 0;
+    EachText((text) => text.replace(pattern, () => { total++; return swapText; }));
+    CloseModal(); FillAll(); Touch(); Say(total + " replacement(s) made");
+  });
+  document.getElementById("fFind").focus();
+}
+function SiteUrl() {
+  const typed = (settings.siteUrl || "").trim();
+  const url = typed || (settings.owner && settings.repo ? `https://${settings.owner}.github.io/${settings.repo}/` : "");
+  return url && !url.endsWith("/") ? url + "/" : url;
+}
+async function CopyText(text) {
+  try { await navigator.clipboard.writeText(text); Say("Copied"); }
+  catch (problem) { Say("[NEWS MANAGER] copy was blocked by the browser, select the text and press Ctrl+C", true); }
+}
+function Chunk(parts) {
+  const chunks = [];
+  let current = "";
+  parts.forEach((part) => {
+    const pieces = [];
+    let rest = String(part);
+    while (rest.length > 1900) { let cut = rest.lastIndexOf("\n", 1900); if (cut < 1) cut = 1900; pieces.push(rest.slice(0, cut)); rest = rest.slice(cut).replace(/^\n/, ""); }
+    pieces.push(rest);
+    pieces.forEach((piece) => {
+      if (current && (current + "\n\n" + piece).length > 1900) { chunks.push(current); current = piece; }
+      else current = current ? current + "\n\n" + piece : piece;
+    });
+  });
+  if (current) chunks.push(current);
+  return chunks;
+}
+function ToDiscord() {
+  const base = SiteUrl();
+  const Abs = (link) => /^https?:/i.test(link) ? link : base + link;
+  const Lines = (text, prefix) => String(text || "").split("\n").map((line) => prefix + line).join("\n");
+  const listed = (block) => String(block.text || "").split("\n").filter(Boolean);
+  const parts = ["# " + draft.title.trim()];
+  if ((draft.excerpt || "").trim()) parts.push("-# " + draft.excerpt.trim());
+  draft.body.filter(HasContent).forEach((block) => {
+    const rows = {
+      h: () => "## " + block.text,
+      ul: () => listed(block).map((line) => "- " + line).join("\n"),
+      ol: () => listed(block).map((line, index) => `${index + 1}. ${line}`).join("\n"),
+      qa: () => `**${block.q || ""}**\n${block.a || ""}`,
+      quote: () => Lines(block.text, "> ") + (block.by ? "\n> -# " + block.by : ""),
+      img: () => block.src ? (block.caption ? block.caption + "\n" : "") + Abs(block.src) : "",
+      callout: () => (block.title ? "> **" + block.title + "**\n" : "") + Lines(block.text, "> "),
+      table: () => "```\n" + listed(block).map((row) => row.trim()).filter((row) => !/^[\s|:-]+$/.test(row)).join("\n") + "\n```",
+      button: () => `[${block.label}](${Abs(block.url || "")})`,
+      divider: () => "\u2500".repeat(12)
+    };
+    parts.push((rows[block.type] || (() => block.text || ""))());
+  });
+  if (base && draft.published !== false) parts.push(`[Read it on the website](${base}#/${kind === "app" ? "applications" : "news"}/${draft.id})`);
+  return Chunk(parts.filter(Boolean));
+}
+function OpenDiscord() {
+  const chunks = ToDiscord();
+  OpenModal("Copy for Discord", `<p class="hint">Discord messages are limited to 2000 characters, so long posts are split. Send them in order. Tables become code blocks and relative links use your site address.</p>${chunks.map((chunk, index) => `<div class="chunk"><div class="row"><b>Message ${index + 1} of ${chunks.length}</b><span class="row"><span class="hint">${chunk.length} / 2000</span><button type="button" class="sm" data-m="copy" data-i="${index}">Copy</button></span></div><textarea readonly>${Esc(chunk)}</textarea></div>`).join("")}`, (target) => {
+    if (target.dataset.m === "copy") CopyText(chunks[Number(target.dataset.i)]);
+  });
+}
+async function OpenHistory() {
+  if (draftIsNew) return Say("This post is not published yet, so it has no history", true);
+  OpenModal("Version history", '<p class="hint">Loading...</p>');
+  try {
+    const commits = (await Gh(`commits?path=${encodeURIComponent(Dir() + "/" + draft.id + ".json")}&sha=${encodeURIComponent(settings.branch)}&per_page=20`)) || [];
+    modalHandler = async (target) => {
+      if (target.dataset.m !== "load") return;
+      try {
+        const file = await Gh(`contents/${Dir()}/${draft.id}.json?ref=${target.dataset.sha}`);
+        const older = JSON.parse(FromBase64(file.content));
+        const keepSha = loadedSha;
+        draft = Prepare(older); headerFile = null;
+        loadedSha = keepSha;
+        CloseModal(); FillAll(); SetDirty(true); PushHistory();
+        Say("Old version loaded. Review it and publish to restore it.");
+      } catch (problem) { Say(problem.message, true); }
+    };
+    document.getElementById("modalBody").innerHTML = commits.length ? `<p class="hint">Pick a version to load it into the editor. Nothing changes on GitHub until you publish.</p><div class="plist">${commits.map((entry) => `<div class="post"><div class="pinfo"><b>${Esc(entry.commit.message.split("\n")[0])}</b><small>${Esc(entry.commit.author.name)} | ${Esc(new Date(entry.commit.author.date).toLocaleString())}</small></div><div class="pact"><button type="button" class="sm" data-m="load" data-sha="${Esc(entry.sha)}">Load this version</button></div></div>`).join("")}</div>` : "<p>No history found for this file.</p>";
+  } catch (problem) { CloseModal(); Say(problem.message, true); }
+}
+async function OpenLibrary(target) {
+  libraryTarget = target;
+  OpenModal("Image library", '<p class="hint">Loading...</p>', (button) => {
+    if (button.dataset.m !== "pick") return;
+    const picked = button.dataset.path;
+    if (libraryTarget === "header") {
+      draft.image = picked; headerFile = null;
+      if (headerUrl) URL.revokeObjectURL(headerUrl);
+      headerUrl = "";
+      document.getElementById("f-image").value = picked; document.getElementById("f-imageFile").value = "";
+      RenderHeaderImage();
+    } else {
+      const block = draft.body[libraryTarget];
+      block.src = picked; delete block._file; delete block._preview; pending.delete(block._uid);
+      RenderBlocks();
+    }
+    CloseModal(); Touch();
+  });
+  try {
+    const files = (await Gh(`contents/${settings.imageDir}?ref=${settings.branch}`)) || [];
+    const images = files.filter((file) => /\.(png|jpe?g|webp|gif)$/i.test(file.name)).reverse().slice(0, 80);
+    document.getElementById("modalBody").innerHTML = images.length ? `<p class="hint">Click an image to use it. Folder: ${Esc(settings.imageDir)}</p><div class="lib">${images.map((file) => `<button type="button" data-m="pick" data-path="${Esc(file.path)}"><img src="${Esc(file.download_url)}" alt=""><span>${Esc(file.name)}</span></button>`).join("")}</div>` : "<p>No images found in this folder.</p>";
+  } catch (problem) { CloseModal(); Say(problem.message, true); }
+}
+function AddImages(files) {
+  const focused = document.activeElement && document.activeElement.closest ? document.activeElement.closest(".block") : null;
+  let at = focused ? Number(focused.dataset.index) + 1 : draft.body.length;
+  files.forEach((file) => {
+    const block = NewBlock("img", {src: "", caption: ""});
+    block._file = file; block._preview = URL.createObjectURL(file);
+    pending.set(block._uid, {file, preview: block._preview});
+    draft.body.splice(at++, 0, block);
+  });
+  RenderBlocks(); Touch();
+  Say(files.length + " image block(s) added. Add a caption to each.");
+}
+async function QuickToggle(post, field) {
+  try {
+    const target = `${Dir()}/${post.id}.json`;
+    const remote = await Gh(`contents/${target}?ref=${settings.branch}`);
+    if (!remote) throw new Error("[NEWS MANAGER] file not found on GitHub");
+    const current = JSON.parse(FromBase64(remote.content));
+    current[field] = field === "published" ? current.published === false : !current.pinned;
+    await PutFile(target, ToBase64(JSON.stringify(current, null, 2)), `${Tag()} ${field} ${post.id}`);
+    Say("Updated. The site refreshes after the next deploy, about a minute.");
+    ListPosts();
+  } catch (problem) { Say(problem.message, true); }
+}
+function SyncKindButtons() { document.querySelectorAll("[data-kind]").forEach((other) => other.classList.toggle("on", other.dataset.kind === kind)); }
+function SetKind(next) {
+  kind = next; SyncKindButtons();
+  if (postCache[kind]) RenderPostList(); else if (settings.token) ListPosts(); else RenderPostList();
+}
+function RenderLocalDrafts() {
+  const box = document.getElementById("localDrafts");
+  const found = [];
+  Object.keys(localStorage).filter((key) => key.startsWith("mpsDraft:")).forEach((key) => {
+    try { const stored = JSON.parse(localStorage.getItem(key)); found.push({key, title: stored.draft.title || "Untitled", savedAt: stored.savedAt, type: key.split(":")[1]}); }
+    catch (problem) { localStorage.removeItem(key); }
+  });
+  box.innerHTML = found.length ? `<h3 class="mh">Unsent local drafts</h3><div class="plist">${found.map((entry) => `<div class="post"><div class="pinfo"><b>${Esc(entry.title)}</b><small>${entry.type === "app" ? "Application" : "News"} | saved ${Esc(new Date(entry.savedAt).toLocaleString())}</small></div><div class="pact"><button type="button" class="sm" data-lopen="${Esc(entry.key)}">Continue</button><button type="button" class="sm quiet" data-ldel="${Esc(entry.key)}">Discard</button></div></div>`).join("")}</div>` : "";
+}
+function OpenLocalDraft(key) {
+  const [, savedKind, ...rest] = key.split(":");
+  const id = rest.join(":");
+  const stored = JSON.parse(localStorage.getItem(key));
+  kind = savedKind; SyncKindButtons();
+  const known = (postCache[kind] || []).find((post) => post.id === id);
+  LoadEditor(stored.draft, id === "new", known ? known._sha : "");
+  document.getElementById("restoreBar").hidden = true;
+  SetDirty(true);
+}
 function FillSettings() {
   document.querySelectorAll("[data-setting]").forEach((input) => { input.value = settings[input.dataset.setting]; });
 }
 function Unlock() {
   document.getElementById("gate").hidden = true; document.getElementById("app").hidden = false;
-  FillSettings(); Show("viewPosts");
+  FillSettings(); ApplyWelcome(); Show("viewPosts");
   document.getElementById("palette").innerHTML = Object.entries(BLOCK_LABELS).map(([type, label]) => `<button type="button" class="quiet" data-add="${type}">+ ${label}</button>`).join("");
   if (settings.owner && settings.token) ListPosts(); else RenderPostList();
 }
@@ -757,21 +1307,19 @@ document.getElementById("gateForm").addEventListener("submit", async (event) => 
 });
 document.querySelectorAll(".bar [data-view]").forEach((tab) => tab.addEventListener("click", () => {
   if (document.getElementById("viewEdit").hidden === false && !Leave()) return;
-  if (tab.dataset.view === "viewEdit") OpenEditor(null); else Show(tab.dataset.view);
+  if (tab.dataset.view === "viewEdit") NewPost(); else Show(tab.dataset.view);
   if (tab.dataset.view === "viewPosts" && settings.token) ListPosts();
 }));
 document.getElementById("lockBtn").onclick = () => { sessionStorage.clear(); location.reload(); };
 document.getElementById("refreshBtn").onclick = ListPosts;
-document.getElementById("createBtn").onclick = () => OpenEditor(null);
+document.getElementById("createBtn").onclick = NewPost;
 document.getElementById("postSearch").addEventListener("input", RenderPostList);
 document.getElementById("postFilter").addEventListener("change", RenderPostList);
 document.querySelectorAll("[data-kind]").forEach((button) => button.addEventListener("click", () => {
-  kind = button.dataset.kind;
-  document.querySelectorAll("[data-kind]").forEach((other) => other.classList.toggle("on", other === button));
-  if (postCache[kind]) RenderPostList(); else if (settings.token) ListPosts(); else RenderPostList();
+  SetKind(button.dataset.kind);
 }));
 document.getElementById("cancelBtn").onclick = () => { if (Leave()) Show("viewPosts"); };
-document.getElementById("publishBtn").onclick = Publish;
+document.getElementById("publishBtn").onclick = OpenReview;
 document.getElementById("downloadBtn").onclick = DownloadJson;
 document.getElementById("saveLocalBtn").onclick = () => { SaveLocal(true); SetDirty(false); };
 document.getElementById("restoreBtn").onclick = RestoreDraft;
@@ -796,6 +1344,11 @@ document.getElementById("viewEdit").addEventListener("input", (event) => {
     headerUrl = headerFile ? URL.createObjectURL(headerFile) : "";
     RenderHeaderImage(); Touch(); return;
   }
+  if (input.id === "f-category" && input.value === "__new") {
+    const typed = (prompt("New category name") || "").trim();
+    if (typed) draft.category = typed;
+    FillCategories(); Touch(); return;
+  }
   if (!input.dataset.field) return;
   draft[input.dataset.field] = input.type === "checkbox" ? input.checked : input.value;
   if (input.dataset.field === "title" && draftIsNew) { draft.id = Slug(input.value); document.getElementById("f-id").value = draft.id; }
@@ -812,6 +1365,7 @@ blockList.addEventListener("input", (event) => {
     block._file = input.files[0];
     if (block._preview) URL.revokeObjectURL(block._preview);
     block._preview = block._file ? URL.createObjectURL(block._file) : "";
+    if (block._file) pending.set(block._uid, {file: block._file, preview: block._preview}); else pending.delete(block._uid);
   } else block[input.dataset.key] = input.value;
   if (input.dataset.key === "text" || input.dataset.key === "q" || input.dataset.key === "label") box.querySelector(".bh small").textContent = Snippet(block);
   Touch();
@@ -821,10 +1375,21 @@ blockList.addEventListener("click", (event) => {
   if (tool) { ApplyTool(tool.closest(".mdf").querySelector("textarea"), tool.dataset.tool); return; }
   const act = event.target.dataset.act;
   if (!act) return;
-  const index = Number(event.target.closest(".block").dataset.index);
+  const box = event.target.closest(".block");
+  const index = Number(box.dataset.index);
+  if (act === "fold") {
+    const uid = draft.body[index]._uid;
+    if (collapsed.has(uid)) collapsed.delete(uid); else collapsed.add(uid);
+    box.classList.toggle("folded"); event.target.textContent = collapsed.has(uid) ? "Show" : "Hide";
+    return;
+  }
+  if (act === "lib") return OpenLibrary(index);
   if (act === "del") draft.body.splice(index, 1);
-  else if (act === "dup") draft.body.splice(index + 1, 0, JSON.parse(JSON.stringify(Object.assign({}, draft.body[index], {_file: undefined, _preview: undefined}))));
-  else { const target = act === "up" ? index - 1 : index + 1; if (target < 0 || target >= draft.body.length) return; [draft.body[index], draft.body[target]] = [draft.body[target], draft.body[index]]; }
+  else if (act === "dup") {
+    const copy = Object.assign({}, draft.body[index], {_uid: Uid()});
+    if (copy._file) pending.set(copy._uid, {file: copy._file, preview: copy._preview});
+    draft.body.splice(index + 1, 0, copy);
+  } else { const target = act === "up" ? index - 1 : index + 1; if (target < 0 || target >= draft.body.length) return; [draft.body[index], draft.body[target]] = [draft.body[target], draft.body[index]]; }
   RenderBlocks(); Touch();
 });
 blockList.addEventListener("keydown", (event) => {
@@ -838,7 +1403,7 @@ blockList.addEventListener("keydown", (event) => {
 document.getElementById("palette").addEventListener("click", (event) => {
   const type = event.target.dataset.add;
   if (!type) return;
-  draft.body.push(Object.assign({type}, BLOCK_STARTERS[type]));
+  draft.body.push(NewBlock(type));
   RenderBlocks(); Touch();
   const added = blockList.lastElementChild;
   added.scrollIntoView({behavior: "smooth", block: "center"});
@@ -866,6 +1431,21 @@ document.querySelectorAll("[data-pw]").forEach((button) => button.addEventListen
   document.querySelectorAll("[data-pw]").forEach((other) => other.classList.toggle("on", other === button));
 }));
 document.getElementById("pvClosed").addEventListener("change", RenderPreview);
+const tagInput = document.getElementById("tagInput");
+tagInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === ",") { event.preventDefault(); AddTags([tagInput.value]); tagInput.value = ""; }
+  else if (event.key === "Backspace" && !tagInput.value && draft.tags.length) { draft.tags.pop(); RenderTags(); Touch(); }
+});
+tagInput.addEventListener("input", () => { if (tagInput.value.includes(",")) { AddTags(tagInput.value.split(",")); tagInput.value = ""; } });
+tagInput.addEventListener("blur", () => { if (tagInput.value.trim()) { AddTags([tagInput.value]); tagInput.value = ""; } });
+document.getElementById("tagBox").addEventListener("click", (event) => {
+  if (event.target.dataset.tagdel !== undefined) { draft.tags.splice(Number(event.target.dataset.tagdel), 1); RenderTags(); Touch(); }
+  else tagInput.focus();
+});
+document.getElementById("tagSugs").addEventListener("click", (event) => {
+  if (event.target.dataset.tagadd !== undefined) AddTags([event.target.dataset.tagadd]);
+  else if (event.target.id === "tagAll") AddTags(SuggestTags().matched);
+});
 document.querySelectorAll("[data-pane]").forEach((button) => button.addEventListener("click", () => SetPane(button.dataset.pane)));
 document.getElementById("resultsGrid").addEventListener("input", (event) => {
   const input = event.target;
@@ -887,6 +1467,114 @@ document.getElementById("resultsGrid").addEventListener("click", (event) => {
 });
 document.getElementById("addColumn").onclick = () => { draft.resultColumns.push("New column"); draft.results.forEach((row) => row.push("")); RenderResults(); Touch(); };
 document.getElementById("addRow").onclick = () => { draft.results.push(draft.resultColumns.map(() => "")); RenderResults(); Touch(); };
+document.getElementById("helpBtn").onclick = OpenHelp;
+document.getElementById("modalClose").onclick = CloseModal;
+document.querySelector("#modal .mback").onclick = CloseModal;
+document.getElementById("modalBody").addEventListener("click", (event) => {
+  const target = event.target.closest("[data-m]");
+  if (!target) return;
+  if (target.dataset.m === "close") return CloseModal();
+  if (target.dataset.m === "jump") { CloseModal(); Jump(target.dataset.jump); return; }
+  if (modalHandler) modalHandler(target);
+});
+document.getElementById("modalBody").addEventListener("input", () => { if (document.getElementById("fFind")) UpdateFindCount(); });
+document.getElementById("checkList").addEventListener("click", (event) => { if (event.target.dataset.jump) Jump(event.target.dataset.jump); });
+document.getElementById("steps").addEventListener("click", (event) => {
+  const step = event.target.closest("[data-step]");
+  if (!step) return;
+  if (step.dataset.step === "details") Jump("#f-title");
+  else if (step.dataset.step === "content") Jump("#palette");
+  else OpenReview();
+});
+document.getElementById("undoBtn").onclick = () => Step(-1);
+document.getElementById("redoBtn").onclick = () => Step(1);
+document.getElementById("layoutSel").addEventListener("change", (event) => {
+  const split = document.getElementById("split");
+  split.classList.toggle("lay-edit", event.target.value === "edit");
+  split.classList.toggle("lay-prev", event.target.value === "prev");
+});
+document.querySelector(".menu").addEventListener("click", (event) => { if (event.target.tagName === "BUTTON") event.target.closest("details").open = false; });
+document.getElementById("findBtn").onclick = OpenFind;
+document.getElementById("historyBtn").onclick = OpenHistory;
+document.getElementById("discordBtn").onclick = OpenDiscord;
+document.getElementById("linkBtn").onclick = () => { const base = SiteUrl(); if (!base) return Say("[NEWS MANAGER] set the site address in Settings first", true); CopyText(`${base}#/${kind === "app" ? "applications" : "news"}/${draft.id}`); };
+document.getElementById("importBtn").onclick = () => document.getElementById("importFile").click();
+document.getElementById("importFile").addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    const parsed = JSON.parse(await file.text());
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("not a post");
+    LoadEditor(parsed, true, ""); SetDirty(true);
+    Say("Imported. Check the details, then publish.");
+  } catch (problem) { Say("[NEWS MANAGER] that file is not a valid post JSON", true); }
+  event.target.value = "";
+});
+document.getElementById("autoExcerpt").onclick = () => {
+  const source = draft.body.find((block) => ["p", "ul", "qa", "callout"].includes(block.type) && Plain(block.text || block.a).length > 20);
+  if (!source) return Say("[NEWS MANAGER] write some text first", true);
+  const plain = Plain(source.text || source.a);
+  const cut = plain.length > 170 ? plain.slice(0, 170).replace(/\s+\S*$/, "") + "..." : plain;
+  draft.excerpt = cut; document.getElementById("f-excerpt").value = cut; Touch();
+};
+document.getElementById("libHeader").onclick = () => OpenLibrary("header");
+document.getElementById("foldAll").onclick = () => { draft.body.forEach((block) => collapsed.add(block._uid)); RenderBlocks(); };
+document.getElementById("unfoldAll").onclick = () => { collapsed.clear(); RenderBlocks(); };
+document.getElementById("postSort").addEventListener("change", RenderPostList);
+document.getElementById("hideWelcome").onclick = () => { localStorage.setItem("mpsWelcome", "0"); ApplyWelcome(); };
+document.getElementById("localDrafts").addEventListener("click", (event) => {
+  if (event.target.dataset.lopen) OpenLocalDraft(event.target.dataset.lopen);
+  else if (event.target.dataset.ldel && confirm("Discard this local draft?")) { localStorage.removeItem(event.target.dataset.ldel); RenderLocalDrafts(); }
+});
+document.addEventListener("focusin", (event) => { if (event.target.matches && event.target.matches(".mdf textarea")) lastArea = event.target; });
+document.addEventListener("paste", (event) => {
+  if (document.getElementById("viewEdit").hidden || !document.getElementById("modal").hidden) return;
+  const pictures = [...(event.clipboardData ? event.clipboardData.files : [])].filter((file) => file.type.startsWith("image/"));
+  if (!pictures.length) return;
+  event.preventDefault(); AddImages(pictures);
+});
+const HasFiles = (event) => event.dataTransfer && [...event.dataTransfer.types].includes("Files");
+blockList.addEventListener("dragstart", (event) => {
+  const grip = event.target.closest(".grip");
+  if (!grip) return;
+  const box = grip.closest(".block");
+  dragFrom = Number(box.dataset.index);
+  event.dataTransfer.effectAllowed = "move"; event.dataTransfer.setData("text/plain", String(dragFrom));
+  box.classList.add("dragging");
+});
+blockList.addEventListener("dragover", (event) => {
+  if (dragFrom === null && !HasFiles(event)) return;
+  event.preventDefault();
+  blockList.querySelectorAll(".over").forEach((box) => box.classList.remove("over"));
+  const over = event.target.closest(".block");
+  if (over && dragFrom !== null) over.classList.add("over");
+});
+blockList.addEventListener("drop", (event) => {
+  if (HasFiles(event)) {
+    event.preventDefault();
+    const pictures = [...event.dataTransfer.files].filter((file) => file.type.startsWith("image/"));
+    if (pictures.length) AddImages(pictures);
+    return;
+  }
+  if (dragFrom === null) return;
+  event.preventDefault();
+  const over = event.target.closest(".block");
+  if (over) { const [moved] = draft.body.splice(dragFrom, 1); draft.body.splice(Number(over.dataset.index), 0, moved); RenderBlocks(); Touch(); }
+  dragFrom = null;
+});
+blockList.addEventListener("dragend", () => {
+  dragFrom = null;
+  blockList.querySelectorAll(".over, .dragging").forEach((box) => box.classList.remove("over", "dragging"));
+});
+document.addEventListener("keydown", (event) => {
+  const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName);
+  if (event.key === "Escape" && !document.getElementById("modal").hidden) return CloseModal();
+  if (event.key === "?" && !typing && document.getElementById("modal").hidden) { event.preventDefault(); return OpenHelp(); }
+  if (typing || !(event.ctrlKey || event.metaKey) || document.getElementById("viewEdit").hidden) return;
+  const pressed = event.key.toLowerCase();
+  if (pressed === "z" && !event.shiftKey) { event.preventDefault(); Step(-1); }
+  else if (pressed === "y" || (pressed === "z" && event.shiftKey)) { event.preventDefault(); Step(1); }
+});
 document.addEventListener("keydown", (event) => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s" && !document.getElementById("viewEdit").hidden) { event.preventDefault(); SaveLocal(true); SetDirty(false); }
 });
