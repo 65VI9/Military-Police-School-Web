@@ -164,5 +164,5 @@ document.addEventListener("click", (event) => {
   const hidden = event.target.closest && event.target.closest(".spoiler");
   if (hidden) hidden.classList.toggle("on");
 });
-window.Md = {Esc, Inline, Markdown, BlockHtml, BodyHtml, ArticleHtml, ApplicationHtml, TileHtml, FormatDate, IsClosed};
+window.Md = {EMOJI, Esc, Inline, Markdown, BlockHtml, BodyHtml, ArticleHtml, ApplicationHtml, TileHtml, FormatDate, IsClosed};
 })();
