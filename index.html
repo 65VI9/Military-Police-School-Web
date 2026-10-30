@@ -855,8 +855,9 @@ catSelect.addEventListener("change", FilterNews);
 document.getElementById("kwInput").addEventListener("input", FilterNews);
 document.getElementById("clearAll").addEventListener("click", () => { catSelect.value = ""; document.getElementById("kwInput").value = ""; FilterNews(); });
 window.addEventListener("hashchange", ShowPage);
+const Live = (list) => list.filter((post) => (!post.publishAt || post.publishAt <= TODAY) && (!post.unpublishAt || post.unpublishAt > TODAY));
 const LoadList = (file) => fetch(file).then((reply) => reply.ok ? reply.json() : []).catch(() => []);
-Promise.all([LoadList("news-index.json"), LoadList("applications-index.json")]).then(([newsList, applicationList]) => { ARTICLES = SortNews(newsList); APPLICATIONS = SortNews(applicationList).map((application) => IsClosed(application) ? {...application, title: application.title + " (CLOSED)"} : application); Rebuild(); });
+Promise.all([LoadList("news-index.json"), LoadList("applications-index.json")]).then(([newsList, applicationList]) => { ARTICLES = SortNews(Live(newsList)); APPLICATIONS = SortNews(Live(applicationList)).map((application) => IsClosed(application) ? {...application, title: application.title + " (CLOSED)"} : application); Rebuild(); });
 </script>
 </body>
 </html>
