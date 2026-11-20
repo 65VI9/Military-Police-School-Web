@@ -491,9 +491,9 @@ const IMG = {banner: "assets/banner.webp", logo: "assets/logo.png", portrait: "a
 let ARTICLES = [];
 let APPLICATIONS = [];
 const PEOPLE = [
-  {id: "high-command", name: "High Command", list: [["MikeVicious", "Commanding Officer", "Major General", "o8", "Major General Mike has served at Military Police School since May 7, 2026, and is one of the people who has contributed the most to leading and developing the school. He officially began his work in High Command on June 24, 2026, as a Divisional Sergeant Major.", [["May 7, 2026", "First Lieutenant", "o2", "Staff Instructor"], ["May 9, 2026", "Colonel", "o6", "Chief Instructor, Aide De Camp"], ["June 24, 2026", "Sergeant Major", "e9b", "Divisional Sergeant Major"], ["July 7, 2026", "Brigadier General", "o7", "Executive Officer"], ["October 6, 2026", "Major General", "o8", "Commanding Officer"]], "If you win, you don’t have to provide any explanations... If you lose, you shouldn’t even be there to give explanations..."], ["VACANT", "Executive Officer", "Brigadier General", "o7"], ["Megasharkkiller", "Divisional Sergeant Major", "Sergeant Major", "e9b", "", [["November 18, 2026", "Sergeant Major", "e9b", "Divisional Sergeant Major"]]]]},
-  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide De Camp", "Colonel", "o6", "", [["May 18, 2026", "Major", "o4", "Lead Staff Instructor"], ["May 25, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["June 15, 2026", "Colonel", "o6", "Chief Instructor"], ["October 15, 2026", "Colonel", "o6", "Aide De Camp"]]], ["KUNALNG6", "Chief Instructor", "Colonel", "o6", "", [["October 8, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["October 26, 2026", "Colonel", "o6", "Chief Instructor"]], "Stay true to yourself, don't let others' opinions change who you are."], ["VACANT", "Chief Instructor", "Colonel", "o6"]]},
-  {id: "head-instructors", name: "Middle Command: Head Instructors", list: [["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5", "", [["September 22, 2026", "Staff Sergeant", "e6", "Senior Instructor"], ["September 28, 2026", "Major", "o4", "Lead Staff Instructor"], ["October 8, 2026", "Lieutenant Colonel", "o5", "Head Instructor"]], "By example we shall lead."], ["unicorn34568996", "Head Instructor", "Lieutenant Colonel", "o5", "", [["October 11, 2026", "Major", "o4", "Lead Staff Instructor"], ["October 26, 2026", "Lieutenant Colonel", "o5", "Head Instructor"]]], ["chrma", "Head Instructor", "Lieutenant Colonel", "o5", "", [["October 11, 2026", "First Lieutenant", "o2", "Staff Instructor"], ["October 19, 2026", "Captain", "o3", "Senior Staff Instructor"], ["October 26, 2026", "Major", "o4", "Lead Staff Instructor"], ["November 6, 2026", "Lieutenant Colonel", "o5", "Head Instructor"]]]]},
+  {id: "high-command", name: "High Command", list: [["MikeVicious", "Chairman", "Major General", "o8", "Major General Mike has served at Military Police School since May 7, 2026, and is one of the people who has contributed the most to leading and developing the school. He officially began his work in High Command on June 24, 2026, as a Divisional Sergeant Major.", [["May 7, 2026", "First Lieutenant", "o2", "Provost Instructor"], ["May 9, 2026", "Colonel", "o6", "Chief Instructor, Aide De Camp"], ["June 24, 2026", "Sergeant Major", "e9b", "Divisional Sergeant Major"], ["July 7, 2026", "Brigadier General", "o7", "Vice Chairman"], ["October 6, 2026", "Major General", "o8", "Chairman"]], "If you win, you don’t have to provide any explanations... If you lose, you shouldn’t even be there to give explanations..."], ["VACANT", "Vice Chairman", "Brigadier General", "o7"], ["Megasharkkiller", "Divisional Sergeant Major", "Sergeant Major", "e9b", "", [["November 14, 2026", "Sergeant Major", "e9b", "Divisional Sergeant Major"]]]]},
+  {id: "chief-instructors", name: "Middle Command: Chief Instructors", list: [["65VI9", "Chief Instructor, Aide De Camp", "Colonel", "o6", "", [["May 18, 2026", "Major", "o4", "Lead Provost Instructor"], ["May 25, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["June 15, 2026", "Colonel", "o6", "Chief Instructor"], ["October 15, 2026", "Colonel", "o6", "Aide De Camp"]]], ["KUNALNG6", "Chief Instructor", "Colonel", "o6", "", [["October 8, 2026", "Lieutenant Colonel", "o5", "Head Instructor"], ["October 26, 2026", "Colonel", "o6", "Chief Instructor"]], "Stay true to yourself, don't let others' opinions change who you are."], ["VACANT", "Chief Instructor", "Colonel", "o6"]]},
+  {id: "head-instructors", name: "Middle Command: Head Instructors", list: [["Bardamcz", "Head Instructor", "Lieutenant Colonel", "o5", "", [["September 22, 2026", "Staff Sergeant", "e6", "Instructor"], ["September 28, 2026", "Major", "o4", "Lead Provost Instructor"], ["October 8, 2026", "Lieutenant Colonel", "o5", "Head Instructor"]], "By example we shall lead."], ["unicorn34568996", "Head Instructor", "Lieutenant Colonel", "o5", "", [["October 11, 2026", "Major", "o4", "Lead Provost Instructor"], ["October 26, 2026", "Lieutenant Colonel", "o5", "Head Instructor"]]], ["chrma", "Head Instructor", "Lieutenant Colonel", "o5", "", [["October 11, 2026", "First Lieutenant", "o2", "Provost Instructor"], ["October 19, 2026", "Captain", "o3", "Senior Provost Instructor"], ["October 26, 2026", "Major", "o4", "Lead Provost Instructor"], ["November 6, 2026", "Lieutenant Colonel", "o5", "Head Instructor"]]]]},
   {id: "senior-enlisted-advisor", name: "Middle Command: Senior Enlisted Advisor", list: [["VACANT", "Senior Enlisted Advisor", "Master Gunnery Sergeant", "e9a"]]}
 ];
 const PORTRAIT_FILES = {MikeVicious: "mike0w73"};
@@ -517,7 +517,7 @@ const JOIN_VIEWS = {
   applications: {title: "Applications", lede: "Every Military Police School application, with the results of the closed ones.", parts: ["apps"]}
 };
 const COMMAND_MENU = [
-  ["High Command", "high-command", [["Commanding Officer", "MikeVicious"], ["Executive Officer", null, "high-command"], ["Divisional Sergeant Major", "Megasharkkiller"]]],
+  ["High Command", "high-command", [["Chairman", "MikeVicious"], ["Vice Chairman", null, "high-command"], ["Divisional Sergeant Major", "Megasharkkiller"]]],
   ["Middle Command", "middle-command", [["Aide De Camp", "65VI9"], ["Chief Instructors", null, "chief-instructors"], ["Head Instructors", null, "head-instructors"], ["Senior Enlisted Advisor", null, "senior-enlisted-advisor"]]]
 ];
 const QUOTA_PATH = (rankName) => `Complete your quota at the ${rankName} rank, and you will be promoted to this position once you meet the requirements.`;
@@ -544,49 +544,49 @@ const POSITIONS = [
   {id: "senior-instructor", name: "Senior Instructor", abbr: "SI", grade: "E7", command: "Enlisted Personnel", insignia: [["e7", "Gunnery Sergeant", "E7"]],
     description: "Senior Instructors focus on hosting Military Police School tryouts and running phases for Instructor Candidates.",
     obtain: [QUOTA_PATH("Instructor"), APPLY_OPEN]},
-  {id: "lead-instructor", name: "Lead Instructor", abbr: "LI", grade: "E8A", command: "Enlisted Personnel", insignia: [["e8a", "Master Sergeant", "E8A"]],
+  {id: "lead-instructor", name: "Lead Instructor", abbr: "LI", grade: "E8A / E8B", command: "Enlisted Personnel", insignia: [["e8a", "Master Sergeant", "E8A"], ["e8b", "First Sergeant", "E8B"]],
     description: "Lead Instructors host events for Military Police School, alongside Military Police School tryouts.",
-    obtain: [QUOTA_PATH("Senior Instructor"), APPLY_OPEN]},
+    obtain: [QUOTA_PATH("Senior Instructor"), APPLY_OPEN, "The First Sergeant rank (E8B) can be obtained by using your quota."]},
   {id: "aide-de-camp", name: "Aide De Camp", abbr: "ADC", grade: "E8B", command: "Enlisted Personnel", insignia: [["e8b", "First Sergeant", "E8B"]],
     description: "The Aide De Camp serves as an assistant to High Command, observing and stepping in to help whenever High Command needs support.",
     obtain: [HICOM_SELECT]},
-  {id: "junior-staff-instructor", name: "Junior Staff Instructor", abbr: "JSFI", grade: "O1", command: "Lower Command", insignia: [["o1", "Second Lieutenant", "O1"]],
-    description: "Junior Staff Instructors are the front line of Military Police training. Their main focus is organizing and running phases for Military Police Phase Candidates.",
+  {id: "junior-provost-instructor", name: "Junior Provost Instructor", abbr: "JPI", grade: "O1", command: "Lower Command (LOWCOM)", insignia: [["o1", "Second Lieutenant", "O1"]],
+    description: "Junior Provost Instructors are the front line of Military Police training. Their main focus is organizing and running phases for Military Police Phase Candidates.",
     obtain: ["Pass a Military Police School tryout, then complete the phases to earn this position.", APPLY_OPEN]},
-  {id: "staff-instructor", name: "Staff Instructor", abbr: "SFI", grade: "O2", command: "Lower Command", insignia: [["o2", "First Lieutenant", "O2"]],
-    description: "Staff Instructors primarily host Law Enforcement Battalion tryouts, and also run phases for Military Police Phase Candidates.",
-    obtain: [QUOTA_PATH("Junior Staff Instructor"), APPLY_OPEN]},
-  {id: "senior-staff-instructor", name: "Senior Staff Instructor", abbr: "SSI", grade: "O3", command: "Lower Command", insignia: [["o3", "Captain", "O3"]],
-    description: "Senior Staff Instructors focus on hosting Military Police School tryouts and running phases for Instructor Candidates.",
-    obtain: [QUOTA_PATH("Staff Instructor"), APPLY_OPEN]},
-  {id: "lead-staff-instructor", name: "Lead Staff Instructor", abbr: "LSI", grade: "O4", command: "Lower Command", insignia: [["o4", "Major", "O4"]],
-    description: "Lead Staff Instructors host events for Military Police School, alongside Military Police School tryouts.",
-    obtain: [QUOTA_PATH("Senior Staff Instructor"), APPLY_OPEN]},
-  {id: "senior-enlisted-advisor", name: "Senior Enlisted Advisor", abbr: "SEA", grade: "E9A", command: "Middle Command", insignia: [["e9a", "Master Gunnery Sergeant", "E9A"]],
+  {id: "provost-instructor", name: "Provost Instructor", abbr: "PI", grade: "O2", command: "Lower Command (LOWCOM)", insignia: [["o2", "First Lieutenant", "O2"]],
+    description: "Provost Instructors primarily host Law Enforcement Battalion tryouts, and also run phases for Military Police Phase Candidates.",
+    obtain: [QUOTA_PATH("Junior Provost Instructor"), APPLY_OPEN]},
+  {id: "senior-provost-instructor", name: "Senior Provost Instructor", abbr: "SPI", grade: "O3", command: "Lower Command (LOWCOM)", insignia: [["o3", "Captain", "O3"]],
+    description: "Senior Provost Instructors focus on hosting Military Police School tryouts and running phases for Instructor Candidates.",
+    obtain: [QUOTA_PATH("Provost Instructor"), APPLY_OPEN]},
+  {id: "lead-provost-instructor", name: "Lead Provost Instructor", abbr: "LPI", grade: "O4", command: "Lower Command (LOWCOM)", insignia: [["o4", "Major", "O4"]],
+    description: "Lead Provost Instructors host events for Military Police School, alongside Military Police School tryouts.",
+    obtain: [QUOTA_PATH("Senior Provost Instructor"), APPLY_OPEN]},
+  {id: "senior-enlisted-advisor", name: "Senior Enlisted Advisor", abbr: "SEA", grade: "E9A", command: "Middle Command (MIDCOM)", insignia: [["e9a", "Master Gunnery Sergeant", "E9A"]],
     description: "The Senior Enlisted Advisor represents the Enlisted Personnel within Middle Command, helps manage quotas and discipline for Enlisted Instructors, and supports the Divisional Sergeant Major.",
     obtain: [HICOM_SELECT, MIDCOM_APPLY]},
-  {id: "head-instructor", name: "Head Instructor", abbr: "HI", grade: "O5", command: "Middle Command", insignia: [["o5", "Lieutenant Colonel", "O5"]],
+  {id: "head-instructor", name: "Head Instructor", abbr: "HI", grade: "O5", command: "Middle Command (MIDCOM)", insignia: [["o5", "Lieutenant Colonel", "O5"]],
     description: "Head Instructors manage the database, log phases and events, and handle many other duties. They also host sessions and support both new and existing members of Military Police School.",
     obtain: [HICOM_SELECT, MIDCOM_APPLY]},
-  {id: "chief-instructor", name: "Chief Instructor", abbr: "CI", grade: "O6", command: "Middle Command", insignia: [["o6", "Colonel", "O6"]],
+  {id: "chief-instructor", name: "Chief Instructor", abbr: "CI", grade: "O6", command: "Middle Command (MIDCOM)", insignia: [["o6", "Colonel", "O6"]],
     description: "Chief Instructors focus on logging and rank management. They host tryouts and events for Military Police School, and support both new and existing members.",
     obtain: [HICOM_SELECT, MIDCOM_APPLY]},
-  {id: "divisional-sergeant-major", name: "Divisional Sergeant Major", abbr: "DSM", grade: "E9B", command: "High Command", insignia: [["e9b", "Sergeant Major", "E9B"]],
+  {id: "divisional-sergeant-major", name: "Divisional Sergeant Major", abbr: "DSM", grade: "E9B", command: "High Command (HICOM)", insignia: [["e9b", "Sergeant Major", "E9B"]],
     description: "The Divisional Sergeant Major manages and represents the Enlisted Instructors, and oversees Lower Command. They handle quotas, discipline and corrections, advise High Command, and help develop Military Police School.",
     obtain: [HQ_SELECT]},
-  {id: "executive-officer", name: "Executive Officer", abbr: "XO", grade: "O7", command: "High Command", insignia: [["o7", "Brigadier General", "O7"]],
-    description: "The Executive Officer oversees Middle Command and recruitment, and assists the Commanding Officer in running Military Police School. They also monitor the state of the school and put forward initiatives that help it grow.",
+  {id: "vice-chairman", name: "Vice Chairman", abbr: "VC", grade: "O7", command: "High Command (HICOM)", insignia: [["o7", "Brigadier General", "O7"]],
+    description: "The Vice Chairman oversees Middle Command and recruitment, and assists the Chairman in running Military Police School. They also monitor the state of the school and put forward initiatives that help it grow.",
     obtain: [HQ_SELECT]},
-  {id: "commanding-officer", name: "Commanding Officer", abbr: "CO", grade: "O8", command: "High Command", insignia: [["o8", "Major General", "O8"]],
-    description: "The Commanding Officer runs Military Police School and represents it, builds and grows the division, and oversees the other members of High Command.",
+  {id: "chairman", name: "Chairman", abbr: "C", grade: "O8", command: "High Command (HICOM)", insignia: [["o8", "Major General", "O8"]],
+    description: "The Chairman runs Military Police School and represents it, builds and grows the division, and oversees the other members of High Command.",
     obtain: [HQ_SELECT]}
 ];
 function TickerLine(name, sentence) { const person = FindPerson(name); return person.rank + " " + person.name + " " + sentence; }
 const TICKER_SPEED = 70;
 const TICKER_MESSAGES = [
   "Join Military Police School today to gain more experience and advance your journey in the United States Marine Corps!",
-  TickerLine("MikeVicious", "is the Commanding Officer of Military Police School."),
-  "The Executive Officer position of Military Police School is currently vacant.",
+  TickerLine("MikeVicious", "is the Chairman of Military Police School."),
+  "The Vice Chairman position of Military Police School is currently vacant.",
   TickerLine("Megasharkkiller", "is the Divisional Sergeant Major of Military Police School."),
   TickerLine("65VI9", "has been appointed as the Aide De Camp of Military Police School."),
   "Attend a hosted tryout in #event-broadcast and become a member of Military Police School.",
@@ -612,14 +612,14 @@ const TICKER_MESSAGES = [
   "Being mic active is a big plus for anyone who wants to become an MPS Instructor.",
   "MPS Instructors are mature, active and ready to lead candidates.",
   "Applications are reviewed carefully, so always answer every question in detail.",
-  "MPSNet sat down with the Commanding Officer and a Chief Instructor of MPS. Read the full interview in the News section."
+  "MPSNet sat down with the Chairman and a Chief Instructor of MPS. Read the full interview in the News section."
 ];
 const BIO_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h9l5 5v15H5z"/><path d="M13 2v6h6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M8 12h8M8 16h8" stroke="#fff" stroke-width="1.5"/></svg>`;
 const HERO = {
   home: {title: "Military Police School", lede: "Responsible for the recruitment and competence of future graduates of the Military Police program.", tall: true},
   news: {title: "News", lede: "The latest news, interviews and coverage from Military Police School."},
   join: {title: "Join MPS", lede: "You can join Military Police School through Tryouts or Applications."},
-  ranks: {title: "Ranks", lede: "Every position in Military Police School, from Phase I Candidate to Commanding Officer."},
+  ranks: {title: "Ranks", lede: "Every position in Military Police School, from Phase I Candidate to Chairman."},
   leadership: {title: "Chain of Command", lede: "The High Command and Middle Command of Military Police School."}
 };
 const PAGE_NAMES = {home: "Military Police School", news: "News", join: "Join", ranks: "Ranks", leadership: "Leadership"};
